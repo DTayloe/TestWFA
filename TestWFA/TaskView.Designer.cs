@@ -44,6 +44,15 @@
                this.btnNewTask = new System.Windows.Forms.Button();
                this.btnNewTaskSub = new System.Windows.Forms.Button();
                this.groupBox3 = new System.Windows.Forms.GroupBox();
+               this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
+               this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+               this.linkLabel4 = new System.Windows.Forms.LinkLabel();
+               this.linkLabel6 = new System.Windows.Forms.LinkLabel();
+               this.linkLabel7 = new System.Windows.Forms.LinkLabel();
+               this.linkLabel8 = new System.Windows.Forms.LinkLabel();
+               this.linkLabel10 = new System.Windows.Forms.LinkLabel();
+               this.linkLabel11 = new System.Windows.Forms.LinkLabel();
+               this.linkLabel12 = new System.Windows.Forms.LinkLabel();
                this.rtbTask = new System.Windows.Forms.RichTextBox();
                this.tabControl1 = new System.Windows.Forms.TabControl();
                this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -60,6 +69,7 @@
                this.toolStripMenuItemSave = new System.Windows.Forms.ToolStripMenuItem();
                this.toolStripMenuItemFilePath = new System.Windows.Forms.ToolStripMenuItem();
                this.groupBoxSelectedTask = new System.Windows.Forms.GroupBox();
+               this.groupBox6 = new System.Windows.Forms.GroupBox();
                this.groupBox5 = new System.Windows.Forms.GroupBox();
                this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
                this.tblTimer = new System.Windows.Forms.TableLayoutPanel();
@@ -80,23 +90,14 @@
                this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
                this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
                this.timerRefresh = new System.Windows.Forms.Timer(this.components);
-               this.groupBox6 = new System.Windows.Forms.GroupBox();
                this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-               this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-               this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-               this.linkLabel4 = new System.Windows.Forms.LinkLabel();
-               this.linkLabel6 = new System.Windows.Forms.LinkLabel();
-               this.linkLabel7 = new System.Windows.Forms.LinkLabel();
-               this.linkLabel8 = new System.Windows.Forms.LinkLabel();
-               this.linkLabel10 = new System.Windows.Forms.LinkLabel();
-               this.linkLabel11 = new System.Windows.Forms.LinkLabel();
-               this.linkLabel12 = new System.Windows.Forms.LinkLabel();
                this.tableLayoutPanel2.SuspendLayout();
                this.tableLayoutPanel3.SuspendLayout();
                this.groupBox1.SuspendLayout();
                this.groupBox2.SuspendLayout();
                this.tableLayoutPanel4.SuspendLayout();
                this.groupBox3.SuspendLayout();
+               this.tableLayoutPanel9.SuspendLayout();
                this.tabControl1.SuspendLayout();
                this.tabPage1.SuspendLayout();
                this.tabPage2.SuspendLayout();
@@ -105,16 +106,15 @@
                this.tableLayoutPanel6.SuspendLayout();
                this.menuStrip1.SuspendLayout();
                this.groupBoxSelectedTask.SuspendLayout();
+               this.groupBox6.SuspendLayout();
                this.groupBox5.SuspendLayout();
                this.tableLayoutPanel8.SuspendLayout();
                this.tblTimer.SuspendLayout();
                this.contextMenuStrip1.SuspendLayout();
-               this.groupBox6.SuspendLayout();
                ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
                this.splitContainer1.Panel1.SuspendLayout();
                this.splitContainer1.Panel2.SuspendLayout();
                this.splitContainer1.SuspendLayout();
-               this.tableLayoutPanel9.SuspendLayout();
                this.SuspendLayout();
                // 
                // tableLayoutPanel1
@@ -146,7 +146,7 @@
             "Il > Ticket 234249"});
                this.listBox1.Location = new System.Drawing.Point(3, 3);
                this.listBox1.Name = "listBox1";
-               this.listBox1.Size = new System.Drawing.Size(299, 507);
+               this.listBox1.Size = new System.Drawing.Size(277, 542);
                this.listBox1.TabIndex = 1;
                // 
                // treeViewTasks
@@ -306,6 +306,152 @@
                this.groupBox3.TabStop = false;
                this.groupBox3.Text = "Running Task";
                // 
+               // tableLayoutPanel9
+               // 
+               this.tableLayoutPanel9.AutoSize = true;
+               this.tableLayoutPanel9.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+               this.tableLayoutPanel9.ColumnCount = 4;
+               this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+               this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+               this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+               this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+               this.tableLayoutPanel9.Controls.Add(this.linkLabel2, 2, 1);
+               this.tableLayoutPanel9.Controls.Add(this.linkLabel4, 1, 1);
+               this.tableLayoutPanel9.Controls.Add(this.linkLabel6, 0, 1);
+               this.tableLayoutPanel9.Controls.Add(this.linkLabel7, 1, 0);
+               this.tableLayoutPanel9.Controls.Add(this.linkLabel8, 0, 0);
+               this.tableLayoutPanel9.Controls.Add(this.linkLabel10, 3, 1);
+               this.tableLayoutPanel9.Controls.Add(this.linkLabel11, 3, 0);
+               this.tableLayoutPanel9.Controls.Add(this.linkLabel12, 2, 0);
+               this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
+               this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 16);
+               this.tableLayoutPanel9.Name = "tableLayoutPanel9";
+               this.tableLayoutPanel9.RowCount = 2;
+               this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle());
+               this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle());
+               this.tableLayoutPanel9.Size = new System.Drawing.Size(285, 74);
+               this.tableLayoutPanel9.TabIndex = 18;
+               // 
+               // linkLabel2
+               // 
+               this.linkLabel2.AutoSize = true;
+               this.linkLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
+               this.linkLabel2.Font = new System.Drawing.Font("HP Simplified", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.linkLabel2.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+               this.linkLabel2.LinkColor = System.Drawing.Color.Black;
+               this.linkLabel2.Location = new System.Drawing.Point(145, 39);
+               this.linkLabel2.Name = "linkLabel2";
+               this.linkLabel2.Size = new System.Drawing.Size(65, 35);
+               this.linkLabel2.TabIndex = 6;
+               this.linkLabel2.TabStop = true;
+               this.linkLabel2.Text = "Minutes";
+               this.linkLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+               // 
+               // linkLabel4
+               // 
+               this.linkLabel4.AutoSize = true;
+               this.linkLabel4.Dock = System.Windows.Forms.DockStyle.Fill;
+               this.linkLabel4.Font = new System.Drawing.Font("HP Simplified", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.linkLabel4.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+               this.linkLabel4.LinkColor = System.Drawing.Color.Black;
+               this.linkLabel4.Location = new System.Drawing.Point(74, 39);
+               this.linkLabel4.Name = "linkLabel4";
+               this.linkLabel4.Size = new System.Drawing.Size(65, 35);
+               this.linkLabel4.TabIndex = 6;
+               this.linkLabel4.TabStop = true;
+               this.linkLabel4.Text = "Hours";
+               this.linkLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+               // 
+               // linkLabel6
+               // 
+               this.linkLabel6.AutoSize = true;
+               this.linkLabel6.Dock = System.Windows.Forms.DockStyle.Fill;
+               this.linkLabel6.Font = new System.Drawing.Font("HP Simplified", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.linkLabel6.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+               this.linkLabel6.LinkColor = System.Drawing.Color.Black;
+               this.linkLabel6.Location = new System.Drawing.Point(3, 39);
+               this.linkLabel6.Name = "linkLabel6";
+               this.linkLabel6.Size = new System.Drawing.Size(65, 35);
+               this.linkLabel6.TabIndex = 6;
+               this.linkLabel6.TabStop = true;
+               this.linkLabel6.Text = "Days";
+               this.linkLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+               // 
+               // linkLabel7
+               // 
+               this.linkLabel7.AutoSize = true;
+               this.linkLabel7.Dock = System.Windows.Forms.DockStyle.Fill;
+               this.linkLabel7.Font = new System.Drawing.Font("HP Simplified", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.linkLabel7.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+               this.linkLabel7.LinkColor = System.Drawing.Color.Black;
+               this.linkLabel7.Location = new System.Drawing.Point(74, 0);
+               this.linkLabel7.Name = "linkLabel7";
+               this.linkLabel7.Size = new System.Drawing.Size(65, 39);
+               this.linkLabel7.TabIndex = 3;
+               this.linkLabel7.TabStop = true;
+               this.linkLabel7.Text = "99";
+               this.linkLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+               // 
+               // linkLabel8
+               // 
+               this.linkLabel8.AutoSize = true;
+               this.linkLabel8.Dock = System.Windows.Forms.DockStyle.Fill;
+               this.linkLabel8.Font = new System.Drawing.Font("HP Simplified", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.linkLabel8.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+               this.linkLabel8.LinkColor = System.Drawing.Color.Black;
+               this.linkLabel8.Location = new System.Drawing.Point(3, 0);
+               this.linkLabel8.Name = "linkLabel8";
+               this.linkLabel8.Size = new System.Drawing.Size(65, 39);
+               this.linkLabel8.TabIndex = 3;
+               this.linkLabel8.TabStop = true;
+               this.linkLabel8.Text = "99";
+               this.linkLabel8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+               // 
+               // linkLabel10
+               // 
+               this.linkLabel10.AutoSize = true;
+               this.linkLabel10.Dock = System.Windows.Forms.DockStyle.Fill;
+               this.linkLabel10.Font = new System.Drawing.Font("HP Simplified", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.linkLabel10.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+               this.linkLabel10.LinkColor = System.Drawing.Color.Black;
+               this.linkLabel10.Location = new System.Drawing.Point(216, 39);
+               this.linkLabel10.Name = "linkLabel10";
+               this.linkLabel10.Size = new System.Drawing.Size(66, 35);
+               this.linkLabel10.TabIndex = 6;
+               this.linkLabel10.TabStop = true;
+               this.linkLabel10.Text = "Seconds";
+               this.linkLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+               // 
+               // linkLabel11
+               // 
+               this.linkLabel11.AutoSize = true;
+               this.linkLabel11.Dock = System.Windows.Forms.DockStyle.Fill;
+               this.linkLabel11.Font = new System.Drawing.Font("HP Simplified", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.linkLabel11.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+               this.linkLabel11.LinkColor = System.Drawing.Color.Black;
+               this.linkLabel11.Location = new System.Drawing.Point(216, 0);
+               this.linkLabel11.Name = "linkLabel11";
+               this.linkLabel11.Size = new System.Drawing.Size(66, 39);
+               this.linkLabel11.TabIndex = 3;
+               this.linkLabel11.TabStop = true;
+               this.linkLabel11.Text = "99";
+               this.linkLabel11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+               // 
+               // linkLabel12
+               // 
+               this.linkLabel12.AutoSize = true;
+               this.linkLabel12.Dock = System.Windows.Forms.DockStyle.Fill;
+               this.linkLabel12.Font = new System.Drawing.Font("HP Simplified", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.linkLabel12.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+               this.linkLabel12.LinkColor = System.Drawing.Color.Black;
+               this.linkLabel12.Location = new System.Drawing.Point(145, 0);
+               this.linkLabel12.Name = "linkLabel12";
+               this.linkLabel12.Size = new System.Drawing.Size(65, 39);
+               this.linkLabel12.TabIndex = 3;
+               this.linkLabel12.TabStop = true;
+               this.linkLabel12.Text = "99";
+               this.linkLabel12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+               // 
                // rtbTask
                // 
                this.rtbTask.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -346,7 +492,7 @@
                this.tabPage2.Location = new System.Drawing.Point(4, 22);
                this.tabPage2.Name = "tabPage2";
                this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-               this.tabPage2.Size = new System.Drawing.Size(305, 513);
+               this.tabPage2.Size = new System.Drawing.Size(283, 548);
                this.tabPage2.TabIndex = 1;
                this.tabPage2.Text = "Running Tasks";
                this.tabPage2.UseVisualStyleBackColor = true;
@@ -356,7 +502,7 @@
                this.tabPage3.Controls.Add(this.propertyGrid1);
                this.tabPage3.Location = new System.Drawing.Point(4, 22);
                this.tabPage3.Name = "tabPage3";
-               this.tabPage3.Size = new System.Drawing.Size(305, 513);
+               this.tabPage3.Size = new System.Drawing.Size(283, 548);
                this.tabPage3.TabIndex = 2;
                this.tabPage3.Text = "History";
                this.tabPage3.UseVisualStyleBackColor = true;
@@ -476,6 +622,17 @@
                this.groupBoxSelectedTask.TabIndex = 12;
                this.groupBoxSelectedTask.TabStop = false;
                this.groupBoxSelectedTask.Text = "SELECTED TASK NAME HERE";
+               // 
+               // groupBox6
+               // 
+               this.groupBox6.Controls.Add(this.rtbTask);
+               this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
+               this.groupBox6.Location = new System.Drawing.Point(3, 96);
+               this.groupBox6.Name = "groupBox6";
+               this.groupBox6.Size = new System.Drawing.Size(573, 473);
+               this.groupBox6.TabIndex = 10;
+               this.groupBox6.TabStop = false;
+               this.groupBox6.Text = "Task Notes";
                // 
                // groupBox5
                // 
@@ -704,17 +861,6 @@
                // 
                this.timerRefresh.Interval = 1000;
                // 
-               // groupBox6
-               // 
-               this.groupBox6.Controls.Add(this.rtbTask);
-               this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.groupBox6.Location = new System.Drawing.Point(3, 96);
-               this.groupBox6.Name = "groupBox6";
-               this.groupBox6.Size = new System.Drawing.Size(573, 473);
-               this.groupBox6.TabIndex = 10;
-               this.groupBox6.TabStop = false;
-               this.groupBox6.Text = "groupBox6";
-               // 
                // splitContainer1
                // 
                this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -732,152 +878,6 @@
                this.splitContainer1.Size = new System.Drawing.Size(874, 667);
                this.splitContainer1.SplitterDistance = 291;
                this.splitContainer1.TabIndex = 12;
-               // 
-               // tableLayoutPanel9
-               // 
-               this.tableLayoutPanel9.AutoSize = true;
-               this.tableLayoutPanel9.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-               this.tableLayoutPanel9.ColumnCount = 4;
-               this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-               this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-               this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-               this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-               this.tableLayoutPanel9.Controls.Add(this.linkLabel2, 2, 1);
-               this.tableLayoutPanel9.Controls.Add(this.linkLabel4, 1, 1);
-               this.tableLayoutPanel9.Controls.Add(this.linkLabel6, 0, 1);
-               this.tableLayoutPanel9.Controls.Add(this.linkLabel7, 1, 0);
-               this.tableLayoutPanel9.Controls.Add(this.linkLabel8, 0, 0);
-               this.tableLayoutPanel9.Controls.Add(this.linkLabel10, 3, 1);
-               this.tableLayoutPanel9.Controls.Add(this.linkLabel11, 3, 0);
-               this.tableLayoutPanel9.Controls.Add(this.linkLabel12, 2, 0);
-               this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 16);
-               this.tableLayoutPanel9.Name = "tableLayoutPanel9";
-               this.tableLayoutPanel9.RowCount = 2;
-               this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle());
-               this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle());
-               this.tableLayoutPanel9.Size = new System.Drawing.Size(285, 74);
-               this.tableLayoutPanel9.TabIndex = 18;
-               // 
-               // linkLabel2
-               // 
-               this.linkLabel2.AutoSize = true;
-               this.linkLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.linkLabel2.Font = new System.Drawing.Font("HP Simplified", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.linkLabel2.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-               this.linkLabel2.LinkColor = System.Drawing.Color.Black;
-               this.linkLabel2.Location = new System.Drawing.Point(145, 39);
-               this.linkLabel2.Name = "linkLabel2";
-               this.linkLabel2.Size = new System.Drawing.Size(65, 35);
-               this.linkLabel2.TabIndex = 6;
-               this.linkLabel2.TabStop = true;
-               this.linkLabel2.Text = "Minutes";
-               this.linkLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-               // 
-               // linkLabel4
-               // 
-               this.linkLabel4.AutoSize = true;
-               this.linkLabel4.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.linkLabel4.Font = new System.Drawing.Font("HP Simplified", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.linkLabel4.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-               this.linkLabel4.LinkColor = System.Drawing.Color.Black;
-               this.linkLabel4.Location = new System.Drawing.Point(74, 39);
-               this.linkLabel4.Name = "linkLabel4";
-               this.linkLabel4.Size = new System.Drawing.Size(65, 35);
-               this.linkLabel4.TabIndex = 6;
-               this.linkLabel4.TabStop = true;
-               this.linkLabel4.Text = "Hours";
-               this.linkLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-               // 
-               // linkLabel6
-               // 
-               this.linkLabel6.AutoSize = true;
-               this.linkLabel6.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.linkLabel6.Font = new System.Drawing.Font("HP Simplified", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.linkLabel6.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-               this.linkLabel6.LinkColor = System.Drawing.Color.Black;
-               this.linkLabel6.Location = new System.Drawing.Point(3, 39);
-               this.linkLabel6.Name = "linkLabel6";
-               this.linkLabel6.Size = new System.Drawing.Size(65, 35);
-               this.linkLabel6.TabIndex = 6;
-               this.linkLabel6.TabStop = true;
-               this.linkLabel6.Text = "Days";
-               this.linkLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-               // 
-               // linkLabel7
-               // 
-               this.linkLabel7.AutoSize = true;
-               this.linkLabel7.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.linkLabel7.Font = new System.Drawing.Font("HP Simplified", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.linkLabel7.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-               this.linkLabel7.LinkColor = System.Drawing.Color.Black;
-               this.linkLabel7.Location = new System.Drawing.Point(74, 0);
-               this.linkLabel7.Name = "linkLabel7";
-               this.linkLabel7.Size = new System.Drawing.Size(65, 39);
-               this.linkLabel7.TabIndex = 3;
-               this.linkLabel7.TabStop = true;
-               this.linkLabel7.Text = "99";
-               this.linkLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-               // 
-               // linkLabel8
-               // 
-               this.linkLabel8.AutoSize = true;
-               this.linkLabel8.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.linkLabel8.Font = new System.Drawing.Font("HP Simplified", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.linkLabel8.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-               this.linkLabel8.LinkColor = System.Drawing.Color.Black;
-               this.linkLabel8.Location = new System.Drawing.Point(3, 0);
-               this.linkLabel8.Name = "linkLabel8";
-               this.linkLabel8.Size = new System.Drawing.Size(65, 39);
-               this.linkLabel8.TabIndex = 3;
-               this.linkLabel8.TabStop = true;
-               this.linkLabel8.Text = "99";
-               this.linkLabel8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-               // 
-               // linkLabel10
-               // 
-               this.linkLabel10.AutoSize = true;
-               this.linkLabel10.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.linkLabel10.Font = new System.Drawing.Font("HP Simplified", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.linkLabel10.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-               this.linkLabel10.LinkColor = System.Drawing.Color.Black;
-               this.linkLabel10.Location = new System.Drawing.Point(216, 39);
-               this.linkLabel10.Name = "linkLabel10";
-               this.linkLabel10.Size = new System.Drawing.Size(66, 35);
-               this.linkLabel10.TabIndex = 6;
-               this.linkLabel10.TabStop = true;
-               this.linkLabel10.Text = "Seconds";
-               this.linkLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-               // 
-               // linkLabel11
-               // 
-               this.linkLabel11.AutoSize = true;
-               this.linkLabel11.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.linkLabel11.Font = new System.Drawing.Font("HP Simplified", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.linkLabel11.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-               this.linkLabel11.LinkColor = System.Drawing.Color.Black;
-               this.linkLabel11.Location = new System.Drawing.Point(216, 0);
-               this.linkLabel11.Name = "linkLabel11";
-               this.linkLabel11.Size = new System.Drawing.Size(66, 39);
-               this.linkLabel11.TabIndex = 3;
-               this.linkLabel11.TabStop = true;
-               this.linkLabel11.Text = "99";
-               this.linkLabel11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-               // 
-               // linkLabel12
-               // 
-               this.linkLabel12.AutoSize = true;
-               this.linkLabel12.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.linkLabel12.Font = new System.Drawing.Font("HP Simplified", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.linkLabel12.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-               this.linkLabel12.LinkColor = System.Drawing.Color.Black;
-               this.linkLabel12.Location = new System.Drawing.Point(145, 0);
-               this.linkLabel12.Name = "linkLabel12";
-               this.linkLabel12.Size = new System.Drawing.Size(65, 39);
-               this.linkLabel12.TabIndex = 3;
-               this.linkLabel12.TabStop = true;
-               this.linkLabel12.Text = "99";
-               this.linkLabel12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
                // 
                // TaskView
                // 
@@ -898,6 +898,8 @@
                this.tableLayoutPanel4.ResumeLayout(false);
                this.groupBox3.ResumeLayout(false);
                this.groupBox3.PerformLayout();
+               this.tableLayoutPanel9.ResumeLayout(false);
+               this.tableLayoutPanel9.PerformLayout();
                this.tabControl1.ResumeLayout(false);
                this.tabPage1.ResumeLayout(false);
                this.tabPage2.ResumeLayout(false);
@@ -909,6 +911,7 @@
                this.menuStrip1.PerformLayout();
                this.groupBoxSelectedTask.ResumeLayout(false);
                this.groupBoxSelectedTask.PerformLayout();
+               this.groupBox6.ResumeLayout(false);
                this.groupBox5.ResumeLayout(false);
                this.groupBox5.PerformLayout();
                this.tableLayoutPanel8.ResumeLayout(false);
@@ -916,13 +919,10 @@
                this.tblTimer.ResumeLayout(false);
                this.tblTimer.PerformLayout();
                this.contextMenuStrip1.ResumeLayout(false);
-               this.groupBox6.ResumeLayout(false);
                this.splitContainer1.Panel1.ResumeLayout(false);
                this.splitContainer1.Panel2.ResumeLayout(false);
                ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
                this.splitContainer1.ResumeLayout(false);
-               this.tableLayoutPanel9.ResumeLayout(false);
-               this.tableLayoutPanel9.PerformLayout();
                this.ResumeLayout(false);
                this.PerformLayout();
 

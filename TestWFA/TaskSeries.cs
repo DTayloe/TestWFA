@@ -104,9 +104,32 @@ namespace TestWFA
                get
                {
                     TimeSpan total = TimeSpan.Zero;
+                    int runningCountErrorCheck = 0;
+
+                    Console.WriteLine();
                     foreach (TaskEvent item in TaskEvents)
                     {
                          total += item.Elapsed;
+                         if (item.State == TaskEventState.TaskEventRunning)
+                         {
+                              runningCountErrorCheck++;
+                         }
+                         Console.WriteLine($"{item}");
+                    }
+                    Console.WriteLine();
+
+                    if (runningCountErrorCheck > 1)
+                    {
+                         Console.WriteLine("[ERROR] TaskSeries.Elapsed: There were more than one TaskEvent in a running state, setting the previous tasks to zero time elapsed");
+
+                         // go all the way, except for the ending one
+                         for (int i = 0; i < TaskEvents.Count - 1; i++)
+                         {
+                              if (TaskEvents[i].State == TaskEventState.TaskEventRunning)
+                              {// set so that there is no elapsed time for this event
+                                   TaskEvents[i].EndingTime = TaskEvents[i].StartingTime;
+                              }
+                         }
                     }
 
                     return total;
@@ -211,7 +234,16 @@ namespace TestWFA
                }
                set
                {
-                    _state = TaskEventState.TaskEventRunning;
+                    if (true)
+                    {
+
+                    }
+
+                    if (value != DateTime.MinValue)
+                    {
+                         _state = TaskEventState.TaskEventRunning;
+                    }
+
                     _startingTime = value;
                }
           }
@@ -226,7 +258,16 @@ namespace TestWFA
 
                set
                {
-                    _state = TaskEventState.TaskEventComplete;
+                    /*
+                     allow changing this state only when the value coming in is not the min value... 
+                     when saving to xml endingtime is min value if it was running when the app was quit, 
+                     so loading from a save file will change the state to completed because of the zero.
+                     */
+                    if (value != DateTime.MinValue)
+                    {
+                         _state = TaskEventState.TaskEventComplete;
+                    }
+
                     _endingTime = value;
                }
           }
@@ -245,6 +286,7 @@ namespace TestWFA
                          else
                          {// we have not ended yet
                               //Case: start !MinValue, end MinValue   Started, still running   (started / running)
+                              // XXX THIS IS WHERE THE BUG IS HAPPENING
                               return DateTime.Now - StartingTime;
                          }
                     }
@@ -277,7 +319,7 @@ namespace TestWFA
                }
                else
                {// we have not started
-                //Case: start MinValue, end MinValue         Not started              (never ran)
+                    //Case: start MinValue, end MinValue         Not started              (never ran)
                     StartingTime = DateTime.Now;
                     return true;
                }
@@ -320,6 +362,11 @@ namespace TestWFA
           {
                StartingTime = startingTime;
                EndingTime = endingTime;
+          }
+
+          public override string ToString()
+          {
+               return $"[TaskEvent: Start({StartingTime}), End({EndingTime}), State({State})]";
           }
      }
 }
