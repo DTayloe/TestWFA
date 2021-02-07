@@ -33,6 +33,8 @@ namespace TestWFA
                openFileDialog1.Filter = "XML files (*.xml)|*.xml";
 
                timerRefresh.Tick += new EventHandler(UpdateViewTaskTimer);
+
+               ClearData();
           }
 
           public void UnsavedChanges(bool unsavedChangesExist)
@@ -72,7 +74,7 @@ namespace TestWFA
           /// <param name="state"></param>
           public void SetBtnStartStopState(TaskEventState state)
           {
-               TaskSeries.PrintState(state);
+               //TaskSeries.PrintState(state);
                switch (state)
                {
                     case TaskEventState.TaskEventNew:
@@ -95,6 +97,15 @@ namespace TestWFA
           public void SetLblDigit(LinkLabel label, int digit)
           {
                label.Text = digit < 10 ? "0" + digit.ToString() : digit.ToString();
+          }
+
+          private void SetTaskTimer(TaskItem t)
+          {
+               SetLblDigit(lblDigitDays, t.TaskSeriesItem.Elapsed.Days);
+               SetLblDigit(lblDigitHours, t.TaskSeriesItem.Elapsed.Hours);
+               SetLblDigit(lblDigitMinutes, t.TaskSeriesItem.Elapsed.Minutes);
+               SetLblDigit(lblDigitSeconds, t.TaskSeriesItem.Elapsed.Seconds);
+               SetBtnStartStopState(t.TaskSeriesItem.State);
           }
 
           private void btnTaskStartStop_Click(object sender, EventArgs e)
@@ -131,21 +142,24 @@ namespace TestWFA
 
           private void btnChooseFolder_Click(object sender, EventArgs e)
           {
-               CommonOpenFileDialog dialog = new CommonOpenFileDialog();
-               dialog.IsFolderPicker = true;
-               if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+               if (treeViewTasks.SelectedNode != null)
                {
-                    string folder = dialog.FileName;
-                    // XXX the exist check should go into code where opening it
-                    if (Directory.Exists(folder))
+                    CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+                    dialog.IsFolderPicker = true;
+                    if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                     {
-                         Console.WriteLine(folder);
+                         string folder = dialog.FileName;
+                         // XXX the exist check should go into code where opening it
+                         if (Directory.Exists(folder))
+                         {
+                              Console.WriteLine(folder);
 
-                         _controller.UpdateModelTaskFolder(GetIDFromSelection(), folder);
+                              _controller.UpdateModelTaskFolder(GetIDFromSelection(), folder);
 
-                         //UpdateFolderData(folder);
-                         //SetDataTaskFolder(folder);
-                         //UpdateViewTaskFolder();
+                              //UpdateFolderData(folder);
+                              //SetDataTaskFolder(folder);
+                              //UpdateViewTaskFolder();
+                         }
                     }
                }
           }
@@ -154,22 +168,66 @@ namespace TestWFA
           {
                if (treeViewTasks.SelectedNode != null)
                {
-                    string folder = _controller.FindTaskItemByID(GetIDFromSelection()).Folder;
-                    if (Directory.Exists(folder))
-                    {
-                         if (true)
+                    TaskItem task = _controller.FindTaskItemByID(GetIDFromSelection());
+                    if (task != null) {
+                         string folder = task.Folder;
+                         if (Directory.Exists(folder))
                          {
-                              // open a new folder location or existing
-                              Process.Start(folder);
-                         }
-                         else
-                         {
-                              // open a new folder location
-                              Process.Start("explorer.exe", folder);
+                              if (true)
+                              {
+                                   // open a new folder location or existing
+                                   Process.Start(folder);
+                              }
+                              else
+                              {
+                                   // open a new folder location
+                                   Process.Start("explorer.exe", folder);
+                              }
                          }
                     }
                }
           }
+
+          /* 
+          EEE this and next method show 2 different ways for updating the model... 
+          - one where we retrieve a TaskItem and modify here in this class
+               - the view now has to be aware of how the data is stored... is this bad?
+          - one where we send the data to the model
+               - extra methods are needed to get the data there (one in controller, one in model)
+               - what if there are a crazy number of data items to be modified, and we need a parameter for each of them?
+                    - maybe using the command pattern is the solution here
+          - one that is a hybrid by making a method in the controller that does the retrieving like in the first way
+               - extra method needed, when could just use the existing methods for retrieving
+          */
+          private void rtbTask_TextChanged(object sender, EventArgs e)
+          {
+               if (treeViewTasks.SelectedNode != null)
+               {// XXX every single action / keystoke sends the entire contents of rtb to the model... this might not be super great
+                    TaskItem task = _controller.FindTaskItemByID(GetIDFromSelection());
+                    if (task != null)
+                    {
+                         RichTextBox rtb = (RichTextBox)sender;
+                         Console.WriteLine("TEXT CHANGED [" + rtb.Text + "]");
+
+                         if (task.Note != rtb.Text)
+                         {// there are only changes needing saved if the rtb text does not match the model. Otherwise selecting a different task will trigger the save button
+                              task.Note = rtb.Text;
+                              _controller.UnsavedChanges = true;
+                         }
+                    }
+               }
+          }
+
+          /*EEE*/
+          //private void rtbTask_TextChanged(object sender, EventArgs e)
+          //{
+          //     if (treeViewTasks.SelectedNode != null)
+          //     {// XXX every single action / keystoke sends the entire contents of rtb to the model... this might not be super great
+          //          RichTextBox rtb = (RichTextBox)sender;
+          //          Console.WriteLine("TEXT CHANGED [" + rtb.Text + "]");
+          //          _controller.UpdateModelTaskNote(GetIDFromSelection(), rtb.Text);
+          //     }
+          //}
 
           private void toolStripMenuItemOpen_Click(object sender, EventArgs e)
           {
@@ -259,13 +317,11 @@ namespace TestWFA
           //need to think how ysing this... will erase anything youve typed in rtf box
           private void UpdateViewTaskPanel()
           {
-
-               //SAVE DATA furst!!!
-
                UpdateViewGroupBoxSelectedTaskText();
                _controller.UpdateViewTaskFolder(GetIDFromSelection());
                UpdateViewTaskTimer(null, null);
                timerRefresh.Start();
+               UpdateViewTaskNote();
           }
 
           public void UpdateViewCurrentFilePath(string currentFilePath)
@@ -303,17 +359,19 @@ namespace TestWFA
 
           public void UpdateViewTaskTimer(Object myObject, EventArgs myEventArgs)
           {
-               TaskItem t = _controller.FindTaskItemByID(GetIDFromSelection());
-               if (t != null)
+               TaskItem task = _controller.FindTaskItemByID(GetIDFromSelection());
+               if (task != null)
                {
-                    /* XXX this is wrong... need 2 different elapsed timers, one for task item, then one for the only 
-                     * running task item. also will need to ensure there is only one running task
-                    */               
-                    SetLblDigit(lblDigitDays, t.TaskSeriesItem.Elapsed.Days);
-                    SetLblDigit(lblDigitHours, t.TaskSeriesItem.Elapsed.Hours);
-                    SetLblDigit(lblDigitMinutes, t.TaskSeriesItem.Elapsed.Minutes);
-                    SetLblDigit(lblDigitSeconds, t.TaskSeriesItem.Elapsed.Seconds);
-                    SetBtnStartStopState(t.TaskSeriesItem.State);
+                    SetTaskTimer(task);
+               }
+          }
+
+          public void UpdateViewTaskNote()
+          {
+               TaskItem task = _controller.FindTaskItemByID(GetIDFromSelection());
+               if (task != null)
+               {
+                    rtbTask.Text = task.Note;
                }
           }
 
@@ -413,6 +471,9 @@ namespace TestWFA
           public void ClearData()
           {
                treeViewTasks.Nodes.Clear();
+               groupBoxSelectedTask.Text = "SELECTED TASK NAME HERE";
+               SetTaskTimer(new TaskItem());
+               rtbTask.Text = "";
           }
 
           public void RemoveTask(int taskItemID)

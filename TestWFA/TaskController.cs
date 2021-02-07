@@ -40,6 +40,7 @@ namespace TestWFA
                task,
                task_name,
                task_folder,
+               task_note,
                task_series,
                task_event,
                task_event_starting,
@@ -133,18 +134,22 @@ namespace TestWFA
                for (int i = 0; i < tasks.Count; i++)
                {
                     TaskItem task = tasks[i];
-                    xtw.WriteStartElement("task");
+                    xtw.WriteStartElement(NodeTypes.task.ToString());
 
-                    xtw.WriteStartElement("task_name");
+                    xtw.WriteStartElement(NodeTypes.task_name.ToString());
                     xtw.WriteString(task.Name);
                     xtw.WriteEndElement();
 
-                    xtw.WriteStartElement("task_folder");
+                    xtw.WriteStartElement(NodeTypes.task_folder.ToString());
                     xtw.WriteString(task.Folder);
                     xtw.WriteEndElement();
 
-                    xtw.WriteStartElement("task_series");
+                    xtw.WriteStartElement(NodeTypes.task_series.ToString());
                     task.TaskSeriesItem.WriteXmlToSave(xtw);
+                    xtw.WriteEndElement();
+
+                    xtw.WriteStartElement(NodeTypes.task_note.ToString());
+                    xtw.WriteCData(System.Security.SecurityElement.Escape(task.Note));
                     xtw.WriteEndElement();
 
                     Console.WriteLine(task.Name);
@@ -226,6 +231,11 @@ namespace TestWFA
                                              case nameof(NodeTypes.task_folder):
                                                   {
                                                        currentNodeType = NodeTypes.task_folder;
+                                                  }
+                                                  break;
+                                             case nameof(NodeTypes.task_note):
+                                                  {
+                                                       currentNodeType = NodeTypes.task_note;
                                                   }
                                                   break;
                                              case nameof(NodeTypes.task_series):
@@ -332,6 +342,21 @@ namespace TestWFA
                                    }
                                    break;
                               case XmlNodeType.CDATA:
+                                   {
+                                        string text = xr.ReadContentAsString();
+
+                                        switch (currentNodeType)
+                                        {
+                                             case NodeTypes.task_note:
+                                                  {
+                                                       Console.WriteLine($"FOUND CDATA RCAS [{text}]");
+                                                       currentTask.Peek().Note = text;
+                                                  }
+                                                  break;
+                                             default:
+                                                  break;
+                                        }
+                                   }
                                    break;
                               case XmlNodeType.EntityReference:
                                    break;
@@ -387,8 +412,23 @@ namespace TestWFA
                }
           }
 
+          public void UpdateModelTaskNote(int taskItemID, string newNote)
+          {
+               TaskItem task = FindTaskItemByID(taskItemID);
+               if (task != null)
+               {
+                    Console.WriteLine("TEXT CHANGED [" + newNote + "]");
+                    task.Note = newNote;
+               }
+          }
+
           public void UpdateViewTaskFolder(int taskItemID)
           {
+               /* 
+               EEE compare to UpdateModelTaskNote... use _model to find task item or just model in this class? 
+               Depends on if you even want/need that method in this class... is it just bad design to have it available 
+               to the view through the controller, so we should just use the _model way?
+               */
                TaskItem t = _model.FindTaskItem(taskItemID);
                if(t != null)
                {

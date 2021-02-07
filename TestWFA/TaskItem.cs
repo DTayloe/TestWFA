@@ -68,10 +68,30 @@ namespace TestWFA
                }
           }
 
+          private string _note = null;
+          public string Note
+          {
+               get
+               {
+                    if (_note == null)
+                    {
+                         _note = "";
+                    }
+
+                    return _note;
+               }
+               set
+               {
+                    _note = value;
+               }
+          }
+
+
 
           public int Count => SubTasks.Count;
 
           public bool IsReadOnly => SubTasks.IsReadOnly;
+
 
           public TaskItem this[int index] { get => SubTasks[index]; set => SubTasks[index] = value; }
 

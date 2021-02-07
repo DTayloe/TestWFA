@@ -460,6 +460,7 @@
                this.rtbTask.Size = new System.Drawing.Size(567, 454);
                this.rtbTask.TabIndex = 0;
                this.rtbTask.Text = resources.GetString("rtbTask.Text");
+               this.rtbTask.TextChanged += new System.EventHandler(this.rtbTask_TextChanged);
                // 
                // tabControl1
                // 

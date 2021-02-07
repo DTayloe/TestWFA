@@ -106,7 +106,7 @@ namespace TestWFA
                     TimeSpan total = TimeSpan.Zero;
                     int runningCountErrorCheck = 0;
 
-                    Console.WriteLine();
+                    //Console.WriteLine();
                     foreach (TaskEvent item in TaskEvents)
                     {
                          total += item.Elapsed;
@@ -114,9 +114,9 @@ namespace TestWFA
                          {
                               runningCountErrorCheck++;
                          }
-                         Console.WriteLine($"{item}");
+                         //Console.WriteLine($"{item}");
                     }
-                    Console.WriteLine();
+                    //Console.WriteLine();
 
                     if (runningCountErrorCheck > 1)
                     {
