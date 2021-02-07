@@ -117,7 +117,7 @@ namespace TestWFA
                               break;
                     }
 
-                    // XXX here add trigger for update method for view update? what if was already running before got here (switched btn tasks)?
+                    _controller.UnsavedChanges = true;
                }
           }
 

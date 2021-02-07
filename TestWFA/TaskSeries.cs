@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace TestWFA
 {
@@ -164,31 +165,23 @@ namespace TestWFA
                return Current.State;
           }
 
-          //public void Start()
-          //{
+          public void WriteXmlToSave(XmlTextWriter xtw)
+          {
+               foreach (TaskEvent item in TaskEvents)
+               {
+                    xtw.WriteStartElement("task_event");
 
-          //     Current.Start();
-          //     //if (!Current.IsRunning)
-          //     //{// we are complete or never ran
-          //     //     if (Current.IsComplete)
-          //     //     {// add another event so we can start it
+                    xtw.WriteStartElement("task_event_starting");
+                    xtw.WriteString(""+item.StartingTime.Ticks);
+                    xtw.WriteEndElement();
 
-          //     //     }
-          //     //     else if(Current.IsNeverStarted)
-          //     //     {// start the current event
+                    xtw.WriteStartElement("task_event_ending");
+                    xtw.WriteString("" + item.EndingTime.Ticks);
+                    xtw.WriteEndElement();
 
-          //     //     }
-          //     //     else
-          //     //     {
-          //     //          throw new Exception("I am a fool - I didn't think it possible");
-          //     //     }
-          //     //}
-          //}
-
-          //public void Stop()
-          //{
-          //     Current.Stop();
-          //}
+                    xtw.WriteEndElement();
+               }
+          }
      }
 
      public enum TaskEventState
@@ -316,6 +309,11 @@ namespace TestWFA
           public TaskEvent()
           {
 
+          }
+          
+          public TaskEvent(DateTime startingTime)
+          {
+               StartingTime = startingTime;
           }
 
           public TaskEvent(DateTime startingTime, DateTime endingTime)

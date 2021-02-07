@@ -19,12 +19,11 @@ namespace TestWFA
           {
                get
                {
-                    Console.WriteLine("GOT");
                     return _unsavedChanges;
                }
                set
                {
-                    Console.WriteLine($"SET to {value}");
+                    Console.WriteLine($"[INFO] TaskController.UnsavedChanges: SET to {value}");
                     _unsavedChanges = value;
                     _view.UnsavedChanges(value);
                }
@@ -40,8 +39,11 @@ namespace TestWFA
                tasks,
                task,
                task_name,
-               task_tasks,
-               task_folder
+               task_folder,
+               task_series,
+               task_event,
+               task_event_starting,
+               task_event_ending
           }
 
           public TaskController(TaskView view, TaskModel model)
@@ -141,9 +143,9 @@ namespace TestWFA
                     xtw.WriteString(task.Folder);
                     xtw.WriteEndElement();
 
-                    //xtw.WriteStartElement("task_series");
-                    //xtw.WriteString(task.TaskSeriesItem);
-                    //xtw.WriteEndElement();
+                    xtw.WriteStartElement("task_series");
+                    task.TaskSeriesItem.WriteXmlToSave(xtw);
+                    xtw.WriteEndElement();
 
                     Console.WriteLine(task.Name);
                     RecurseXmlTasks(task, xtw);
@@ -171,8 +173,7 @@ namespace TestWFA
                     XmlReaderSettings xrs = new XmlReaderSettings();
                     xrs.IgnoreWhitespace = true;
                     XmlReader xr = XmlReader.Create(file, xrs);
-
-                    //TaskItem currentTask = null;
+                    
                     NodeTypes currentNodeType = NodeTypes.tasks;
                     Stack<TaskItem> currentTask = new Stack<TaskItem>();
                     string indent = "";
@@ -180,7 +181,6 @@ namespace TestWFA
                     while (xr.Read())
                     {
                          emptyFlag = false;
-                         //Console.WriteLine(xr.NodeType);
                          switch (xr.NodeType)
                          {
                               case XmlNodeType.None:
@@ -223,28 +223,29 @@ namespace TestWFA
                                                        currentNodeType = NodeTypes.task_name;
                                                   }
                                                   break;
-                                             case nameof(NodeTypes.task_tasks):
-                                                  {
-                                                       Console.WriteLine();
-                                                       indent += "\t";
-
-                                                       //_currentTask.SubTasks.Add(new TaskItem());
-                                                       //_currentTask = _currentTask.SubTasks[_currentTask.SubTasks.Count - 1];
-                                                       currentNodeType = NodeTypes.task_tasks;
-                                                       if (emptyFlag)
-                                                       {
-
-                                                       }
-                                                       else
-                                                       {
-                                                            //other tasks to add to the current task
-                                                            //currentTask.Peek().SubTasks
-                                                       }
-                                                  }
-                                                  break;
                                              case nameof(NodeTypes.task_folder):
                                                   {
                                                        currentNodeType = NodeTypes.task_folder;
+                                                  }
+                                                  break;
+                                             case nameof(NodeTypes.task_series):
+                                                  {
+                                                       currentNodeType = NodeTypes.task_series;
+                                                  }
+                                                  break;
+                                             case nameof(NodeTypes.task_event):
+                                                  {
+                                                       currentNodeType = NodeTypes.task_event;
+                                                  }
+                                                  break;
+                                             case nameof(NodeTypes.task_event_starting):
+                                                  {
+                                                       currentNodeType = NodeTypes.task_event_starting;
+                                                  }
+                                                  break;
+                                             case nameof(NodeTypes.task_event_ending):
+                                                  {
+                                                       currentNodeType = NodeTypes.task_event_ending;
                                                   }
                                                   break;
                                              case "":
@@ -257,10 +258,7 @@ namespace TestWFA
                                         }
                                    }
 
-                                   Console.Write((xr.Name == "task" || xr.Name == "task_tasks" ? (emptyFlag ? "" : indent) : "") + "Name: " + xr.Name + ", ");
-                                   //Console.WriteLine(""+xr.);
-                                   //Console.WriteLine("" + xr.);
-                                   //xr.ReadSubtree();
+                                   Console.Write((xr.Name == "task" ? (emptyFlag ? "" : indent) : "") + "Name: " + xr.Name + ", ");
                                    break;
                               case XmlNodeType.Attribute:
                                    break;
@@ -286,15 +284,46 @@ namespace TestWFA
                                                        //Console.WriteLine($"HELLO [{text}][{xr.Value}][{xr.ReadContentAsString()}][{currentTask.Peek().Name}]");
                                                   }
                                                   break;
-                                             case NodeTypes.task_tasks:
-                                                  {
-
-                                                  }
-                                                  break;
                                              case NodeTypes.task_folder:
                                                   {
                                                        currentTask.Peek().Folder = text;
                                                        //Console.WriteLine($"HELLO [{text}][{xr.Value}][{xr.ReadContentAsString()}][{currentTask.Peek().Name}]");
+                                                  }
+                                                  break;
+                                             case NodeTypes.task_series:
+                                                  {
+
+                                                  }
+                                                  break;
+                                             case NodeTypes.task_event:
+                                                  {
+
+                                                  }
+                                                  break;
+                                             case NodeTypes.task_event_starting:
+                                                  {
+                                                       long longTime = 0;
+                                                       if (long.TryParse(text, out longTime))
+                                                       {
+                                                            currentTask.Peek().TaskSeriesItem.AddTaskEvent(new TaskEvent(new DateTime(longTime)));
+                                                       }
+                                                       else
+                                                       {
+                                                            Console.WriteLine($"[ERROR] TaskController.LoadXmlFileToModel: taskeventstarting [{text}] from file could not be parsed");
+                                                       }
+                                                  }
+                                                  break;
+                                             case NodeTypes.task_event_ending:
+                                                  {
+                                                       long longTime = 0;
+                                                       if (long.TryParse(text, out longTime))
+                                                       {
+                                                            currentTask.Peek().TaskSeriesItem.Current.EndingTime = new DateTime(longTime);
+                                                       }
+                                                       else
+                                                       {
+                                                            Console.WriteLine($"[ERROR] TaskController.LoadXmlFileToModel: taskeventending [{text}] from file could not be parsed");
+                                                       }
                                                   }
                                                   break;
                                              default:
@@ -328,13 +357,14 @@ namespace TestWFA
                                    Console.Write("\n" + indent + "End");
                                    indent = (indent.Length - 1) > 0 ? indent.Remove(indent.Length - 1) : "";
 
-                                   //     _view.CreateEmptyTask(task);
-                                   //     _model.Tasks.Add(task);
-                                   if (currentTask.Count != 0)
+                                   switch (xr.Name)
                                    {
-                                        currentTask.Pop();//XXX just discard this???
+                                        case nameof(NodeTypes.task):
+                                             currentTask.Pop();
+                                             break;
+                                        default:
+                                             break;
                                    }
-                                   //refresh the view data???
 
                                    break;
                               case XmlNodeType.EndEntity:
