@@ -173,7 +173,17 @@ namespace TestWFA
 
           public bool Remove(TaskItem item)
           {
-               return SubTasks.Remove(item);
+               bool result = false;
+               for (int i = 0; i < SubTasks.Count; i++)
+               {
+                    if (SubTasks[i].ID == item.ID)
+                    {
+                         SubTasks.RemoveAt(i);
+                         result = true;
+                    }
+               }
+
+               return result;
           }
 
           public IEnumerator<TaskItem> GetEnumerator()
