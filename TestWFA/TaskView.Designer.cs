@@ -69,7 +69,10 @@
                this.toolStripMenuItemSave = new System.Windows.Forms.ToolStripMenuItem();
                this.toolStripMenuItemFilePath = new System.Windows.Forms.ToolStripMenuItem();
                this.groupBoxSelectedTask = new System.Windows.Forms.GroupBox();
-               this.groupBox6 = new System.Windows.Forms.GroupBox();
+               this.tabControl2 = new System.Windows.Forms.TabControl();
+               this.tabPage4 = new System.Windows.Forms.TabPage();
+               this.tabPage5 = new System.Windows.Forms.TabPage();
+               this.dgvTaskEventHistory = new System.Windows.Forms.DataGridView();
                this.groupBox5 = new System.Windows.Forms.GroupBox();
                this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
                this.tblTimer = new System.Windows.Forms.TableLayoutPanel();
@@ -106,7 +109,10 @@
                this.tableLayoutPanel6.SuspendLayout();
                this.menuStrip1.SuspendLayout();
                this.groupBoxSelectedTask.SuspendLayout();
-               this.groupBox6.SuspendLayout();
+               this.tabControl2.SuspendLayout();
+               this.tabPage4.SuspendLayout();
+               this.tabPage5.SuspendLayout();
+               ((System.ComponentModel.ISupportInitialize)(this.dgvTaskEventHistory)).BeginInit();
                this.groupBox5.SuspendLayout();
                this.tableLayoutPanel8.SuspendLayout();
                this.tblTimer.SuspendLayout();
@@ -455,9 +461,9 @@
                // rtbTask
                // 
                this.rtbTask.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.rtbTask.Location = new System.Drawing.Point(3, 16);
+               this.rtbTask.Location = new System.Drawing.Point(3, 3);
                this.rtbTask.Name = "rtbTask";
-               this.rtbTask.Size = new System.Drawing.Size(567, 454);
+               this.rtbTask.Size = new System.Drawing.Size(559, 441);
                this.rtbTask.TabIndex = 0;
                this.rtbTask.Text = resources.GetString("rtbTask.Text");
                this.rtbTask.TextChanged += new System.EventHandler(this.rtbTask_TextChanged);
@@ -613,7 +619,7 @@
                // 
                // groupBoxSelectedTask
                // 
-               this.groupBoxSelectedTask.Controls.Add(this.groupBox6);
+               this.groupBoxSelectedTask.Controls.Add(this.tabControl2);
                this.groupBoxSelectedTask.Controls.Add(this.groupBox5);
                this.groupBoxSelectedTask.Controls.Add(this.groupBox4);
                this.groupBoxSelectedTask.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -624,16 +630,51 @@
                this.groupBoxSelectedTask.TabStop = false;
                this.groupBoxSelectedTask.Text = "SELECTED TASK NAME HERE";
                // 
-               // groupBox6
+               // tabControl2
                // 
-               this.groupBox6.Controls.Add(this.rtbTask);
-               this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.groupBox6.Location = new System.Drawing.Point(3, 96);
-               this.groupBox6.Name = "groupBox6";
-               this.groupBox6.Size = new System.Drawing.Size(573, 473);
-               this.groupBox6.TabIndex = 10;
-               this.groupBox6.TabStop = false;
-               this.groupBox6.Text = "Task Notes";
+               this.tabControl2.Controls.Add(this.tabPage4);
+               this.tabControl2.Controls.Add(this.tabPage5);
+               this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+               this.tabControl2.ItemSize = new System.Drawing.Size(67, 18);
+               this.tabControl2.Location = new System.Drawing.Point(3, 96);
+               this.tabControl2.Name = "tabControl2";
+               this.tabControl2.SelectedIndex = 0;
+               this.tabControl2.Size = new System.Drawing.Size(573, 473);
+               this.tabControl2.TabIndex = 11;
+               // 
+               // tabPage4
+               // 
+               this.tabPage4.Controls.Add(this.rtbTask);
+               this.tabPage4.Location = new System.Drawing.Point(4, 22);
+               this.tabPage4.Name = "tabPage4";
+               this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+               this.tabPage4.Size = new System.Drawing.Size(565, 447);
+               this.tabPage4.TabIndex = 0;
+               this.tabPage4.Text = "Task Notes";
+               this.tabPage4.UseVisualStyleBackColor = true;
+               // 
+               // tabPage5
+               // 
+               this.tabPage5.Controls.Add(this.dgvTaskEventHistory);
+               this.tabPage5.Location = new System.Drawing.Point(4, 22);
+               this.tabPage5.Name = "tabPage5";
+               this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+               this.tabPage5.Size = new System.Drawing.Size(565, 447);
+               this.tabPage5.TabIndex = 1;
+               this.tabPage5.Text = "Task Event History";
+               this.tabPage5.UseVisualStyleBackColor = true;
+               // 
+               // dgvTaskEventHistory
+               // 
+               this.dgvTaskEventHistory.AllowUserToAddRows = false;
+               this.dgvTaskEventHistory.AllowUserToDeleteRows = false;
+               this.dgvTaskEventHistory.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+               this.dgvTaskEventHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+               this.dgvTaskEventHistory.Dock = System.Windows.Forms.DockStyle.Fill;
+               this.dgvTaskEventHistory.Location = new System.Drawing.Point(3, 3);
+               this.dgvTaskEventHistory.Name = "dgvTaskEventHistory";
+               this.dgvTaskEventHistory.Size = new System.Drawing.Size(559, 441);
+               this.dgvTaskEventHistory.TabIndex = 0;
                // 
                // groupBox5
                // 
@@ -912,7 +953,10 @@
                this.menuStrip1.PerformLayout();
                this.groupBoxSelectedTask.ResumeLayout(false);
                this.groupBoxSelectedTask.PerformLayout();
-               this.groupBox6.ResumeLayout(false);
+               this.tabControl2.ResumeLayout(false);
+               this.tabPage4.ResumeLayout(false);
+               this.tabPage5.ResumeLayout(false);
+               ((System.ComponentModel.ISupportInitialize)(this.dgvTaskEventHistory)).EndInit();
                this.groupBox5.ResumeLayout(false);
                this.groupBox5.PerformLayout();
                this.tableLayoutPanel8.ResumeLayout(false);
@@ -981,7 +1025,6 @@
           private System.Windows.Forms.LinkLabel lblDigitDays;
           private System.Windows.Forms.LinkLabel linkLabel9;
           private System.Windows.Forms.TableLayoutPanel tblTimer;
-          private System.Windows.Forms.GroupBox groupBox6;
           private System.Windows.Forms.SplitContainer splitContainer1;
           private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
           private System.Windows.Forms.LinkLabel linkLabel2;
@@ -992,6 +1035,10 @@
           private System.Windows.Forms.LinkLabel linkLabel10;
           private System.Windows.Forms.LinkLabel linkLabel11;
           private System.Windows.Forms.LinkLabel linkLabel12;
+          private System.Windows.Forms.TabControl tabControl2;
+          private System.Windows.Forms.TabPage tabPage4;
+          private System.Windows.Forms.TabPage tabPage5;
+          private System.Windows.Forms.DataGridView dgvTaskEventHistory;
      }
 }
 

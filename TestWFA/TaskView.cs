@@ -34,6 +34,33 @@ namespace TestWFA
 
                timerRefresh.Tick += new EventHandler(UpdateViewTaskTimer);
 
+               // initialize columns
+               {
+                    DataGridViewTextBoxColumn dgtc = new DataGridViewTextBoxColumn();
+                    dgtc.DataPropertyName = "StartingTime";
+                    dgtc.Name = "Starting Time";
+                    dgvTaskEventHistory.Columns.Add(dgtc);
+               }
+               {
+                    DataGridViewTextBoxColumn dgtc = new DataGridViewTextBoxColumn();
+                    dgtc.DataPropertyName = "EndingTime";
+                    dgtc.Name = "Ending Time";
+                    dgvTaskEventHistory.Columns.Add(dgtc);
+               }
+               {
+                    DataGridViewTextBoxColumn dgtc = new DataGridViewTextBoxColumn();
+                    dgtc.DataPropertyName = "Elapsed";
+                    dgtc.Name = "Elapsed";
+                    dgvTaskEventHistory.Columns.Add(dgtc);
+               }
+               {
+                    DataGridViewTextBoxColumn dgtc = new DataGridViewTextBoxColumn();
+                    dgtc.DataPropertyName = "State";
+                    dgtc.Name = "State";
+                    dgvTaskEventHistory.Columns.Add(dgtc);
+               }
+
+
                ClearData();
           }
 
@@ -129,6 +156,8 @@ namespace TestWFA
                     }
 
                     _controller.UnsavedChanges = true;
+
+                    UpdateViewTaskHistory();
                }
           }
 
@@ -322,6 +351,7 @@ namespace TestWFA
                UpdateViewTaskTimer(null, null);
                timerRefresh.Start();
                UpdateViewTaskNote();
+               UpdateViewTaskHistory();
           }
 
           public void UpdateViewCurrentFilePath(string currentFilePath)
@@ -363,6 +393,26 @@ namespace TestWFA
                if (task != null)
                {
                     SetTaskTimer(task);
+               }
+          }
+
+          public void UpdateViewTaskHistory()
+          {
+               TaskItem task = _controller.FindTaskItemByID(GetIDFromSelection());
+               if (task != null)
+               {
+                    // populate datasource
+                    BindingSource bs = new BindingSource();
+
+                    foreach (TaskEvent item in task.TaskSeriesItem.TaskEvents)
+                    {
+                         // XXX eventually once bugs worked out, only completed or errored tasks should be allowed here???
+                         bs.Add(item);
+                    }
+
+                    // initialize DGV
+                    dgvTaskEventHistory.AutoGenerateColumns = false;
+                    dgvTaskEventHistory.DataSource = bs;
                }
           }
 
