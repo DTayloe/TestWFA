@@ -93,6 +93,20 @@ namespace TestWFA
           public bool IsReadOnly => SubTasks.IsReadOnly;
 
 
+          public TimeSpan ElapsedTotal
+          {
+               get
+               {
+                    TimeSpan total = TimeSpan.Zero;
+                    foreach (TaskItem item in SubTasks)
+                    {
+                         total += item.TaskSeriesItem.Elapsed;
+                    }
+
+                    return total + TaskSeriesItem.Elapsed;
+               }
+          }
+
           public TaskItem this[int index] { get => SubTasks[index]; set => SubTasks[index] = value; }
 
           public TaskItem()

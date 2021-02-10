@@ -18,6 +18,9 @@ namespace TestWFA
      public partial class TaskView : Form
      {
           private TaskController _controller = null;
+
+          public const string TIMER_THIS_TASK = "This Task";
+          public const string TIMER_TOTAL = "This Task + Subtasks";
           
           public TaskView()
           {
@@ -49,7 +52,7 @@ namespace TestWFA
                }
                {
                     DataGridViewTextBoxColumn dgtc = new DataGridViewTextBoxColumn();
-                    dgtc.DataPropertyName = "Elapsed";
+                    dgtc.DataPropertyName = "ElapsedDisplay";
                     dgtc.Name = "Elapsed";
                     dgvTaskEventHistory.Columns.Add(dgtc);
                }
@@ -60,6 +63,10 @@ namespace TestWFA
                     dgvTaskEventHistory.Columns.Add(dgtc);
                }
 
+               cbTaskTimeMode.Items.Add(TIMER_THIS_TASK);
+               cbTaskTimeMode.Items.Add(TIMER_TOTAL);
+               cbTaskTimeMode.SelectedIndex = 0;
+               cbTaskTimeMode.SelectedValueChanged += cbTaskTimeMode_SelectedValueChanged;
 
                ClearData();
           }
@@ -128,36 +135,61 @@ namespace TestWFA
 
           private void SetTaskTimer(TaskItem t)
           {
-               SetLblDigit(lblDigitDays, t.TaskSeriesItem.Elapsed.Days);
-               SetLblDigit(lblDigitHours, t.TaskSeriesItem.Elapsed.Hours);
-               SetLblDigit(lblDigitMinutes, t.TaskSeriesItem.Elapsed.Minutes);
-               SetLblDigit(lblDigitSeconds, t.TaskSeriesItem.Elapsed.Seconds);
+               TimeSpan timeToDisplay = TimeSpan.Zero;
+               switch (cbTaskTimeMode.SelectedItem)
+               {
+                    case TIMER_THIS_TASK:
+                         timeToDisplay = t.TaskSeriesItem.Elapsed;
+                         Console.WriteLine("TIMER_THIS_TASK");
+                         break;
+                    case TIMER_TOTAL:
+                         Console.WriteLine("TIMER_TOTAL");
+                         timeToDisplay = t.ElapsedTotal;
+                         break;
+                    default:
+                         Console.WriteLine("DEFAULT");
+                         break;
+               }
+
+               SetLblDigit(lblDigitDays, timeToDisplay.Days);
+               SetLblDigit(lblDigitHours, timeToDisplay.Hours);
+               SetLblDigit(lblDigitMinutes, timeToDisplay.Minutes);
+               SetLblDigit(lblDigitSeconds, timeToDisplay.Seconds);
                SetBtnStartStopState(t.TaskSeriesItem.State);
           }
 
           private void btnTaskStartStop_Click(object sender, EventArgs e)
           {
-               TaskItem t = _controller.FindTaskItemByID(GetIDFromSelection());
-               if (t != null)
+               TaskItem task = _controller.FindTaskItemByID(GetIDFromSelection());
+               if (task != null)
                {
-                    switch (t.TaskSeriesItem.State)
+                    switch (task.TaskSeriesItem.State)
                     {
                          case TaskEventState.TaskEventNew:
                          case TaskEventState.TaskEventComplete:
                               Console.WriteLine("Starting...");
                               // item is currently new
-                              SetBtnStartStopState(t.TaskSeriesItem.Start());
+                              SetBtnStartStopState(task.TaskSeriesItem.Start());
                               break;
                          case TaskEventState.TaskEventRunning:
                               Console.WriteLine("Stopping...");
                               // item is currently running
-                              SetBtnStartStopState(t.TaskSeriesItem.Stop());
+                              SetBtnStartStopState(task.TaskSeriesItem.Stop());
                               break;
                     }
 
                     _controller.UnsavedChanges = true;
 
                     UpdateViewTaskHistory();
+               }
+          }
+
+          private void cbTaskTimeMode_SelectedValueChanged(object sender, EventArgs e)
+          {
+               TaskItem task = _controller.FindTaskItemByID(GetIDFromSelection());
+               if (task != null)
+               {
+                    UpdateViewTaskTimer(null, null);
                }
           }
 

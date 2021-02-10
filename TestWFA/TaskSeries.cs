@@ -298,6 +298,14 @@ namespace TestWFA
                }
           }
 
+          public string ElapsedDisplay
+          {
+               get
+               {
+                    return $"{Elapsed.Days}D {Elapsed.Hours}H {Elapsed.Minutes}M {Elapsed.Seconds}S";
+               }
+          }
+          
           /// <summary>
           /// True for success, false for failure
           /// </summary>

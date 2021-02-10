@@ -94,6 +94,8 @@
                this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
                this.timerRefresh = new System.Windows.Forms.Timer(this.components);
                this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+               this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+               this.cbTaskTimeMode = new System.Windows.Forms.ComboBox();
                this.tableLayoutPanel2.SuspendLayout();
                this.tableLayoutPanel3.SuspendLayout();
                this.groupBox1.SuspendLayout();
@@ -121,6 +123,7 @@
                this.splitContainer1.Panel1.SuspendLayout();
                this.splitContainer1.Panel2.SuspendLayout();
                this.splitContainer1.SuspendLayout();
+               this.tableLayoutPanel5.SuspendLayout();
                this.SuspendLayout();
                // 
                // tableLayoutPanel1
@@ -166,7 +169,7 @@
                this.treeViewTasks.Location = new System.Drawing.Point(3, 57);
                this.treeViewTasks.Name = "treeViewTasks";
                this.treeViewTasks.ShowLines = false;
-               this.treeViewTasks.Size = new System.Drawing.Size(277, 426);
+               this.treeViewTasks.Size = new System.Drawing.Size(263, 426);
                this.treeViewTasks.TabIndex = 2;
                this.treeViewTasks.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewTasks_AfterLabelEdit);
                this.treeViewTasks.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewTasks_AfterSelect);
@@ -203,7 +206,7 @@
                this.tableLayoutPanel3.Name = "tableLayoutPanel3";
                this.tableLayoutPanel3.RowCount = 1;
                this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-               this.tableLayoutPanel3.Size = new System.Drawing.Size(271, 43);
+               this.tableLayoutPanel3.Size = new System.Drawing.Size(257, 43);
                this.tableLayoutPanel3.TabIndex = 3;
                // 
                // btnCollapseAll
@@ -211,7 +214,7 @@
                this.btnCollapseAll.Dock = System.Windows.Forms.DockStyle.Fill;
                this.btnCollapseAll.Location = new System.Drawing.Point(3, 3);
                this.btnCollapseAll.Name = "btnCollapseAll";
-               this.btnCollapseAll.Size = new System.Drawing.Size(84, 37);
+               this.btnCollapseAll.Size = new System.Drawing.Size(79, 37);
                this.btnCollapseAll.TabIndex = 0;
                this.btnCollapseAll.Text = "Collapse All";
                this.btnCollapseAll.UseVisualStyleBackColor = true;
@@ -220,9 +223,9 @@
                // btnFocusRunning
                // 
                this.btnFocusRunning.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.btnFocusRunning.Location = new System.Drawing.Point(93, 3);
+               this.btnFocusRunning.Location = new System.Drawing.Point(88, 3);
                this.btnFocusRunning.Name = "btnFocusRunning";
-               this.btnFocusRunning.Size = new System.Drawing.Size(84, 37);
+               this.btnFocusRunning.Size = new System.Drawing.Size(79, 37);
                this.btnFocusRunning.TabIndex = 1;
                this.btnFocusRunning.Text = "Focus Running";
                this.btnFocusRunning.UseVisualStyleBackColor = true;
@@ -231,9 +234,9 @@
                // btnExpandAll
                // 
                this.btnExpandAll.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.btnExpandAll.Location = new System.Drawing.Point(183, 3);
+               this.btnExpandAll.Location = new System.Drawing.Point(173, 3);
                this.btnExpandAll.Name = "btnExpandAll";
-               this.btnExpandAll.Size = new System.Drawing.Size(85, 37);
+               this.btnExpandAll.Size = new System.Drawing.Size(81, 37);
                this.btnExpandAll.TabIndex = 2;
                this.btnExpandAll.Text = "Expand All";
                this.btnExpandAll.UseVisualStyleBackColor = true;
@@ -245,7 +248,7 @@
                this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
                this.groupBox1.Location = new System.Drawing.Point(3, 483);
                this.groupBox1.Name = "groupBox1";
-               this.groupBox1.Size = new System.Drawing.Size(277, 62);
+               this.groupBox1.Size = new System.Drawing.Size(263, 62);
                this.groupBox1.TabIndex = 4;
                this.groupBox1.TabStop = false;
                this.groupBox1.Text = "Tree Control";
@@ -256,7 +259,7 @@
                this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
                this.groupBox2.Location = new System.Drawing.Point(3, 3);
                this.groupBox2.Name = "groupBox2";
-               this.groupBox2.Size = new System.Drawing.Size(277, 54);
+               this.groupBox2.Size = new System.Drawing.Size(263, 54);
                this.groupBox2.TabIndex = 5;
                this.groupBox2.TabStop = false;
                this.groupBox2.Text = "Task Control";
@@ -275,7 +278,7 @@
                this.tableLayoutPanel4.RowCount = 1;
                this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
                this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-               this.tableLayoutPanel4.Size = new System.Drawing.Size(271, 35);
+               this.tableLayoutPanel4.Size = new System.Drawing.Size(257, 35);
                this.tableLayoutPanel4.TabIndex = 3;
                // 
                // btnNewTask
@@ -283,7 +286,7 @@
                this.btnNewTask.Dock = System.Windows.Forms.DockStyle.Fill;
                this.btnNewTask.Location = new System.Drawing.Point(3, 3);
                this.btnNewTask.Name = "btnNewTask";
-               this.btnNewTask.Size = new System.Drawing.Size(129, 29);
+               this.btnNewTask.Size = new System.Drawing.Size(122, 29);
                this.btnNewTask.TabIndex = 1;
                this.btnNewTask.Text = "New Task";
                this.btnNewTask.UseVisualStyleBackColor = true;
@@ -292,9 +295,9 @@
                // btnNewTaskSub
                // 
                this.btnNewTaskSub.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.btnNewTaskSub.Location = new System.Drawing.Point(138, 3);
+               this.btnNewTaskSub.Location = new System.Drawing.Point(131, 3);
                this.btnNewTaskSub.Name = "btnNewTaskSub";
-               this.btnNewTaskSub.Size = new System.Drawing.Size(130, 29);
+               this.btnNewTaskSub.Size = new System.Drawing.Size(123, 29);
                this.btnNewTaskSub.TabIndex = 2;
                this.btnNewTaskSub.Text = "New Subtask";
                this.btnNewTaskSub.UseVisualStyleBackColor = true;
@@ -307,7 +310,7 @@
                this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
                this.groupBox3.Location = new System.Drawing.Point(0, 0);
                this.groupBox3.Name = "groupBox3";
-               this.groupBox3.Size = new System.Drawing.Size(291, 93);
+               this.groupBox3.Size = new System.Drawing.Size(277, 93);
                this.groupBox3.TabIndex = 5;
                this.groupBox3.TabStop = false;
                this.groupBox3.Text = "Running Task";
@@ -335,7 +338,7 @@
                this.tableLayoutPanel9.RowCount = 2;
                this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle());
                this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle());
-               this.tableLayoutPanel9.Size = new System.Drawing.Size(285, 74);
+               this.tableLayoutPanel9.Size = new System.Drawing.Size(271, 74);
                this.tableLayoutPanel9.TabIndex = 18;
                // 
                // linkLabel2
@@ -345,9 +348,9 @@
                this.linkLabel2.Font = new System.Drawing.Font("HP Simplified", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.linkLabel2.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
                this.linkLabel2.LinkColor = System.Drawing.Color.Black;
-               this.linkLabel2.Location = new System.Drawing.Point(145, 39);
+               this.linkLabel2.Location = new System.Drawing.Point(137, 39);
                this.linkLabel2.Name = "linkLabel2";
-               this.linkLabel2.Size = new System.Drawing.Size(65, 35);
+               this.linkLabel2.Size = new System.Drawing.Size(61, 35);
                this.linkLabel2.TabIndex = 6;
                this.linkLabel2.TabStop = true;
                this.linkLabel2.Text = "Minutes";
@@ -360,9 +363,9 @@
                this.linkLabel4.Font = new System.Drawing.Font("HP Simplified", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.linkLabel4.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
                this.linkLabel4.LinkColor = System.Drawing.Color.Black;
-               this.linkLabel4.Location = new System.Drawing.Point(74, 39);
+               this.linkLabel4.Location = new System.Drawing.Point(70, 39);
                this.linkLabel4.Name = "linkLabel4";
-               this.linkLabel4.Size = new System.Drawing.Size(65, 35);
+               this.linkLabel4.Size = new System.Drawing.Size(61, 35);
                this.linkLabel4.TabIndex = 6;
                this.linkLabel4.TabStop = true;
                this.linkLabel4.Text = "Hours";
@@ -377,7 +380,7 @@
                this.linkLabel6.LinkColor = System.Drawing.Color.Black;
                this.linkLabel6.Location = new System.Drawing.Point(3, 39);
                this.linkLabel6.Name = "linkLabel6";
-               this.linkLabel6.Size = new System.Drawing.Size(65, 35);
+               this.linkLabel6.Size = new System.Drawing.Size(61, 35);
                this.linkLabel6.TabIndex = 6;
                this.linkLabel6.TabStop = true;
                this.linkLabel6.Text = "Days";
@@ -390,9 +393,9 @@
                this.linkLabel7.Font = new System.Drawing.Font("HP Simplified", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.linkLabel7.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
                this.linkLabel7.LinkColor = System.Drawing.Color.Black;
-               this.linkLabel7.Location = new System.Drawing.Point(74, 0);
+               this.linkLabel7.Location = new System.Drawing.Point(70, 0);
                this.linkLabel7.Name = "linkLabel7";
-               this.linkLabel7.Size = new System.Drawing.Size(65, 39);
+               this.linkLabel7.Size = new System.Drawing.Size(61, 39);
                this.linkLabel7.TabIndex = 3;
                this.linkLabel7.TabStop = true;
                this.linkLabel7.Text = "99";
@@ -407,7 +410,7 @@
                this.linkLabel8.LinkColor = System.Drawing.Color.Black;
                this.linkLabel8.Location = new System.Drawing.Point(3, 0);
                this.linkLabel8.Name = "linkLabel8";
-               this.linkLabel8.Size = new System.Drawing.Size(65, 39);
+               this.linkLabel8.Size = new System.Drawing.Size(61, 39);
                this.linkLabel8.TabIndex = 3;
                this.linkLabel8.TabStop = true;
                this.linkLabel8.Text = "99";
@@ -420,9 +423,9 @@
                this.linkLabel10.Font = new System.Drawing.Font("HP Simplified", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.linkLabel10.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
                this.linkLabel10.LinkColor = System.Drawing.Color.Black;
-               this.linkLabel10.Location = new System.Drawing.Point(216, 39);
+               this.linkLabel10.Location = new System.Drawing.Point(204, 39);
                this.linkLabel10.Name = "linkLabel10";
-               this.linkLabel10.Size = new System.Drawing.Size(66, 35);
+               this.linkLabel10.Size = new System.Drawing.Size(64, 35);
                this.linkLabel10.TabIndex = 6;
                this.linkLabel10.TabStop = true;
                this.linkLabel10.Text = "Seconds";
@@ -435,9 +438,9 @@
                this.linkLabel11.Font = new System.Drawing.Font("HP Simplified", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.linkLabel11.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
                this.linkLabel11.LinkColor = System.Drawing.Color.Black;
-               this.linkLabel11.Location = new System.Drawing.Point(216, 0);
+               this.linkLabel11.Location = new System.Drawing.Point(204, 0);
                this.linkLabel11.Name = "linkLabel11";
-               this.linkLabel11.Size = new System.Drawing.Size(66, 39);
+               this.linkLabel11.Size = new System.Drawing.Size(64, 39);
                this.linkLabel11.TabIndex = 3;
                this.linkLabel11.TabStop = true;
                this.linkLabel11.Text = "99";
@@ -450,9 +453,9 @@
                this.linkLabel12.Font = new System.Drawing.Font("HP Simplified", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.linkLabel12.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
                this.linkLabel12.LinkColor = System.Drawing.Color.Black;
-               this.linkLabel12.Location = new System.Drawing.Point(145, 0);
+               this.linkLabel12.Location = new System.Drawing.Point(137, 0);
                this.linkLabel12.Name = "linkLabel12";
-               this.linkLabel12.Size = new System.Drawing.Size(65, 39);
+               this.linkLabel12.Size = new System.Drawing.Size(61, 39);
                this.linkLabel12.TabIndex = 3;
                this.linkLabel12.TabStop = true;
                this.linkLabel12.Text = "99";
@@ -461,9 +464,10 @@
                // rtbTask
                // 
                this.rtbTask.Dock = System.Windows.Forms.DockStyle.Fill;
+               this.rtbTask.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.rtbTask.Location = new System.Drawing.Point(3, 3);
                this.rtbTask.Name = "rtbTask";
-               this.rtbTask.Size = new System.Drawing.Size(559, 441);
+               this.rtbTask.Size = new System.Drawing.Size(533, 408);
                this.rtbTask.TabIndex = 0;
                this.rtbTask.Text = resources.GetString("rtbTask.Text");
                this.rtbTask.TextChanged += new System.EventHandler(this.rtbTask_TextChanged);
@@ -477,7 +481,7 @@
                this.tabControl1.Location = new System.Drawing.Point(0, 93);
                this.tabControl1.Name = "tabControl1";
                this.tabControl1.SelectedIndex = 0;
-               this.tabControl1.Size = new System.Drawing.Size(291, 574);
+               this.tabControl1.Size = new System.Drawing.Size(277, 574);
                this.tabControl1.TabIndex = 7;
                // 
                // tabPage1
@@ -488,7 +492,7 @@
                this.tabPage1.Location = new System.Drawing.Point(4, 22);
                this.tabPage1.Name = "tabPage1";
                this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-               this.tabPage1.Size = new System.Drawing.Size(283, 548);
+               this.tabPage1.Size = new System.Drawing.Size(269, 548);
                this.tabPage1.TabIndex = 0;
                this.tabPage1.Text = "Open Tasks";
                this.tabPage1.UseVisualStyleBackColor = true;
@@ -527,7 +531,7 @@
                this.groupBox4.Dock = System.Windows.Forms.DockStyle.Bottom;
                this.groupBox4.Location = new System.Drawing.Point(3, 569);
                this.groupBox4.Name = "groupBox4";
-               this.groupBox4.Size = new System.Drawing.Size(573, 95);
+               this.groupBox4.Size = new System.Drawing.Size(547, 95);
                this.groupBox4.TabIndex = 8;
                this.groupBox4.TabStop = false;
                this.groupBox4.Text = "Task Folder Control";
@@ -546,7 +550,7 @@
                this.tableLayoutPanel6.RowCount = 2;
                this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
                this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
-               this.tableLayoutPanel6.Size = new System.Drawing.Size(567, 76);
+               this.tableLayoutPanel6.Size = new System.Drawing.Size(541, 76);
                this.tableLayoutPanel6.TabIndex = 3;
                // 
                // btnOpenFolder
@@ -554,7 +558,7 @@
                this.btnOpenFolder.Dock = System.Windows.Forms.DockStyle.Fill;
                this.btnOpenFolder.Location = new System.Drawing.Point(3, 3);
                this.btnOpenFolder.Name = "btnOpenFolder";
-               this.btnOpenFolder.Size = new System.Drawing.Size(277, 44);
+               this.btnOpenFolder.Size = new System.Drawing.Size(264, 44);
                this.btnOpenFolder.TabIndex = 0;
                this.btnOpenFolder.Text = "Open Folder";
                this.btnOpenFolder.UseVisualStyleBackColor = true;
@@ -563,9 +567,9 @@
                // btnChooseFolder
                // 
                this.btnChooseFolder.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.btnChooseFolder.Location = new System.Drawing.Point(286, 3);
+               this.btnChooseFolder.Location = new System.Drawing.Point(273, 3);
                this.btnChooseFolder.Name = "btnChooseFolder";
-               this.btnChooseFolder.Size = new System.Drawing.Size(278, 44);
+               this.btnChooseFolder.Size = new System.Drawing.Size(265, 44);
                this.btnChooseFolder.TabIndex = 2;
                this.btnChooseFolder.Text = "Choose Folder...";
                this.btnChooseFolder.UseVisualStyleBackColor = true;
@@ -578,7 +582,7 @@
                this.txtFolderPath.Location = new System.Drawing.Point(3, 53);
                this.txtFolderPath.Name = "txtFolderPath";
                this.txtFolderPath.ReadOnly = true;
-               this.txtFolderPath.Size = new System.Drawing.Size(561, 20);
+               this.txtFolderPath.Size = new System.Drawing.Size(535, 20);
                this.txtFolderPath.TabIndex = 3;
                // 
                // menuStrip1
@@ -591,7 +595,7 @@
                this.menuStrip1.Location = new System.Drawing.Point(0, 0);
                this.menuStrip1.Name = "menuStrip1";
                this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-               this.menuStrip1.Size = new System.Drawing.Size(874, 24);
+               this.menuStrip1.Size = new System.Drawing.Size(834, 24);
                this.menuStrip1.TabIndex = 10;
                this.menuStrip1.Text = "menuStrip1";
                // 
@@ -625,7 +629,7 @@
                this.groupBoxSelectedTask.Dock = System.Windows.Forms.DockStyle.Fill;
                this.groupBoxSelectedTask.Location = new System.Drawing.Point(0, 0);
                this.groupBoxSelectedTask.Name = "groupBoxSelectedTask";
-               this.groupBoxSelectedTask.Size = new System.Drawing.Size(579, 667);
+               this.groupBoxSelectedTask.Size = new System.Drawing.Size(553, 667);
                this.groupBoxSelectedTask.TabIndex = 12;
                this.groupBoxSelectedTask.TabStop = false;
                this.groupBoxSelectedTask.Text = "SELECTED TASK NAME HERE";
@@ -636,10 +640,10 @@
                this.tabControl2.Controls.Add(this.tabPage5);
                this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
                this.tabControl2.ItemSize = new System.Drawing.Size(67, 18);
-               this.tabControl2.Location = new System.Drawing.Point(3, 96);
+               this.tabControl2.Location = new System.Drawing.Point(3, 129);
                this.tabControl2.Name = "tabControl2";
                this.tabControl2.SelectedIndex = 0;
-               this.tabControl2.Size = new System.Drawing.Size(573, 473);
+               this.tabControl2.Size = new System.Drawing.Size(547, 440);
                this.tabControl2.TabIndex = 11;
                // 
                // tabPage4
@@ -648,7 +652,7 @@
                this.tabPage4.Location = new System.Drawing.Point(4, 22);
                this.tabPage4.Name = "tabPage4";
                this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-               this.tabPage4.Size = new System.Drawing.Size(565, 447);
+               this.tabPage4.Size = new System.Drawing.Size(539, 414);
                this.tabPage4.TabIndex = 0;
                this.tabPage4.Text = "Task Notes";
                this.tabPage4.UseVisualStyleBackColor = true;
@@ -684,7 +688,7 @@
                this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
                this.groupBox5.Location = new System.Drawing.Point(3, 16);
                this.groupBox5.Name = "groupBox5";
-               this.groupBox5.Size = new System.Drawing.Size(573, 80);
+               this.groupBox5.Size = new System.Drawing.Size(547, 113);
                this.groupBox5.TabIndex = 9;
                this.groupBox5.TabStop = false;
                this.groupBox5.Text = "Task Time Control";
@@ -697,7 +701,7 @@
                this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
                this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
                this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-               this.tableLayoutPanel8.Controls.Add(this.tblTimer, 0, 0);
+               this.tableLayoutPanel8.Controls.Add(this.tableLayoutPanel5, 0, 0);
                this.tableLayoutPanel8.Controls.Add(this.btnTaskStartStop, 1, 0);
                this.tableLayoutPanel8.Controls.Add(this.btnTaskHistory, 2, 0);
                this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Top;
@@ -705,7 +709,7 @@
                this.tableLayoutPanel8.Name = "tableLayoutPanel8";
                this.tableLayoutPanel8.RowCount = 1;
                this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle());
-               this.tableLayoutPanel8.Size = new System.Drawing.Size(567, 61);
+               this.tableLayoutPanel8.Size = new System.Drawing.Size(541, 94);
                this.tableLayoutPanel8.TabIndex = 3;
                // 
                // tblTimer
@@ -858,9 +862,9 @@
                this.btnTaskStartStop.AutoSize = true;
                this.btnTaskStartStop.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
                this.btnTaskStartStop.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.btnTaskStartStop.Location = new System.Drawing.Point(253, 3);
+               this.btnTaskStartStop.Location = new System.Drawing.Point(259, 3);
                this.btnTaskStartStop.Name = "btnTaskStartStop";
-               this.btnTaskStartStop.Size = new System.Drawing.Size(229, 55);
+               this.btnTaskStartStop.Size = new System.Drawing.Size(197, 88);
                this.btnTaskStartStop.TabIndex = 0;
                this.btnTaskStartStop.Text = "Start Task";
                this.btnTaskStartStop.UseVisualStyleBackColor = true;
@@ -871,9 +875,9 @@
                this.btnTaskHistory.AutoSize = true;
                this.btnTaskHistory.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
                this.btnTaskHistory.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.btnTaskHistory.Location = new System.Drawing.Point(488, 3);
+               this.btnTaskHistory.Location = new System.Drawing.Point(462, 3);
                this.btnTaskHistory.Name = "btnTaskHistory";
-               this.btnTaskHistory.Size = new System.Drawing.Size(76, 55);
+               this.btnTaskHistory.Size = new System.Drawing.Size(76, 88);
                this.btnTaskHistory.TabIndex = 1;
                this.btnTaskHistory.Text = "Task History";
                this.btnTaskHistory.UseVisualStyleBackColor = true;
@@ -917,15 +921,41 @@
                // splitContainer1.Panel2
                // 
                this.splitContainer1.Panel2.Controls.Add(this.groupBoxSelectedTask);
-               this.splitContainer1.Size = new System.Drawing.Size(874, 667);
-               this.splitContainer1.SplitterDistance = 291;
+               this.splitContainer1.Size = new System.Drawing.Size(834, 667);
+               this.splitContainer1.SplitterDistance = 277;
                this.splitContainer1.TabIndex = 12;
+               // 
+               // tableLayoutPanel5
+               // 
+               this.tableLayoutPanel5.AutoSize = true;
+               this.tableLayoutPanel5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+               this.tableLayoutPanel5.ColumnCount = 1;
+               this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+               this.tableLayoutPanel5.Controls.Add(this.cbTaskTimeMode, 0, 1);
+               this.tableLayoutPanel5.Controls.Add(this.tblTimer, 0, 0);
+               this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 3);
+               this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+               this.tableLayoutPanel5.RowCount = 2;
+               this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+               this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+               this.tableLayoutPanel5.Size = new System.Drawing.Size(250, 88);
+               this.tableLayoutPanel5.TabIndex = 18;
+               // 
+               // cbTaskTimeMode
+               // 
+               this.cbTaskTimeMode.Dock = System.Windows.Forms.DockStyle.Fill;
+               this.cbTaskTimeMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+               this.cbTaskTimeMode.FormattingEnabled = true;
+               this.cbTaskTimeMode.Location = new System.Drawing.Point(3, 64);
+               this.cbTaskTimeMode.Name = "cbTaskTimeMode";
+               this.cbTaskTimeMode.Size = new System.Drawing.Size(244, 21);
+               this.cbTaskTimeMode.TabIndex = 0;
                // 
                // TaskView
                // 
                this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
                this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-               this.ClientSize = new System.Drawing.Size(874, 691);
+               this.ClientSize = new System.Drawing.Size(834, 691);
                this.Controls.Add(this.splitContainer1);
                this.Controls.Add(this.tableLayoutPanel2);
                this.Controls.Add(this.menuStrip1);
@@ -968,6 +998,8 @@
                this.splitContainer1.Panel2.ResumeLayout(false);
                ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
                this.splitContainer1.ResumeLayout(false);
+               this.tableLayoutPanel5.ResumeLayout(false);
+               this.tableLayoutPanel5.PerformLayout();
                this.ResumeLayout(false);
                this.PerformLayout();
 
@@ -1039,6 +1071,8 @@
           private System.Windows.Forms.TabPage tabPage4;
           private System.Windows.Forms.TabPage tabPage5;
           private System.Windows.Forms.DataGridView dgvTaskEventHistory;
+          private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+          private System.Windows.Forms.ComboBox cbTaskTimeMode;
      }
 }
 
