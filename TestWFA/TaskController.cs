@@ -350,7 +350,7 @@ namespace TestWFA
                                              case NodeTypes.task_note:
                                                   {
                                                        Console.WriteLine($"FOUND CDATA RCAS [{text}]");
-                                                       currentTask.Peek().Note = text;
+                                                       currentTask.Peek().Note = System.Net.WebUtility.HtmlDecode(text);
                                                   }
                                                   break;
                                              default:

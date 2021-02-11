@@ -100,7 +100,7 @@ namespace TestWFA
                     TimeSpan total = TimeSpan.Zero;
                     foreach (TaskItem item in SubTasks)
                     {
-                         total += item.TaskSeriesItem.Elapsed;
+                         total += item.ElapsedTotal;
                     }
 
                     return total + TaskSeriesItem.Elapsed;
@@ -187,17 +187,27 @@ namespace TestWFA
 
           public bool Remove(TaskItem item)
           {
-               bool result = false;
+               bool success = false;
                for (int i = 0; i < SubTasks.Count; i++)
                {
                     if (SubTasks[i].ID == item.ID)
                     {
                          SubTasks.RemoveAt(i);
-                         result = true;
+                         success = true;
+                         break;
+                    }
+                    else
+                    {
+                         success = SubTasks[i].Remove(item);
+                         if (success)
+                         {
+                              // we found and deleted it!
+                              break;
+                         }
                     }
                }
 
-               return result;
+               return success;
           }
 
           public IEnumerator<TaskItem> GetEnumerator()

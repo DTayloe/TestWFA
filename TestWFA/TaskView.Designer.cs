@@ -96,6 +96,7 @@
                this.splitContainer1 = new System.Windows.Forms.SplitContainer();
                this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
                this.cbTaskTimeMode = new System.Windows.Forms.ComboBox();
+               this.serviceController1 = new System.ServiceProcess.ServiceController();
                this.tableLayoutPanel2.SuspendLayout();
                this.tableLayoutPanel3.SuspendLayout();
                this.groupBox1.SuspendLayout();
@@ -160,11 +161,11 @@
                // 
                // treeViewTasks
                // 
+               this.treeViewTasks.CheckBoxes = true;
                this.treeViewTasks.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.treeViewTasks.Font = new System.Drawing.Font("Lucida Console", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.treeViewTasks.Font = new System.Drawing.Font("Lucida Console", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.treeViewTasks.FullRowSelect = true;
                this.treeViewTasks.HideSelection = false;
-               this.treeViewTasks.HotTracking = true;
                this.treeViewTasks.LabelEdit = true;
                this.treeViewTasks.Location = new System.Drawing.Point(3, 57);
                this.treeViewTasks.Name = "treeViewTasks";
@@ -1073,6 +1074,7 @@
           private System.Windows.Forms.DataGridView dgvTaskEventHistory;
           private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
           private System.Windows.Forms.ComboBox cbTaskTimeMode;
+          private System.ServiceProcess.ServiceController serviceController1;
      }
 }
 

@@ -31,5 +31,10 @@ namespace TestWFA
                var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
                return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
           }
+
+          public static string DisplayDigitWithZero(int digit)
+          {
+               return digit < 10 ? "0" + digit.ToString() : digit.ToString();
+          }
      }
 }

@@ -302,7 +302,10 @@ namespace TestWFA
           {
                get
                {
-                    return $"{Elapsed.Days}D {Elapsed.Hours}H {Elapsed.Minutes}M {Elapsed.Seconds}S";
+                    return    $"{Utility.DisplayDigitWithZero(Elapsed.Days)}D " +
+                              $"{Utility.DisplayDigitWithZero(Elapsed.Hours)}H " +
+                              $"{Utility.DisplayDigitWithZero(Elapsed.Minutes)}M " +
+                              $"{Utility.DisplayDigitWithZero(Elapsed.Seconds)}S";
                }
           }
           

@@ -74,7 +74,10 @@ namespace TestWFA
           
           public void RemoveTask(int taskItemID)
           {
-               Tasks.Remove(FindTaskItem(taskItemID));
+               if (!Tasks.Remove(FindTaskItem(taskItemID)))
+               {
+                    Console.WriteLine($"[ERROR] TaskModel.RemoveTask: Could not delete task {taskItemID}");
+               }
           }
 
           public void ErrorScan()

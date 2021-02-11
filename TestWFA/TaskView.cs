@@ -67,7 +67,7 @@ namespace TestWFA
                cbTaskTimeMode.Items.Add(TIMER_TOTAL);
                cbTaskTimeMode.SelectedIndex = 0;
                cbTaskTimeMode.SelectedValueChanged += cbTaskTimeMode_SelectedValueChanged;
-
+               
                ClearData();
           }
 
@@ -128,9 +128,25 @@ namespace TestWFA
                }
           }
 
+          private static void SetTreeNodeRunningState(TaskItem newTask, TreeNode newNode)
+          {
+               switch (newTask.TaskSeriesItem.State)
+               {
+                    case TaskEventState.TaskEventNew:
+                    case TaskEventState.TaskEventComplete:
+                         newNode.BackColor = SystemColors.Window;
+                         newNode.ForeColor = SystemColors.WindowText;
+                         break;
+                    case TaskEventState.TaskEventRunning:
+                         newNode.BackColor = Color.DarkRed;
+                         newNode.ForeColor = Color.White;
+                         break;
+               }
+          }
+
           public void SetLblDigit(LinkLabel label, int digit)
           {
-               label.Text = digit < 10 ? "0" + digit.ToString() : digit.ToString();
+               label.Text = Utility.DisplayDigitWithZero(digit);
           }
 
           private void SetTaskTimer(TaskItem t)
@@ -139,15 +155,15 @@ namespace TestWFA
                switch (cbTaskTimeMode.SelectedItem)
                {
                     case TIMER_THIS_TASK:
+                         //Console.WriteLine("TIMER_THIS_TASK");
                          timeToDisplay = t.TaskSeriesItem.Elapsed;
-                         Console.WriteLine("TIMER_THIS_TASK");
                          break;
                     case TIMER_TOTAL:
-                         Console.WriteLine("TIMER_TOTAL");
+                         //Console.WriteLine("TIMER_TOTAL");
                          timeToDisplay = t.ElapsedTotal;
                          break;
                     default:
-                         Console.WriteLine("DEFAULT");
+                         Console.WriteLine("[ERROR] SetTaskTimer: DEFAULT");
                          break;
                }
 
@@ -163,6 +179,7 @@ namespace TestWFA
                TaskItem task = _controller.FindTaskItemByID(GetIDFromSelection());
                if (task != null)
                {
+                    // XXX I may not even need this switch! Could I just pass in the state to the methods that need it...?
                     switch (task.TaskSeriesItem.State)
                     {
                          case TaskEventState.TaskEventNew:
@@ -170,11 +187,13 @@ namespace TestWFA
                               Console.WriteLine("Starting...");
                               // item is currently new
                               SetBtnStartStopState(task.TaskSeriesItem.Start());
+                              SetTreeNodeRunningState(task, treeViewTasks.SelectedNode);
                               break;
                          case TaskEventState.TaskEventRunning:
                               Console.WriteLine("Stopping...");
                               // item is currently running
                               SetBtnStartStopState(task.TaskSeriesItem.Stop());
+                              SetTreeNodeRunningState(task, treeViewTasks.SelectedNode);
                               break;
                     }
 
@@ -610,15 +629,16 @@ namespace TestWFA
           public void AddSubTask(TaskItem parentTask, TaskItem newTask)
           {
                TreeNode foundParent = FindTreeNodeByTask(parentTask);
-               Console.WriteLine("Par: "+parentTask+"\tChi: "+newTask);
+               Console.WriteLine("Par: " + parentTask + "\tChi: " + newTask);
                TreeNodeCollection subtaskList = foundParent != null ? foundParent.Nodes : treeViewTasks.Nodes;
                TreeNode newNode = subtaskList.Add(newTask.Name);
                newNode.Tag = newTask.ID;
+               SetTreeNodeRunningState(newTask, newNode);
 
                // cannot add paramerter... i guess i need to have an editing mode that can tell when the new task button has been clicked
                //if (selectAndEditAfterAdd)
                //{
-                    
+
                //}
 
 
