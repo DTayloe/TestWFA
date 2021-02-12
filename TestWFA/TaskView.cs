@@ -27,6 +27,8 @@ namespace TestWFA
                InitializeComponent();
                menuStrip1.Renderer = new MyRenderer();
 
+               this.Text = "Stopped";
+
                // current running directory of app
                //https://stackoverflow.com/a/930832/3752444
                Console.WriteLine(Directory.GetParent(Assembly.GetExecutingAssembly().Location));
@@ -68,6 +70,8 @@ namespace TestWFA
                cbTaskTimeMode.SelectedIndex = 0;
                cbTaskTimeMode.SelectedValueChanged += cbTaskTimeMode_SelectedValueChanged;
                
+               //treeViewTasks.contex
+
                ClearData();
           }
 
@@ -106,7 +110,7 @@ namespace TestWFA
           /// Accepts the current state of the task
           /// </summary>
           /// <param name="state"></param>
-          public void SetBtnStartStopState(TaskEventState state)
+          public void UpdateBtnStartStopState(TaskEventState state)
           {
                //TaskSeries.PrintState(state);
                switch (state)
@@ -128,18 +132,22 @@ namespace TestWFA
                }
           }
 
-          private static void SetTreeNodeRunningState(TaskItem newTask, TreeNode newNode)
+          //public static void UpdateTreeNodeRunningState()
+
+          public void UpdateTreeNodeRunningState(TaskItem task, TreeNode node)
           {
-               switch (newTask.TaskSeriesItem.State)
+               switch (task.TaskSeriesItem.State)
                {
                     case TaskEventState.TaskEventNew:
                     case TaskEventState.TaskEventComplete:
-                         newNode.BackColor = SystemColors.Window;
-                         newNode.ForeColor = SystemColors.WindowText;
+                         node.BackColor = SystemColors.Window;
+                         node.ForeColor = SystemColors.WindowText;
                          break;
                     case TaskEventState.TaskEventRunning:
-                         newNode.BackColor = Color.DarkRed;
-                         newNode.ForeColor = Color.White;
+                         node.BackColor = Color.DarkRed;
+                         node.ForeColor = Color.White;
+                         break;
+                    default:
                          break;
                }
           }
@@ -171,7 +179,7 @@ namespace TestWFA
                SetLblDigit(lblDigitHours, timeToDisplay.Hours);
                SetLblDigit(lblDigitMinutes, timeToDisplay.Minutes);
                SetLblDigit(lblDigitSeconds, timeToDisplay.Seconds);
-               SetBtnStartStopState(t.TaskSeriesItem.State);
+               UpdateBtnStartStopState(t.TaskSeriesItem.State);
           }
 
           private void btnTaskStartStop_Click(object sender, EventArgs e)
@@ -179,6 +187,16 @@ namespace TestWFA
                TaskItem task = _controller.FindTaskItemByID(GetIDFromSelection());
                if (task != null)
                {
+                    //TaskItem prevRun = _controller.GetRunningTask();
+                    //if (prevRun != null)
+                    //{
+                    //     TaskSeries.PrintState(prevRun.TaskSeriesItem.Stop());
+                    //}
+                    //else
+                    //{
+                    //     Console.WriteLine("No other running tasks");
+                    //}
+
                     // XXX I may not even need this switch! Could I just pass in the state to the methods that need it...?
                     switch (task.TaskSeriesItem.State)
                     {
@@ -186,20 +204,22 @@ namespace TestWFA
                          case TaskEventState.TaskEventComplete:
                               Console.WriteLine("Starting...");
                               // item is currently new
-                              SetBtnStartStopState(task.TaskSeriesItem.Start());
-                              SetTreeNodeRunningState(task, treeViewTasks.SelectedNode);
+                              UpdateBtnStartStopState(task.TaskSeriesItem.Start());
+                              UpdateTreeNodeRunningState(task, treeViewTasks.SelectedNode);
+                              //UpdateViewTaskbarTitle(task);
                               break;
                          case TaskEventState.TaskEventRunning:
                               Console.WriteLine("Stopping...");
                               // item is currently running
-                              SetBtnStartStopState(task.TaskSeriesItem.Stop());
-                              SetTreeNodeRunningState(task, treeViewTasks.SelectedNode);
+                              UpdateBtnStartStopState(task.TaskSeriesItem.Stop());
+                              UpdateTreeNodeRunningState(task, treeViewTasks.SelectedNode);
+                              //UpdateViewTaskbarTitle(task);
                               break;
                     }
 
                     _controller.UnsavedChanges = true;
-
-                    UpdateViewTaskHistory();
+                    
+                    UpdateViewTaskPanel();
                }
           }
 
@@ -216,7 +236,7 @@ namespace TestWFA
           {
                if (treeViewTasks.SelectedNode != null)
                {
-                    //treeViewTasks.GetNodeAt
+
                }
           }
 
@@ -322,6 +342,32 @@ namespace TestWFA
                _controller.SaveXmlFileToDisk(askUserIfChangesToBeSaved:false);
           }
 
+          private void toolStripMenuItemSettings_Click(object sender, EventArgs e)
+          {
+               Console.WriteLine("settings!");
+          }
+
+          private void resetTaskEventHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+          {
+               Console.WriteLine("Resetting history");
+               _controller.ResetTaskEventHistory(GetIDFromSelection(), false);
+          }
+
+          private void resetTaskEventHistoryAndChildrenToolStripMenuItem_Click(object sender, EventArgs e)
+          {
+               Console.WriteLine("Resetting history and children");
+               _controller.ResetTaskEventHistory(GetIDFromSelection(), true);
+          }
+
+          private void treeViewTasks_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+          {
+               if (e.Button == MouseButtons.Right && e.Node.IsSelected)
+               {
+                    Console.WriteLine("RIGHT CLICK only on selected MAN " + e.Node.Tag);
+                    cmsTreeView.Show(treeViewTasks, new Point(e.X, e.Y));
+               }
+          }
+
           /// <summary>
           /// This event listener is fired after the editing has completed.
           /// </summary>
@@ -354,14 +400,13 @@ namespace TestWFA
                {
                     e.CancelEdit = true;
                     Console.WriteLine("[INFO] TaskView.treeViewTasks_AfterLabelEdit: label was null, clicked off/no change after edit mode");
-                    //e.Node.BeginEdit();
                     e.Node.EndEdit(false);
                }
           }
 
           private void treeViewTasks_MouseDown(object sender, MouseEventArgs e)
           {
-
+               Console.WriteLine("TEST");
           }
 
           private void treeViewTasks_KeyDown(object sender, KeyEventArgs e)
@@ -383,8 +428,6 @@ namespace TestWFA
                //Console.WriteLine(Utility.DanPropertyList(e));
                if (e.KeyCode == Keys.Delete)
                {
-                    //treeViewTasks.SelectedNode.Remove();
-                    
                     _controller.RemoveNode(GetIDFromSelection());
                }
           }
@@ -393,9 +436,8 @@ namespace TestWFA
           {
                UpdateViewTaskPanel();
           }
-
-          //need to think how ysing this... will erase anything youve typed in rtf box
-          private void UpdateViewTaskPanel()
+          
+          public void UpdateViewTaskPanel()
           {
                UpdateViewGroupBoxSelectedTaskText();
                _controller.UpdateViewTaskFolder(GetIDFromSelection());
@@ -403,6 +445,30 @@ namespace TestWFA
                timerRefresh.Start();
                UpdateViewTaskNote();
                UpdateViewTaskHistory();
+               //UpdateViewTaskbarTitle(_controller.GetRunningTask());
+          }
+
+          private void UpdateViewTaskbarTitle(TaskItem task)
+          {
+               if (task != null)
+               {
+                    switch (task.TaskSeriesItem.State)
+                    {
+                         case TaskEventState.TaskEventNew:
+                         case TaskEventState.TaskEventComplete:
+                              this.Text = "Stopped";
+                              break;
+                         case TaskEventState.TaskEventRunning:
+                              this.Text = "\u25B6" + " [" + task.Name + "]";
+                              break;
+                         default:
+                              break;
+                    }
+               }
+               else
+               {
+                    this.Text = "Stopped";
+               }
           }
 
           public void UpdateViewCurrentFilePath(string currentFilePath)
@@ -633,7 +699,7 @@ namespace TestWFA
                TreeNodeCollection subtaskList = foundParent != null ? foundParent.Nodes : treeViewTasks.Nodes;
                TreeNode newNode = subtaskList.Add(newTask.Name);
                newNode.Tag = newTask.ID;
-               SetTreeNodeRunningState(newTask, newNode);
+               UpdateTreeNodeRunningState(newTask, newNode);
 
                // cannot add paramerter... i guess i need to have an editing mode that can tell when the new task button has been clicked
                //if (selectAndEditAfterAdd)

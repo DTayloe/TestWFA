@@ -412,6 +412,37 @@ namespace TestWFA
                }
           }
 
+          public TaskItem GetRunningTask()
+          {
+               return GetRunningTask(_model.Tasks);
+          }
+
+          private TaskItem GetRunningTask(TaskItem task)
+          {
+               TaskItem result = null;
+               if (task.TaskSeriesItem.State != TaskEventState.TaskEventRunning)
+               {
+                    foreach (TaskItem item in task.SubTasks)
+                    {
+                         if (item.TaskSeriesItem.State == TaskEventState.TaskEventRunning)
+                         {
+                              result = item;
+                              break;
+                         }
+                         else
+                         {
+                              return GetRunningTask(item);
+                         }
+                    }
+               }
+               else
+               {// the current task is running
+                    result = task;
+               }
+
+               return result;
+          }
+
           public void UpdateModelTaskNote(int taskItemID, string newNote)
           {
                TaskItem task = FindTaskItemByID(taskItemID);
@@ -515,6 +546,24 @@ namespace TestWFA
           {
                _model.ErrorScan();
                _view.ErrorScan();
+          }
+
+          public void ResetTaskEventHistory(int taskItemID, bool resetChildren)
+          {
+               TaskItem task = _model.FindTaskItem(taskItemID);
+               if (task != null)
+               {
+                    task.TaskSeriesItem.Reset();
+                    _view.UpdateViewTaskPanel();
+                    _view.UpdateTreeNodeRunningState(task, _view.FindTreeNodeByTask(task));
+                    if (resetChildren)
+                    {
+                         for (int i = 0; i < task.SubTasks.Count; i++)
+                         {
+                              ResetTaskEventHistory(task.SubTasks[i].ID, resetChildren);
+                         }
+                    }
+               }
           }
      }
 }

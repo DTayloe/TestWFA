@@ -87,16 +87,16 @@
                this.btnTaskStartStop = new System.Windows.Forms.Button();
                this.btnTaskHistory = new System.Windows.Forms.Button();
                this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-               this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-               this.whatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-               this.wHyTwoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
                this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
                this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
                this.timerRefresh = new System.Windows.Forms.Timer(this.components);
                this.splitContainer1 = new System.Windows.Forms.SplitContainer();
                this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
                this.cbTaskTimeMode = new System.Windows.Forms.ComboBox();
-               this.serviceController1 = new System.ServiceProcess.ServiceController();
+               this.toolStripMenuItemSettings = new System.Windows.Forms.ToolStripMenuItem();
+               this.cmsTreeView = new System.Windows.Forms.ContextMenuStrip(this.components);
+               this.resetTaskEventHistoryAndChildrenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+               this.resetTaskEventHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
                this.tableLayoutPanel2.SuspendLayout();
                this.tableLayoutPanel3.SuspendLayout();
                this.groupBox1.SuspendLayout();
@@ -119,12 +119,12 @@
                this.groupBox5.SuspendLayout();
                this.tableLayoutPanel8.SuspendLayout();
                this.tblTimer.SuspendLayout();
-               this.contextMenuStrip1.SuspendLayout();
                ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
                this.splitContainer1.Panel1.SuspendLayout();
                this.splitContainer1.Panel2.SuspendLayout();
                this.splitContainer1.SuspendLayout();
                this.tableLayoutPanel5.SuspendLayout();
+               this.cmsTreeView.SuspendLayout();
                this.SuspendLayout();
                // 
                // tableLayoutPanel1
@@ -174,10 +174,10 @@
                this.treeViewTasks.TabIndex = 2;
                this.treeViewTasks.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewTasks_AfterLabelEdit);
                this.treeViewTasks.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewTasks_AfterSelect);
+               this.treeViewTasks.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewTasks_NodeMouseClick);
                this.treeViewTasks.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeViewTasks_KeyDown);
                this.treeViewTasks.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.treeViewTasks_KeyPress);
                this.treeViewTasks.KeyUp += new System.Windows.Forms.KeyEventHandler(this.treeViewTasks_KeyUp);
-               this.treeViewTasks.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeViewTasks_MouseDown);
                // 
                // tableLayoutPanel2
                // 
@@ -591,7 +591,8 @@
                this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemOpen,
             this.toolStripMenuItemSave,
-            this.toolStripMenuItemFilePath});
+            this.toolStripMenuItemFilePath,
+            this.toolStripMenuItemSettings});
                this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
                this.menuStrip1.Location = new System.Drawing.Point(0, 0);
                this.menuStrip1.Name = "menuStrip1";
@@ -883,27 +884,6 @@
                this.btnTaskHistory.Text = "Task History";
                this.btnTaskHistory.UseVisualStyleBackColor = true;
                // 
-               // contextMenuStrip1
-               // 
-               this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.whatToolStripMenuItem,
-            this.wHyTwoToolStripMenuItem});
-               this.contextMenuStrip1.Name = "contextMenuStrip1";
-               this.contextMenuStrip1.Size = new System.Drawing.Size(124, 48);
-               this.contextMenuStrip1.Text = "Test";
-               // 
-               // whatToolStripMenuItem
-               // 
-               this.whatToolStripMenuItem.Name = "whatToolStripMenuItem";
-               this.whatToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-               this.whatToolStripMenuItem.Text = "What?";
-               // 
-               // wHyTwoToolStripMenuItem
-               // 
-               this.wHyTwoToolStripMenuItem.Name = "wHyTwoToolStripMenuItem";
-               this.wHyTwoToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-               this.wHyTwoToolStripMenuItem.Text = "WHy two";
-               // 
                // timerRefresh
                // 
                this.timerRefresh.Interval = 1000;
@@ -952,6 +932,36 @@
                this.cbTaskTimeMode.Size = new System.Drawing.Size(244, 21);
                this.cbTaskTimeMode.TabIndex = 0;
                // 
+               // toolStripMenuItemSettings
+               // 
+               this.toolStripMenuItemSettings.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+               this.toolStripMenuItemSettings.Name = "toolStripMenuItemSettings";
+               this.toolStripMenuItemSettings.Size = new System.Drawing.Size(61, 20);
+               this.toolStripMenuItemSettings.Text = "Settings";
+               this.toolStripMenuItemSettings.Click += new System.EventHandler(this.toolStripMenuItemSettings_Click);
+               // 
+               // cmsTreeView
+               // 
+               this.cmsTreeView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.resetTaskEventHistoryToolStripMenuItem,
+            this.resetTaskEventHistoryAndChildrenToolStripMenuItem});
+               this.cmsTreeView.Name = "cmsTreeView";
+               this.cmsTreeView.Size = new System.Drawing.Size(261, 70);
+               // 
+               // resetTaskEventHistoryAndChildrenToolStripMenuItem
+               // 
+               this.resetTaskEventHistoryAndChildrenToolStripMenuItem.Name = "resetTaskEventHistoryAndChildrenToolStripMenuItem";
+               this.resetTaskEventHistoryAndChildrenToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+               this.resetTaskEventHistoryAndChildrenToolStripMenuItem.Text = "Reset Task Event History + Children";
+               this.resetTaskEventHistoryAndChildrenToolStripMenuItem.Click += new System.EventHandler(this.resetTaskEventHistoryAndChildrenToolStripMenuItem_Click);
+               // 
+               // resetTaskEventHistoryToolStripMenuItem
+               // 
+               this.resetTaskEventHistoryToolStripMenuItem.Name = "resetTaskEventHistoryToolStripMenuItem";
+               this.resetTaskEventHistoryToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+               this.resetTaskEventHistoryToolStripMenuItem.Text = "Reset Task Event History";
+               this.resetTaskEventHistoryToolStripMenuItem.Click += new System.EventHandler(this.resetTaskEventHistoryToolStripMenuItem_Click);
+               // 
                // TaskView
                // 
                this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -994,13 +1004,13 @@
                this.tableLayoutPanel8.PerformLayout();
                this.tblTimer.ResumeLayout(false);
                this.tblTimer.PerformLayout();
-               this.contextMenuStrip1.ResumeLayout(false);
                this.splitContainer1.Panel1.ResumeLayout(false);
                this.splitContainer1.Panel2.ResumeLayout(false);
                ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
                this.splitContainer1.ResumeLayout(false);
                this.tableLayoutPanel5.ResumeLayout(false);
                this.tableLayoutPanel5.PerformLayout();
+               this.cmsTreeView.ResumeLayout(false);
                this.ResumeLayout(false);
                this.PerformLayout();
 
@@ -1038,9 +1048,6 @@
         private System.Windows.Forms.Button btnTaskHistory;
         private System.Windows.Forms.GroupBox groupBoxSelectedTask;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem whatToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem wHyTwoToolStripMenuItem;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.TextBox txtFolderPath;
           private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemOpen;
@@ -1074,7 +1081,10 @@
           private System.Windows.Forms.DataGridView dgvTaskEventHistory;
           private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
           private System.Windows.Forms.ComboBox cbTaskTimeMode;
-          private System.ServiceProcess.ServiceController serviceController1;
+          private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSettings;
+          private System.Windows.Forms.ContextMenuStrip cmsTreeView;
+          private System.Windows.Forms.ToolStripMenuItem resetTaskEventHistoryAndChildrenToolStripMenuItem;
+          private System.Windows.Forms.ToolStripMenuItem resetTaskEventHistoryToolStripMenuItem;
      }
 }
 

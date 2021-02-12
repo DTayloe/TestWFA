@@ -205,6 +205,11 @@ namespace TestWFA
                     xtw.WriteEndElement();
                }
           }
+
+          public void Reset()
+          {
+               _taskEvents = null;
+          }
      }
 
      public enum TaskEventState
