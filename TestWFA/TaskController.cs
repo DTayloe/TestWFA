@@ -412,35 +412,25 @@ namespace TestWFA
                }
           }
 
-          public TaskItem GetRunningTask()
+          public List<TaskItem> GetRunningTasks()
           {
-               return GetRunningTask(_model.Tasks);
+               List<TaskItem> runningTasks = new List<TaskItem>();
+               GetRunningTasks(runningTasks, _model.Tasks);
+
+               return runningTasks;
           }
 
-          private TaskItem GetRunningTask(TaskItem task)
+          private void GetRunningTasks(List<TaskItem> runningTasks, TaskItem task)
           {
-               TaskItem result = null;
-               if (task.TaskSeriesItem.State != TaskEventState.TaskEventRunning)
+               if (task.TaskSeriesItem.State == TaskEventState.TaskEventRunning)
                {
-                    foreach (TaskItem item in task.SubTasks)
-                    {
-                         if (item.TaskSeriesItem.State == TaskEventState.TaskEventRunning)
-                         {
-                              result = item;
-                              break;
-                         }
-                         else
-                         {
-                              return GetRunningTask(item);
-                         }
-                    }
-               }
-               else
-               {// the current task is running
-                    result = task;
+                    runningTasks.Add(task);
                }
 
-               return result;
+               foreach (TaskItem item in task.SubTasks)
+               {
+                    GetRunningTasks(runningTasks, item);
+               }
           }
 
           public void UpdateModelTaskNote(int taskItemID, string newNote)

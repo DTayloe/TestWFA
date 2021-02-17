@@ -186,17 +186,7 @@ namespace TestWFA
           {
                TaskItem task = _controller.FindTaskItemByID(GetIDFromSelection());
                if (task != null)
-               {
-                    //TaskItem prevRun = _controller.GetRunningTask();
-                    //if (prevRun != null)
-                    //{
-                    //     TaskSeries.PrintState(prevRun.TaskSeriesItem.Stop());
-                    //}
-                    //else
-                    //{
-                    //     Console.WriteLine("No other running tasks");
-                    //}
-
+               {                    
                     // XXX I may not even need this switch! Could I just pass in the state to the methods that need it...?
                     switch (task.TaskSeriesItem.State)
                     {
@@ -204,6 +194,21 @@ namespace TestWFA
                          case TaskEventState.TaskEventComplete:
                               Console.WriteLine("Starting...");
                               // item is currently new
+
+                              // XXX stop others, will change with settings in future
+                              if (true)
+                              {
+                                   foreach (TaskItem item in _controller.GetRunningTasks())
+                                   {
+                                        if (item.TaskSeriesItem.State == TaskEventState.TaskEventRunning)
+                                        {
+                                             item.TaskSeriesItem.Stop();
+                                             UpdateTreeNodeRunningState(item, FindTreeNodeByTask(item));
+                                             Console.WriteLine($"Stopped [{item.Name},{item.ID}]");
+                                        }
+                                   }
+                              }
+
                               UpdateBtnStartStopState(task.TaskSeriesItem.Start());
                               UpdateTreeNodeRunningState(task, treeViewTasks.SelectedNode);
                               //UpdateViewTaskbarTitle(task);
@@ -216,6 +221,9 @@ namespace TestWFA
                               //UpdateViewTaskbarTitle(task);
                               break;
                     }
+                    
+                    int count = _controller.GetRunningTasks().Count;
+                    Console.WriteLine($"Running count: {count}");
 
                     _controller.UnsavedChanges = true;
                     
@@ -345,6 +353,9 @@ namespace TestWFA
           private void toolStripMenuItemSettings_Click(object sender, EventArgs e)
           {
                Console.WriteLine("settings!");
+               //TaskViewSettings tvs = new TaskViewSettings();
+               
+               //tvs.ShowDialog();
           }
 
           private void resetTaskEventHistoryToolStripMenuItem_Click(object sender, EventArgs e)
