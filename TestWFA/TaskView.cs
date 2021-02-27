@@ -221,9 +221,8 @@ namespace TestWFA
                               //UpdateViewTaskbarTitle(task);
                               break;
                     }
-                    
-                    int count = _controller.GetRunningTasks().Count;
-                    Console.WriteLine($"Running count: {count}");
+
+                    UpdateViewTaskbarTitle();
 
                     _controller.UnsavedChanges = true;
                     
@@ -456,30 +455,48 @@ namespace TestWFA
                timerRefresh.Start();
                UpdateViewTaskNote();
                UpdateViewTaskHistory();
-               //UpdateViewTaskbarTitle(_controller.GetRunningTask());
+               UpdateViewTaskbarTitle();
           }
 
-          private void UpdateViewTaskbarTitle(TaskItem task)
+          private void UpdateViewTaskbarTitle()
           {
-               if (task != null)
-               {
-                    switch (task.TaskSeriesItem.State)
-                    {
-                         case TaskEventState.TaskEventNew:
-                         case TaskEventState.TaskEventComplete:
-                              this.Text = "Stopped";
-                              break;
-                         case TaskEventState.TaskEventRunning:
-                              this.Text = "\u25B6" + " [" + task.Name + "]";
-                              break;
-                         default:
-                              break;
-                    }
-               }
-               else
+               List<TaskItem> runningTasks = _controller.GetRunningTasks();
+               int count = runningTasks.Count;
+               Console.WriteLine($"Running count: {count}");
+
+               if (count == 0)
                {
                     this.Text = "Stopped";
                }
+               else if (count == 1)
+               {
+                    this.Text = "\u25B6" + " [" + runningTasks[0].Name + "]";
+                    //if (task != null)
+                    //{
+                    //     switch (task.TaskSeriesItem.State)
+                    //     {
+                    //          case TaskEventState.TaskEventNew:
+                    //          case TaskEventState.TaskEventComplete:
+                    //               this.Text = "Stopped";
+                    //               break;
+                    //          case TaskEventState.TaskEventRunning:
+                    //               this.Text = "\u25B6" + " [" + task.Name + "]";
+                    //               break;
+                    //          default:
+                    //               break;
+                    //     }
+                    //}
+                    //else
+                    //{
+                    //     this.Text = "Stopped";
+                    //}
+               }
+               else
+               {// multiple running tasks
+                    this.Text = "\u25B6" + " [" + count + " running]";
+               }
+
+
           }
 
           public void UpdateViewCurrentFilePath(string currentFilePath)

@@ -1,6 +1,6 @@
 ﻿namespace TestWFA
 {
-     partial class TaskViewSettings
+     partial class TaskViewSettingsView
      {
           /// <summary>
           /// Required designer variable.
@@ -55,15 +55,15 @@
                this.clbSettings.Size = new System.Drawing.Size(420, 274);
                this.clbSettings.TabIndex = 3;
                // 
-               // TaskViewSettings
+               // TaskViewSettingsView
                // 
                this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
                this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
                this.ClientSize = new System.Drawing.Size(800, 450);
                this.Controls.Add(this.clbSettings);
                this.Controls.Add(this.cbEnableParallelTasks);
-               this.Name = "TaskViewSettings";
-               this.Text = "TaskViewSettings";
+               this.Name = "TaskViewSettingsView";
+               this.Text = "TaskViewSettingsView";
                this.ResumeLayout(false);
                this.PerformLayout();
 

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace TestWFA
 {
-     public partial class TaskViewSettings : Form
+     public partial class TaskViewSettingsView : Form
      {
-          public TaskViewSettings(TaskViewSettingsValues values)
+          public TaskViewSettingsView(TaskViewSettingsValues values)
           {
                InitializeComponent();
                cbEnableParallelTasks.CheckedChanged += CbEnableParallelTasks_CheckedChanged;

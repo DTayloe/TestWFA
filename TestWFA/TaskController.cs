@@ -29,6 +29,8 @@ namespace TestWFA
                }
           }
 
+          //public TaskViewSettingsView.TaskViewSettingsValues TaskViewSettingsValue { get; set; }
+
           public void UpdateViewCurrentFilePath(string currentFilePath)
           {
                _view.UpdateViewCurrentFilePath(currentFilePath);
