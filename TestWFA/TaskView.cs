@@ -241,9 +241,21 @@ namespace TestWFA
 
           private void btnFocusRunning_Click(object sender, EventArgs e)
           {
-               if (treeViewTasks.SelectedNode != null)
+               List<TaskItem> running = _controller.GetRunningTasks();
+               if (running.Count > 0)
                {
+                    treeViewTasks.CollapseAll();
 
+                    TreeNode t = FindTreeNodeByTask(running[0]);
+                    treeViewTasks.SelectedNode = t;
+                    // XXX doesn't expand all running tasks, can easily do later if needed with below code
+                    //TreeNode tParent = t.Parent;
+                    //while (tParent != null)
+                    //{
+                    //     Console.WriteLine($"Parent: {tParent.Text}");
+                    //     tParent.Expand();
+                    //     tParent = tParent.Parent;
+                    //}
                }
           }
 

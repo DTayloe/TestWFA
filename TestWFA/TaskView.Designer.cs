@@ -68,6 +68,7 @@
                this.toolStripMenuItemOpen = new System.Windows.Forms.ToolStripMenuItem();
                this.toolStripMenuItemSave = new System.Windows.Forms.ToolStripMenuItem();
                this.toolStripMenuItemFilePath = new System.Windows.Forms.ToolStripMenuItem();
+               this.toolStripMenuItemSettings = new System.Windows.Forms.ToolStripMenuItem();
                this.groupBoxSelectedTask = new System.Windows.Forms.GroupBox();
                this.tabControl2 = new System.Windows.Forms.TabControl();
                this.tabPage4 = new System.Windows.Forms.TabPage();
@@ -75,6 +76,8 @@
                this.dgvTaskEventHistory = new System.Windows.Forms.DataGridView();
                this.groupBox5 = new System.Windows.Forms.GroupBox();
                this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+               this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+               this.cbTaskTimeMode = new System.Windows.Forms.ComboBox();
                this.tblTimer = new System.Windows.Forms.TableLayoutPanel();
                this.linkLabel9 = new System.Windows.Forms.LinkLabel();
                this.linkLabel5 = new System.Windows.Forms.LinkLabel();
@@ -91,12 +94,9 @@
                this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
                this.timerRefresh = new System.Windows.Forms.Timer(this.components);
                this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-               this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-               this.cbTaskTimeMode = new System.Windows.Forms.ComboBox();
-               this.toolStripMenuItemSettings = new System.Windows.Forms.ToolStripMenuItem();
                this.cmsTreeView = new System.Windows.Forms.ContextMenuStrip(this.components);
-               this.resetTaskEventHistoryAndChildrenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
                this.resetTaskEventHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+               this.resetTaskEventHistoryAndChildrenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
                this.tableLayoutPanel2.SuspendLayout();
                this.tableLayoutPanel3.SuspendLayout();
                this.groupBox1.SuspendLayout();
@@ -118,12 +118,12 @@
                ((System.ComponentModel.ISupportInitialize)(this.dgvTaskEventHistory)).BeginInit();
                this.groupBox5.SuspendLayout();
                this.tableLayoutPanel8.SuspendLayout();
+               this.tableLayoutPanel5.SuspendLayout();
                this.tblTimer.SuspendLayout();
                ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
                this.splitContainer1.Panel1.SuspendLayout();
                this.splitContainer1.Panel2.SuspendLayout();
                this.splitContainer1.SuspendLayout();
-               this.tableLayoutPanel5.SuspendLayout();
                this.cmsTreeView.SuspendLayout();
                this.SuspendLayout();
                // 
@@ -156,12 +156,11 @@
             "Il > Ticket 234249"});
                this.listBox1.Location = new System.Drawing.Point(3, 3);
                this.listBox1.Name = "listBox1";
-               this.listBox1.Size = new System.Drawing.Size(277, 542);
+               this.listBox1.Size = new System.Drawing.Size(263, 542);
                this.listBox1.TabIndex = 1;
                // 
                // treeViewTasks
                // 
-               this.treeViewTasks.CheckBoxes = true;
                this.treeViewTasks.Dock = System.Windows.Forms.DockStyle.Fill;
                this.treeViewTasks.Font = new System.Drawing.Font("Lucida Console", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.treeViewTasks.FullRowSelect = true;
@@ -346,7 +345,7 @@
                // 
                this.linkLabel2.AutoSize = true;
                this.linkLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.linkLabel2.Font = new System.Drawing.Font("HP Simplified", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.linkLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.linkLabel2.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
                this.linkLabel2.LinkColor = System.Drawing.Color.Black;
                this.linkLabel2.Location = new System.Drawing.Point(137, 39);
@@ -361,7 +360,7 @@
                // 
                this.linkLabel4.AutoSize = true;
                this.linkLabel4.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.linkLabel4.Font = new System.Drawing.Font("HP Simplified", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.linkLabel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.linkLabel4.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
                this.linkLabel4.LinkColor = System.Drawing.Color.Black;
                this.linkLabel4.Location = new System.Drawing.Point(70, 39);
@@ -376,7 +375,7 @@
                // 
                this.linkLabel6.AutoSize = true;
                this.linkLabel6.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.linkLabel6.Font = new System.Drawing.Font("HP Simplified", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.linkLabel6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.linkLabel6.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
                this.linkLabel6.LinkColor = System.Drawing.Color.Black;
                this.linkLabel6.Location = new System.Drawing.Point(3, 39);
@@ -391,7 +390,7 @@
                // 
                this.linkLabel7.AutoSize = true;
                this.linkLabel7.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.linkLabel7.Font = new System.Drawing.Font("HP Simplified", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.linkLabel7.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.linkLabel7.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
                this.linkLabel7.LinkColor = System.Drawing.Color.Black;
                this.linkLabel7.Location = new System.Drawing.Point(70, 0);
@@ -406,7 +405,7 @@
                // 
                this.linkLabel8.AutoSize = true;
                this.linkLabel8.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.linkLabel8.Font = new System.Drawing.Font("HP Simplified", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.linkLabel8.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.linkLabel8.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
                this.linkLabel8.LinkColor = System.Drawing.Color.Black;
                this.linkLabel8.Location = new System.Drawing.Point(3, 0);
@@ -421,7 +420,7 @@
                // 
                this.linkLabel10.AutoSize = true;
                this.linkLabel10.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.linkLabel10.Font = new System.Drawing.Font("HP Simplified", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.linkLabel10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.linkLabel10.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
                this.linkLabel10.LinkColor = System.Drawing.Color.Black;
                this.linkLabel10.Location = new System.Drawing.Point(204, 39);
@@ -436,7 +435,7 @@
                // 
                this.linkLabel11.AutoSize = true;
                this.linkLabel11.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.linkLabel11.Font = new System.Drawing.Font("HP Simplified", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.linkLabel11.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.linkLabel11.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
                this.linkLabel11.LinkColor = System.Drawing.Color.Black;
                this.linkLabel11.Location = new System.Drawing.Point(204, 0);
@@ -451,7 +450,7 @@
                // 
                this.linkLabel12.AutoSize = true;
                this.linkLabel12.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.linkLabel12.Font = new System.Drawing.Font("HP Simplified", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.linkLabel12.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.linkLabel12.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
                this.linkLabel12.LinkColor = System.Drawing.Color.Black;
                this.linkLabel12.Location = new System.Drawing.Point(137, 0);
@@ -504,7 +503,7 @@
                this.tabPage2.Location = new System.Drawing.Point(4, 22);
                this.tabPage2.Name = "tabPage2";
                this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-               this.tabPage2.Size = new System.Drawing.Size(283, 548);
+               this.tabPage2.Size = new System.Drawing.Size(269, 548);
                this.tabPage2.TabIndex = 1;
                this.tabPage2.Text = "Running Tasks";
                this.tabPage2.UseVisualStyleBackColor = true;
@@ -514,7 +513,7 @@
                this.tabPage3.Controls.Add(this.propertyGrid1);
                this.tabPage3.Location = new System.Drawing.Point(4, 22);
                this.tabPage3.Name = "tabPage3";
-               this.tabPage3.Size = new System.Drawing.Size(283, 548);
+               this.tabPage3.Size = new System.Drawing.Size(269, 548);
                this.tabPage3.TabIndex = 2;
                this.tabPage3.Text = "History";
                this.tabPage3.UseVisualStyleBackColor = true;
@@ -623,6 +622,14 @@
                this.toolStripMenuItemFilePath.Size = new System.Drawing.Size(99, 20);
                this.toolStripMenuItemFilePath.Text = "(Not yet saved)";
                // 
+               // toolStripMenuItemSettings
+               // 
+               this.toolStripMenuItemSettings.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+               this.toolStripMenuItemSettings.Name = "toolStripMenuItemSettings";
+               this.toolStripMenuItemSettings.Size = new System.Drawing.Size(61, 20);
+               this.toolStripMenuItemSettings.Text = "Settings";
+               this.toolStripMenuItemSettings.Click += new System.EventHandler(this.toolStripMenuItemSettings_Click);
+               // 
                // groupBoxSelectedTask
                // 
                this.groupBoxSelectedTask.Controls.Add(this.tabControl2);
@@ -665,7 +672,7 @@
                this.tabPage5.Location = new System.Drawing.Point(4, 22);
                this.tabPage5.Name = "tabPage5";
                this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-               this.tabPage5.Size = new System.Drawing.Size(565, 447);
+               this.tabPage5.Size = new System.Drawing.Size(539, 414);
                this.tabPage5.TabIndex = 1;
                this.tabPage5.Text = "Task Event History";
                this.tabPage5.UseVisualStyleBackColor = true;
@@ -679,7 +686,7 @@
                this.dgvTaskEventHistory.Dock = System.Windows.Forms.DockStyle.Fill;
                this.dgvTaskEventHistory.Location = new System.Drawing.Point(3, 3);
                this.dgvTaskEventHistory.Name = "dgvTaskEventHistory";
-               this.dgvTaskEventHistory.Size = new System.Drawing.Size(559, 441);
+               this.dgvTaskEventHistory.Size = new System.Drawing.Size(533, 408);
                this.dgvTaskEventHistory.TabIndex = 0;
                // 
                // groupBox5
@@ -714,6 +721,32 @@
                this.tableLayoutPanel8.Size = new System.Drawing.Size(541, 94);
                this.tableLayoutPanel8.TabIndex = 3;
                // 
+               // tableLayoutPanel5
+               // 
+               this.tableLayoutPanel5.AutoSize = true;
+               this.tableLayoutPanel5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+               this.tableLayoutPanel5.ColumnCount = 1;
+               this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+               this.tableLayoutPanel5.Controls.Add(this.cbTaskTimeMode, 0, 1);
+               this.tableLayoutPanel5.Controls.Add(this.tblTimer, 0, 0);
+               this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 3);
+               this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+               this.tableLayoutPanel5.RowCount = 2;
+               this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+               this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+               this.tableLayoutPanel5.Size = new System.Drawing.Size(257, 88);
+               this.tableLayoutPanel5.TabIndex = 18;
+               // 
+               // cbTaskTimeMode
+               // 
+               this.cbTaskTimeMode.Dock = System.Windows.Forms.DockStyle.Fill;
+               this.cbTaskTimeMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+               this.cbTaskTimeMode.FormattingEnabled = true;
+               this.cbTaskTimeMode.Location = new System.Drawing.Point(3, 64);
+               this.cbTaskTimeMode.Name = "cbTaskTimeMode";
+               this.cbTaskTimeMode.Size = new System.Drawing.Size(251, 21);
+               this.cbTaskTimeMode.TabIndex = 0;
+               // 
                // tblTimer
                // 
                this.tblTimer.AutoSize = true;
@@ -736,14 +769,14 @@
                this.tblTimer.RowCount = 2;
                this.tblTimer.RowStyles.Add(new System.Windows.Forms.RowStyle());
                this.tblTimer.RowStyles.Add(new System.Windows.Forms.RowStyle());
-               this.tblTimer.Size = new System.Drawing.Size(244, 55);
+               this.tblTimer.Size = new System.Drawing.Size(251, 55);
                this.tblTimer.TabIndex = 17;
                // 
                // linkLabel9
                // 
                this.linkLabel9.AutoSize = true;
                this.linkLabel9.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.linkLabel9.Font = new System.Drawing.Font("HP Simplified", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.linkLabel9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.linkLabel9.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
                this.linkLabel9.LinkColor = System.Drawing.Color.Black;
                this.linkLabel9.Location = new System.Drawing.Point(125, 39);
@@ -758,7 +791,7 @@
                // 
                this.linkLabel5.AutoSize = true;
                this.linkLabel5.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.linkLabel5.Font = new System.Drawing.Font("HP Simplified", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.linkLabel5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.linkLabel5.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
                this.linkLabel5.LinkColor = System.Drawing.Color.Black;
                this.linkLabel5.Location = new System.Drawing.Point(64, 39);
@@ -773,7 +806,7 @@
                // 
                this.linkLabel3.AutoSize = true;
                this.linkLabel3.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.linkLabel3.Font = new System.Drawing.Font("HP Simplified", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.linkLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.linkLabel3.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
                this.linkLabel3.LinkColor = System.Drawing.Color.Black;
                this.linkLabel3.Location = new System.Drawing.Point(3, 39);
@@ -788,7 +821,7 @@
                // 
                this.lblDigitHours.AutoSize = true;
                this.lblDigitHours.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.lblDigitHours.Font = new System.Drawing.Font("HP Simplified", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.lblDigitHours.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.lblDigitHours.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
                this.lblDigitHours.LinkColor = System.Drawing.Color.Black;
                this.lblDigitHours.Location = new System.Drawing.Point(64, 0);
@@ -803,7 +836,7 @@
                // 
                this.lblDigitDays.AutoSize = true;
                this.lblDigitDays.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.lblDigitDays.Font = new System.Drawing.Font("HP Simplified", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.lblDigitDays.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.lblDigitDays.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
                this.lblDigitDays.LinkColor = System.Drawing.Color.Black;
                this.lblDigitDays.Location = new System.Drawing.Point(3, 0);
@@ -818,12 +851,12 @@
                // 
                this.lblDigitUnit.AutoSize = true;
                this.lblDigitUnit.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.lblDigitUnit.Font = new System.Drawing.Font("HP Simplified", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.lblDigitUnit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.lblDigitUnit.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
                this.lblDigitUnit.LinkColor = System.Drawing.Color.Black;
                this.lblDigitUnit.Location = new System.Drawing.Point(186, 39);
                this.lblDigitUnit.Name = "lblDigitUnit";
-               this.lblDigitUnit.Size = new System.Drawing.Size(55, 16);
+               this.lblDigitUnit.Size = new System.Drawing.Size(62, 16);
                this.lblDigitUnit.TabIndex = 6;
                this.lblDigitUnit.TabStop = true;
                this.lblDigitUnit.Text = "Seconds";
@@ -833,12 +866,12 @@
                // 
                this.lblDigitSeconds.AutoSize = true;
                this.lblDigitSeconds.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.lblDigitSeconds.Font = new System.Drawing.Font("HP Simplified", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.lblDigitSeconds.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.lblDigitSeconds.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
                this.lblDigitSeconds.LinkColor = System.Drawing.Color.Black;
                this.lblDigitSeconds.Location = new System.Drawing.Point(186, 0);
                this.lblDigitSeconds.Name = "lblDigitSeconds";
-               this.lblDigitSeconds.Size = new System.Drawing.Size(55, 39);
+               this.lblDigitSeconds.Size = new System.Drawing.Size(62, 39);
                this.lblDigitSeconds.TabIndex = 3;
                this.lblDigitSeconds.TabStop = true;
                this.lblDigitSeconds.Text = "99";
@@ -848,7 +881,7 @@
                // 
                this.lblDigitMinutes.AutoSize = true;
                this.lblDigitMinutes.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.lblDigitMinutes.Font = new System.Drawing.Font("HP Simplified", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.lblDigitMinutes.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.lblDigitMinutes.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
                this.lblDigitMinutes.LinkColor = System.Drawing.Color.Black;
                this.lblDigitMinutes.Location = new System.Drawing.Point(125, 0);
@@ -864,9 +897,9 @@
                this.btnTaskStartStop.AutoSize = true;
                this.btnTaskStartStop.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
                this.btnTaskStartStop.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.btnTaskStartStop.Location = new System.Drawing.Point(259, 3);
+               this.btnTaskStartStop.Location = new System.Drawing.Point(266, 3);
                this.btnTaskStartStop.Name = "btnTaskStartStop";
-               this.btnTaskStartStop.Size = new System.Drawing.Size(197, 88);
+               this.btnTaskStartStop.Size = new System.Drawing.Size(190, 88);
                this.btnTaskStartStop.TabIndex = 0;
                this.btnTaskStartStop.Text = "Start Task";
                this.btnTaskStartStop.UseVisualStyleBackColor = true;
@@ -891,6 +924,7 @@
                // splitContainer1
                // 
                this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+               this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
                this.splitContainer1.Location = new System.Drawing.Point(0, 24);
                this.splitContainer1.Name = "splitContainer1";
                // 
@@ -906,61 +940,27 @@
                this.splitContainer1.SplitterDistance = 277;
                this.splitContainer1.TabIndex = 12;
                // 
-               // tableLayoutPanel5
-               // 
-               this.tableLayoutPanel5.AutoSize = true;
-               this.tableLayoutPanel5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-               this.tableLayoutPanel5.ColumnCount = 1;
-               this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-               this.tableLayoutPanel5.Controls.Add(this.cbTaskTimeMode, 0, 1);
-               this.tableLayoutPanel5.Controls.Add(this.tblTimer, 0, 0);
-               this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 3);
-               this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-               this.tableLayoutPanel5.RowCount = 2;
-               this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
-               this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
-               this.tableLayoutPanel5.Size = new System.Drawing.Size(250, 88);
-               this.tableLayoutPanel5.TabIndex = 18;
-               // 
-               // cbTaskTimeMode
-               // 
-               this.cbTaskTimeMode.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.cbTaskTimeMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-               this.cbTaskTimeMode.FormattingEnabled = true;
-               this.cbTaskTimeMode.Location = new System.Drawing.Point(3, 64);
-               this.cbTaskTimeMode.Name = "cbTaskTimeMode";
-               this.cbTaskTimeMode.Size = new System.Drawing.Size(244, 21);
-               this.cbTaskTimeMode.TabIndex = 0;
-               // 
-               // toolStripMenuItemSettings
-               // 
-               this.toolStripMenuItemSettings.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-               this.toolStripMenuItemSettings.Name = "toolStripMenuItemSettings";
-               this.toolStripMenuItemSettings.Size = new System.Drawing.Size(61, 20);
-               this.toolStripMenuItemSettings.Text = "Settings";
-               this.toolStripMenuItemSettings.Click += new System.EventHandler(this.toolStripMenuItemSettings_Click);
-               // 
                // cmsTreeView
                // 
                this.cmsTreeView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.resetTaskEventHistoryToolStripMenuItem,
             this.resetTaskEventHistoryAndChildrenToolStripMenuItem});
                this.cmsTreeView.Name = "cmsTreeView";
-               this.cmsTreeView.Size = new System.Drawing.Size(261, 70);
-               // 
-               // resetTaskEventHistoryAndChildrenToolStripMenuItem
-               // 
-               this.resetTaskEventHistoryAndChildrenToolStripMenuItem.Name = "resetTaskEventHistoryAndChildrenToolStripMenuItem";
-               this.resetTaskEventHistoryAndChildrenToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
-               this.resetTaskEventHistoryAndChildrenToolStripMenuItem.Text = "Reset Task Event History + Children";
-               this.resetTaskEventHistoryAndChildrenToolStripMenuItem.Click += new System.EventHandler(this.resetTaskEventHistoryAndChildrenToolStripMenuItem_Click);
+               this.cmsTreeView.Size = new System.Drawing.Size(260, 48);
                // 
                // resetTaskEventHistoryToolStripMenuItem
                // 
                this.resetTaskEventHistoryToolStripMenuItem.Name = "resetTaskEventHistoryToolStripMenuItem";
-               this.resetTaskEventHistoryToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+               this.resetTaskEventHistoryToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
                this.resetTaskEventHistoryToolStripMenuItem.Text = "Reset Task Event History";
                this.resetTaskEventHistoryToolStripMenuItem.Click += new System.EventHandler(this.resetTaskEventHistoryToolStripMenuItem_Click);
+               // 
+               // resetTaskEventHistoryAndChildrenToolStripMenuItem
+               // 
+               this.resetTaskEventHistoryAndChildrenToolStripMenuItem.Name = "resetTaskEventHistoryAndChildrenToolStripMenuItem";
+               this.resetTaskEventHistoryAndChildrenToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
+               this.resetTaskEventHistoryAndChildrenToolStripMenuItem.Text = "Reset Task Event History + Children";
+               this.resetTaskEventHistoryAndChildrenToolStripMenuItem.Click += new System.EventHandler(this.resetTaskEventHistoryAndChildrenToolStripMenuItem_Click);
                // 
                // TaskView
                // 
@@ -1002,14 +1002,14 @@
                this.groupBox5.PerformLayout();
                this.tableLayoutPanel8.ResumeLayout(false);
                this.tableLayoutPanel8.PerformLayout();
+               this.tableLayoutPanel5.ResumeLayout(false);
+               this.tableLayoutPanel5.PerformLayout();
                this.tblTimer.ResumeLayout(false);
                this.tblTimer.PerformLayout();
                this.splitContainer1.Panel1.ResumeLayout(false);
                this.splitContainer1.Panel2.ResumeLayout(false);
                ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
                this.splitContainer1.ResumeLayout(false);
-               this.tableLayoutPanel5.ResumeLayout(false);
-               this.tableLayoutPanel5.PerformLayout();
                this.cmsTreeView.ResumeLayout(false);
                this.ResumeLayout(false);
                this.PerformLayout();
