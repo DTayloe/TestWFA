@@ -805,5 +805,43 @@ namespace TestWFA
           {
                e.Cancel = !_controller.SaveXmlFileToDisk(askUserIfChangesToBeSaved:true);
           }
+
+          private void treeViewTasks_DrawNode(object sender, DrawTreeNodeEventArgs e)
+          {
+               Console.WriteLine($"e.bounds: {e.Bounds}");
+               Console.WriteLine($"e.Node.Bounds: {e.Node.Bounds}");
+               if((e.State & TreeNodeStates.Selected) != 0)
+               {
+                    e.Graphics.FillRectangle(Brushes.Aquamarine, e.Bounds);
+               }
+               else
+               {
+                    //e.DrawDefault = true;
+               }
+               
+               e.Graphics.DrawEllipse(new Pen(Brushes.Red,0.5f), new Rectangle(e.Node.Bounds.X, e.Node.Bounds.Y,10,10));
+
+               Font nodeFont = e.Node.NodeFont;
+               if (nodeFont == null)
+               {
+                    nodeFont = ((TreeView)sender).Font;
+               }
+
+               Int32 boxSize = 16;
+               Int32 offset = e.Node.Parent == null ? 3 : 21;
+               Rectangle bounds = new Rectangle(new Point(e.Node.Bounds.X + offset, e.Node.Bounds.Y + 1), new Size(boxSize, boxSize));
+               if (((TreeView)sender).CheckBoxes)
+               {
+                    ControlPaint.DrawCheckBox(e.Graphics, bounds, e.Node.Checked ? ButtonState.Checked : ButtonState.Normal);
+               }
+
+               string extraText = _controller.FindTaskItemByID((int)e.Node.Tag).TaskSeriesItem.Elapsed.ToString();
+               //float extraTextHeight = e.Graphics.MeasureString(extraText, nodeFont).Height;
+               //e.Graphics.DrawString(e.Node.Text, nodeFont, Brushes.Black, Rectangle.Inflate(e.Bounds, 20, 0));
+               Font extraFont = new Font(nodeFont.FontFamily, 5,FontStyle.Italic);
+               e.Graphics.DrawString(extraText, extraFont, Brushes.Gray, 0, e.Node.Bounds.Y);
+               e.Graphics.DrawString(e.Node.Text, nodeFont, Brushes.Black,e.Node.Bounds.X, e.Node.Bounds.Y);
+               //e.Bounds.Height = e.Node.Bounds.Y + extraTextHeight;
+          }
      }
 }

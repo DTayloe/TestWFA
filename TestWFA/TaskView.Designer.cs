@@ -161,7 +161,9 @@
                // 
                // treeViewTasks
                // 
+               this.treeViewTasks.CheckBoxes = true;
                this.treeViewTasks.Dock = System.Windows.Forms.DockStyle.Fill;
+               this.treeViewTasks.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawAll;
                this.treeViewTasks.Font = new System.Drawing.Font("Lucida Console", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                this.treeViewTasks.FullRowSelect = true;
                this.treeViewTasks.HideSelection = false;
@@ -172,6 +174,7 @@
                this.treeViewTasks.Size = new System.Drawing.Size(263, 426);
                this.treeViewTasks.TabIndex = 2;
                this.treeViewTasks.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewTasks_AfterLabelEdit);
+               this.treeViewTasks.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(this.treeViewTasks_DrawNode);
                this.treeViewTasks.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewTasks_AfterSelect);
                this.treeViewTasks.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewTasks_NodeMouseClick);
                this.treeViewTasks.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeViewTasks_KeyDown);
