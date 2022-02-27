@@ -29,7 +29,6 @@
           private void InitializeComponent()
           {
                this.components = new System.ComponentModel.Container();
-               System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskView));
                this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
                this.listBox1 = new System.Windows.Forms.ListBox();
                this.treeViewTasks = new System.Windows.Forms.TreeView();
@@ -53,7 +52,6 @@
                this.linkLabel10 = new System.Windows.Forms.LinkLabel();
                this.linkLabel11 = new System.Windows.Forms.LinkLabel();
                this.linkLabel12 = new System.Windows.Forms.LinkLabel();
-               this.rtbTask = new System.Windows.Forms.RichTextBox();
                this.tabControl1 = new System.Windows.Forms.TabControl();
                this.tabPage1 = new System.Windows.Forms.TabPage();
                this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -97,6 +95,7 @@
                this.cmsTreeView = new System.Windows.Forms.ContextMenuStrip(this.components);
                this.resetTaskEventHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
                this.resetTaskEventHistoryAndChildrenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+               this.txtTask = new System.Windows.Forms.RichTextBox();
                this.tableLayoutPanel2.SuspendLayout();
                this.tableLayoutPanel3.SuspendLayout();
                this.groupBox1.SuspendLayout();
@@ -461,17 +460,6 @@
                this.linkLabel12.Text = "99";
                this.linkLabel12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
                // 
-               // rtbTask
-               // 
-               this.rtbTask.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.rtbTask.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.rtbTask.Location = new System.Drawing.Point(3, 3);
-               this.rtbTask.Name = "rtbTask";
-               this.rtbTask.Size = new System.Drawing.Size(533, 408);
-               this.rtbTask.TabIndex = 0;
-               this.rtbTask.Text = resources.GetString("rtbTask.Text");
-               this.rtbTask.TextChanged += new System.EventHandler(this.rtbTask_TextChanged);
-               // 
                // tabControl1
                // 
                this.tabControl1.Controls.Add(this.tabPage1);
@@ -657,7 +645,7 @@
                // 
                // tabPage4
                // 
-               this.tabPage4.Controls.Add(this.rtbTask);
+               this.tabPage4.Controls.Add(this.txtTask);
                this.tabPage4.Location = new System.Drawing.Point(4, 22);
                this.tabPage4.Name = "tabPage4";
                this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
@@ -962,6 +950,22 @@
                this.resetTaskEventHistoryAndChildrenToolStripMenuItem.Text = "Reset Task Event History + Children";
                this.resetTaskEventHistoryAndChildrenToolStripMenuItem.Click += new System.EventHandler(this.resetTaskEventHistoryAndChildrenToolStripMenuItem_Click);
                // 
+               // txtTask
+               // 
+               this.txtTask.AcceptsTab = true;
+               this.txtTask.DetectUrls = false;
+               this.txtTask.Dock = System.Windows.Forms.DockStyle.Fill;
+               this.txtTask.Font = new System.Drawing.Font("Lucida Console", 9.75F);
+               this.txtTask.Location = new System.Drawing.Point(3, 3);
+               this.txtTask.Name = "txtTask";
+               this.txtTask.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+               this.txtTask.Size = new System.Drawing.Size(533, 408);
+               this.txtTask.TabIndex = 2;
+               this.txtTask.TabStop = false;
+               this.txtTask.Text = "ksadfkjkasjdfsahfjhaskfj";
+               this.txtTask.TextChanged += new System.EventHandler(this.rtbTask_TextChanged);
+               this.txtTask.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTask_KeyDown);
+               // 
                // TaskView
                // 
                this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1032,7 +1036,6 @@
         private System.Windows.Forms.Button btnNewTask;
         private System.Windows.Forms.Button btnNewTaskSub;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.RichTextBox rtbTask;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
@@ -1085,6 +1088,7 @@
           private System.Windows.Forms.ContextMenuStrip cmsTreeView;
           private System.Windows.Forms.ToolStripMenuItem resetTaskEventHistoryAndChildrenToolStripMenuItem;
           private System.Windows.Forms.ToolStripMenuItem resetTaskEventHistoryToolStripMenuItem;
+          private System.Windows.Forms.RichTextBox txtTask;
      }
 }
 

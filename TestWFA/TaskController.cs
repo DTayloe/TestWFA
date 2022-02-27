@@ -139,11 +139,13 @@ namespace TestWFA
                     xtw.WriteStartElement(NodeTypes.task.ToString());
 
                     xtw.WriteStartElement(NodeTypes.task_name.ToString());
-                    xtw.WriteString(task.Name);
+                    //xtw.WriteString(System.Security.SecurityElement.Escape(task.Name));
+                    xtw.WriteString(task.Name); // XXX unescaped version 
                     xtw.WriteEndElement();
 
                     xtw.WriteStartElement(NodeTypes.task_folder.ToString());
-                    xtw.WriteString(task.Folder);
+                    //xtw.WriteString(System.Security.SecurityElement.Escape(task.Folder));
+                    xtw.WriteString(task.Folder);// XXX unescaped version 
                     xtw.WriteEndElement();
 
                     xtw.WriteStartElement(NodeTypes.task_series.ToString());
@@ -170,7 +172,7 @@ namespace TestWFA
                }
 
                // clear data
-               ClearData();
+               ClearAllData();
                
                if (File.Exists(file))
                {
@@ -292,12 +294,14 @@ namespace TestWFA
                                                   break;
                                              case NodeTypes.task_name:
                                                   {
+                                                       //currentTask.Peek().Name = System.Net.WebUtility.HtmlDecode(text);  // XXX escaped version
                                                        currentTask.Peek().Name = text;
                                                        //Console.WriteLine($"HELLO [{text}][{xr.Value}][{xr.ReadContentAsString()}][{currentTask.Peek().Name}]");
                                                   }
                                                   break;
                                              case NodeTypes.task_folder:
                                                   {
+                                                       //currentTask.Peek().Folder = System.Net.WebUtility.HtmlDecode(text);  // XXX escaped version
                                                        currentTask.Peek().Folder = text;
                                                        //Console.WriteLine($"HELLO [{text}][{xr.Value}][{xr.ReadContentAsString()}][{currentTask.Peek().Name}]");
                                                   }
@@ -486,6 +490,7 @@ namespace TestWFA
           {
                _model.RemoveTask(taskItemID);
                _view.RemoveTask(taskItemID);
+               _view.UpdateViewTaskPanel();
                UnsavedChanges = true;
 
                ErrorScan();
@@ -527,10 +532,10 @@ namespace TestWFA
                ErrorScan();
           }
 
-          private void ClearData()
+          private void ClearAllData()
           {
-               _model.ClearData();
-               _view.ClearData();
+               _model.ClearAllModelData();
+               _view.ClearAllViewData();
                UnsavedChanges = false;
           }
 

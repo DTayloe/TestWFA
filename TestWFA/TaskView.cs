@@ -21,7 +21,7 @@ namespace TestWFA
 
           public const string TIMER_THIS_TASK = "This Task";
           public const string TIMER_TOTAL = "This Task + Subtasks";
-          
+
           public TaskView()
           {
                InitializeComponent();
@@ -69,10 +69,14 @@ namespace TestWFA
                cbTaskTimeMode.Items.Add(TIMER_TOTAL);
                cbTaskTimeMode.SelectedIndex = 0;
                cbTaskTimeMode.SelectedValueChanged += cbTaskTimeMode_SelectedValueChanged;
-               
+
                //treeViewTasks.contex
 
-               ClearData();
+               ClearAllViewData();
+
+               groupBoxSelectedTask.Enabled = false;
+
+               //treeViewTasks.HideSelection = true;
           }
 
           public void UnsavedChanges(bool unsavedChangesExist)
@@ -88,6 +92,7 @@ namespace TestWFA
           private void btnCollapseAll_Click(object sender, EventArgs e)
           {
                treeViewTasks.CollapseAll();
+               UpdateViewTaskPanel();
           }
 
           private void btnExpandAll_Click(object sender, EventArgs e)
@@ -98,7 +103,7 @@ namespace TestWFA
           private void btnNewTask_Click(object sender, EventArgs e)
           {
                SelectAndEdit(InsertSubtaskOnNode(GetParentTreeNodeFromSelection()));
-               
+
           }
 
           private void btnNewTaskSub_Click(object sender, EventArgs e)
@@ -155,6 +160,19 @@ namespace TestWFA
           public void SetLblDigit(LinkLabel label, int digit)
           {
                label.Text = Utility.DisplayDigitWithZero(digit);
+          }
+
+          public string TextBoxTask
+          {
+               get
+               {
+                    return txtTask.Text;
+               }
+
+               set
+               {
+                    txtTask.Text = value;
+               }
           }
 
           private void SetTaskTimer(TaskItem t)
@@ -325,7 +343,8 @@ namespace TestWFA
                     TaskItem task = _controller.FindTaskItemByID(GetIDFromSelection());
                     if (task != null)
                     {
-                         RichTextBox rtb = (RichTextBox)sender;
+                         TextBoxBase rtb = (TextBoxBase)sender;
+                         
                          Console.WriteLine("TEXT CHANGED [" + rtb.Text + "]");
 
                          if (task.Note != rtb.Text)
@@ -461,6 +480,7 @@ namespace TestWFA
           
           public void UpdateViewTaskPanel()
           {
+               UpdateViewCheckEnabledRightPanel();
                UpdateViewGroupBoxSelectedTaskText();
                _controller.UpdateViewTaskFolder(GetIDFromSelection());
                UpdateViewTaskTimer(null, null);
@@ -468,6 +488,19 @@ namespace TestWFA
                UpdateViewTaskNote();
                UpdateViewTaskHistory();
                UpdateViewTaskbarTitle();
+          }
+
+          private void UpdateViewCheckEnabledRightPanel()
+          {
+               if (treeViewTasks.SelectedNode == null)
+               {
+                    groupBoxSelectedTask.Enabled = false;
+                    ClearPaneSelectedTask();
+               }
+               else
+               {
+                    groupBoxSelectedTask.Enabled = true;
+               }
           }
 
           private void UpdateViewTaskbarTitle()
@@ -578,7 +611,7 @@ namespace TestWFA
                TaskItem task = _controller.FindTaskItemByID(GetIDFromSelection());
                if (task != null)
                {
-                    rtbTask.Text = task.Note;
+                    TextBoxTask = task.Note;
                }
           }
 
@@ -675,12 +708,29 @@ namespace TestWFA
                return result;
           }
 
-          public void ClearData()
+          public void ClearAllViewData()
           {
                treeViewTasks.Nodes.Clear();
+               ClearPaneSelectedTask();
+          }
+
+          public void ClearPaneSelectedTask()
+          {
                groupBoxSelectedTask.Text = "SELECTED TASK NAME HERE";
                SetTaskTimer(new TaskItem());
-               rtbTask.Text = "";
+               TextBoxTask = "";
+               txtFolderPath.Text = "";
+               ClearViewTaskHistory();
+          }
+
+          public void ClearViewTaskHistory()
+          {
+               // populate datasource
+               BindingSource bs = new BindingSource();
+
+               // initialize DGV
+               dgvTaskEventHistory.AutoGenerateColumns = false;
+               dgvTaskEventHistory.DataSource = bs;
           }
 
           public void RemoveTask(int taskItemID)
@@ -804,6 +854,15 @@ namespace TestWFA
           private void TaskView_FormClosing(object sender, FormClosingEventArgs e)
           {
                e.Cancel = !_controller.SaveXmlFileToDisk(askUserIfChangesToBeSaved:true);
+          }
+
+          private void txtTask_KeyDown(object sender, KeyEventArgs e)
+          {
+               if (e.Control && e.KeyCode == Keys.V)
+               {
+                    ((RichTextBox)sender).Paste(DataFormats.GetFormat("Text"));
+                    e.Handled = true;
+               }
           }
      }
 }

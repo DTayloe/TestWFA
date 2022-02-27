@@ -102,7 +102,7 @@ namespace TestWFA
                }
           }
 
-          public void ClearData()
+          public void ClearAllModelData()
           {
                Tasks = new TaskItem();
                CurrentFilePath = null;
