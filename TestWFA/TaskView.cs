@@ -74,8 +74,6 @@ namespace TestWFA
 
                ClearAllViewData();
 
-               groupBoxSelectedTask.Enabled = false;
-
                //treeViewTasks.HideSelection = true;
           }
 
@@ -712,6 +710,7 @@ namespace TestWFA
           {
                treeViewTasks.Nodes.Clear();
                ClearPaneSelectedTask();
+               groupBoxSelectedTask.Enabled = false;
           }
 
           public void ClearPaneSelectedTask()
@@ -834,9 +833,9 @@ namespace TestWFA
                protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
                {
                     base.OnRenderMenuItemBackground(e);
-                    if(e.Item.Enabled && e.Item.Selected)
+                    if (e.Item.Enabled)
                     {
-                         using (Pen p = new Pen(((MyColorTable)ColorTable).MenuItemEnabledBorder))
+                         using (Pen p = new Pen(((MyColorTable)ColorTable).MenuItemEnabledAlert))
                          {
                               Rectangle r = new Rectangle(0, 0, e.Item.Width-1, e.Item.Height-1);
                               e.Graphics.DrawRectangle(p, r);
@@ -848,6 +847,7 @@ namespace TestWFA
                {
                     public override Color MenuItemBorder { get { return Color.Transparent; } }
                     public Color MenuItemEnabledBorder { get { return base.MenuItemBorder; } }
+                    public Color MenuItemEnabledAlert { get { return Color.Red; } }
                }
           }
 
