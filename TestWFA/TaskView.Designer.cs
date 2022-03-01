@@ -70,6 +70,7 @@
                this.groupBoxSelectedTask = new System.Windows.Forms.GroupBox();
                this.tabControl2 = new System.Windows.Forms.TabControl();
                this.tabPage4 = new System.Windows.Forms.TabPage();
+               this.txtTask = new System.Windows.Forms.RichTextBox();
                this.tabPage5 = new System.Windows.Forms.TabPage();
                this.dgvTaskEventHistory = new System.Windows.Forms.DataGridView();
                this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -95,7 +96,6 @@
                this.cmsTreeView = new System.Windows.Forms.ContextMenuStrip(this.components);
                this.resetTaskEventHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
                this.resetTaskEventHistoryAndChildrenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-               this.txtTask = new System.Windows.Forms.RichTextBox();
                this.tableLayoutPanel2.SuspendLayout();
                this.tableLayoutPanel3.SuspendLayout();
                this.groupBox1.SuspendLayout();
@@ -654,6 +654,22 @@
                this.tabPage4.Text = "Task Notes";
                this.tabPage4.UseVisualStyleBackColor = true;
                // 
+               // txtTask
+               // 
+               this.txtTask.AcceptsTab = true;
+               this.txtTask.DetectUrls = false;
+               this.txtTask.Dock = System.Windows.Forms.DockStyle.Fill;
+               this.txtTask.Font = new System.Drawing.Font("Lucida Console", 9.75F);
+               this.txtTask.Location = new System.Drawing.Point(3, 3);
+               this.txtTask.Name = "txtTask";
+               this.txtTask.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+               this.txtTask.Size = new System.Drawing.Size(533, 408);
+               this.txtTask.TabIndex = 2;
+               this.txtTask.TabStop = false;
+               this.txtTask.Text = "ksadfkjkasjdfsahfjhaskfj";
+               this.txtTask.TextChanged += new System.EventHandler(this.rtbTask_TextChanged);
+               this.txtTask.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTask_KeyDown);
+               // 
                // tabPage5
                // 
                this.tabPage5.Controls.Add(this.dgvTaskEventHistory);
@@ -904,6 +920,7 @@
                this.btnTaskHistory.TabIndex = 1;
                this.btnTaskHistory.Text = "Task History";
                this.btnTaskHistory.UseVisualStyleBackColor = true;
+               this.btnTaskHistory.Click += new System.EventHandler(this.btnTaskHistory_Click);
                // 
                // timerRefresh
                // 
@@ -949,22 +966,6 @@
                this.resetTaskEventHistoryAndChildrenToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
                this.resetTaskEventHistoryAndChildrenToolStripMenuItem.Text = "Reset Task Event History + Children";
                this.resetTaskEventHistoryAndChildrenToolStripMenuItem.Click += new System.EventHandler(this.resetTaskEventHistoryAndChildrenToolStripMenuItem_Click);
-               // 
-               // txtTask
-               // 
-               this.txtTask.AcceptsTab = true;
-               this.txtTask.DetectUrls = false;
-               this.txtTask.Dock = System.Windows.Forms.DockStyle.Fill;
-               this.txtTask.Font = new System.Drawing.Font("Lucida Console", 9.75F);
-               this.txtTask.Location = new System.Drawing.Point(3, 3);
-               this.txtTask.Name = "txtTask";
-               this.txtTask.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-               this.txtTask.Size = new System.Drawing.Size(533, 408);
-               this.txtTask.TabIndex = 2;
-               this.txtTask.TabStop = false;
-               this.txtTask.Text = "ksadfkjkasjdfsahfjhaskfj";
-               this.txtTask.TextChanged += new System.EventHandler(this.rtbTask_TextChanged);
-               this.txtTask.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTask_KeyDown);
                // 
                // TaskView
                // 

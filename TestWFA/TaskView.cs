@@ -12,6 +12,7 @@ using System.IO;
 using System.Reflection;
 using System.Diagnostics;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using Microsoft.Win32;
 
 namespace TestWFA
 {
@@ -382,7 +383,7 @@ namespace TestWFA
           {
                Console.WriteLine("settings!");
                //TaskViewSettings tvs = new TaskViewSettings();
-               
+
                //tvs.ShowDialog();
           }
 
@@ -864,5 +865,110 @@ namespace TestWFA
                     e.Handled = true;
                }
           }
+
+          private void btnTaskHistory_Click(object sender, EventArgs e)
+          {
+
+          }
+
+          private void WriteStartFilePathToRegistry(string path)
+          {
+               string strKeyMain = "TaskFracker";
+               string strKeySub = "StartFile";
+
+               // Opens or creates a RegistryKey
+               RegistryKey startFileKey = Registry.CurrentUser.CreateSubKey(strKeyMain, true);
+               try
+               {
+                    if (startFileKey != null)
+                    {
+                         Console.WriteLine($"Finding prevously saved key's value...");
+                         object startFilePath = startFileKey.GetValue(strKeySub);
+                         if (startFilePath != null)
+                         {
+                              Console.WriteLine($"Value of key found: [{startFilePath}]");
+
+                              Console.WriteLine($"Changing value to: [{path}]");
+                         }
+                         else
+                         {
+                              Console.WriteLine($"Key's value hasn't been created yet, creating: [{path}]");
+                         }
+
+                         startFileKey.SetValue(strKeySub, path);
+
+                         startFileKey.Close();
+                         startFileKey = null;
+                    }
+                    else
+                    {
+                         Console.WriteLine($"[ERROR] Something went wrong trying to write the registry key: [{strKeyMain}]");
+                    }
+               }
+               catch (Exception)
+               {
+                    Console.WriteLine($"[CATCH] Something went wrong trying to write the registry key: [{strKeyMain}]");
+               }
+               finally
+               {
+                    if (startFileKey != null)
+                    {
+                         startFileKey.Close();
+                         startFileKey = null;
+                    }
+               }
+          }
+
+          private string ReadStartFilePathFromRegistry()
+          {
+               string strKeyMain = "TaskFracker";
+               string strKeySub = "StartFile";
+
+               // Opens or creates a RegistryKey
+               RegistryKey startFileKey = Registry.CurrentUser.CreateSubKey(strKeyMain, true);
+               try
+               {
+                    if (startFileKey != null)
+                    {
+                         Console.WriteLine($"Finding prevously saved key's value...");
+                         object startFilePath = startFileKey.GetValue(strKeySub);
+                         if (startFilePath != null)
+                         {
+                              Console.WriteLine($"Value of key found: [{startFilePath}]");
+
+                              startFileKey.Close();
+                              startFileKey = null;
+
+                              return (string)startFilePath;
+                         }
+                         else
+                         {
+                              Console.WriteLine("Key's value not found");
+
+                              startFileKey.Close();
+                              startFileKey = null;
+                         }
+                    }
+                    else
+                    {
+                         Console.WriteLine($"[ERROR] Something went wrong trying to read the registry key: [{strKeyMain}]");
+                    }
+               }
+               catch (Exception)
+               {
+                    Console.WriteLine($"[CATCH] Something went wrong trying to read the registry key: [{strKeyMain}]");
+               }
+               finally
+               {
+                    if (startFileKey != null)
+                    {
+                         startFileKey.Close();
+                         startFileKey = null;
+                    }
+               }
+
+               return null;
+          }
+
      }
 }
