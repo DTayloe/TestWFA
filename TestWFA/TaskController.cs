@@ -56,7 +56,16 @@ namespace TestWFA
                _model.SetController(this);
                _view.SetController(this);
 
-               LoadModelToView();
+               string startFilePath = _model.ReadStartFilePathFromRegistry();
+
+               if (startFilePath != null)
+               {
+                    LoadXmlFileToModel(startFilePath);
+               }
+               else
+               {
+                    LoadModelToView();
+               }
           }
           
           /// <summary>
@@ -409,13 +418,13 @@ namespace TestWFA
 
                     xr.Close();
                     Console.WriteLine();
-
-                    LoadModelToView();
-
-                    UnsavedChanges = false;
-
-                    ErrorScan();
                }
+
+               LoadModelToView();
+
+               UnsavedChanges = false;
+
+               ErrorScan();
           }
 
           public List<TaskItem> GetRunningTasks()
