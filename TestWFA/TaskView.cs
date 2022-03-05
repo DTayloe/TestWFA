@@ -203,7 +203,7 @@ namespace TestWFA
           {
                TaskItem task = _controller.FindTaskItemByID(GetIDFromSelection());
                if (task != null)
-               {                    
+               {
                     // XXX I may not even need this switch! Could I just pass in the state to the methods that need it...?
                     switch (task.TaskSeriesItem.State)
                     {
@@ -242,7 +242,7 @@ namespace TestWFA
                     UpdateViewTaskbarTitle();
 
                     _controller.UnsavedChanges = true;
-                    
+
                     UpdateViewTaskPanel();
                }
           }
@@ -305,7 +305,8 @@ namespace TestWFA
                if (treeViewTasks.SelectedNode != null)
                {
                     TaskItem task = _controller.FindTaskItemByID(GetIDFromSelection());
-                    if (task != null) {
+                    if (task != null)
+                    {
                          string folder = task.Folder;
                          if (Directory.Exists(folder))
                          {
@@ -343,7 +344,7 @@ namespace TestWFA
                     if (task != null)
                     {
                          TextBoxBase rtb = (TextBoxBase)sender;
-                         
+
                          Console.WriteLine("TEXT CHANGED [" + rtb.Text + "]");
 
                          if (task.Note != rtb.Text)
@@ -376,7 +377,7 @@ namespace TestWFA
 
           private void toolStripMenuItemSave_Click(object sender, EventArgs e)
           {
-               _controller.SaveXmlFileToDisk(askUserIfChangesToBeSaved:false);
+               _controller.SaveXmlFileToDisk(askUserIfChangesToBeSaved: false);
           }
 
           private void toolStripMenuItemSettings_Click(object sender, EventArgs e)
@@ -415,14 +416,15 @@ namespace TestWFA
           /// <param name="e"></param>
           private void treeViewTasks_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
           {
-               if(e.Label != null)
+               if (e.Label != null)
                {
-                    if(e.Label.Trim().Length > 0)
+                    if (e.Label.Trim().Length > 0)
                     {
                          e.Node.EndEdit(false);
 
                          // need to use this since the treeview is only changed after the method ends. This adds to the current thread a task to complete.
-                         this.BeginInvoke((MethodInvoker)delegate {
+                         this.BeginInvoke((MethodInvoker)delegate
+                         {
 
                               // XXX change below to more general update method that updates everything... maybe even in the controller... then could fire that off and update model
                               _controller.UpdateModelTaskName((int)e.Node.Tag, e.Label.Trim());
@@ -431,7 +433,7 @@ namespace TestWFA
                     }
                     else
                     {
-                    e.CancelEdit = true;
+                         e.CancelEdit = true;
                          Console.WriteLine("[ERROR] TaskView.treeViewTasks_AfterLabelEdit: label was empty");
                          e.Node.BeginEdit();
                     }
@@ -476,7 +478,7 @@ namespace TestWFA
           {
                UpdateViewTaskPanel();
           }
-          
+
           public void UpdateViewTaskPanel()
           {
                UpdateViewCheckEnabledRightPanel();
@@ -684,7 +686,7 @@ namespace TestWFA
 
                return result;
           }
-          
+
           public TreeNode GetParentTreeNodeFromSelection()
           {
                TreeNode result = null;
@@ -736,7 +738,7 @@ namespace TestWFA
           public void RemoveTask(int taskItemID)
           {
                TreeNode result = FindTreeNodeByTaskID(treeViewTasks.Nodes, taskItemID);
-               if (result!=null)
+               if (result != null)
                {
                     result.Remove();
                }
@@ -838,7 +840,7 @@ namespace TestWFA
                     {
                          using (Pen p = new Pen(((MyColorTable)ColorTable).MenuItemEnabledAlert))
                          {
-                              Rectangle r = new Rectangle(0, 0, e.Item.Width-1, e.Item.Height-1);
+                              Rectangle r = new Rectangle(0, 0, e.Item.Width - 1, e.Item.Height - 1);
                               e.Graphics.DrawRectangle(p, r);
                          }
                     }
@@ -854,7 +856,7 @@ namespace TestWFA
 
           private void TaskView_FormClosing(object sender, FormClosingEventArgs e)
           {
-               e.Cancel = !_controller.SaveXmlFileToDisk(askUserIfChangesToBeSaved:true);
+               e.Cancel = !_controller.SaveXmlFileToDisk(askUserIfChangesToBeSaved: true);
           }
 
           private void txtTask_KeyDown(object sender, KeyEventArgs e)
@@ -870,105 +872,5 @@ namespace TestWFA
           {
 
           }
-
-          private void WriteStartFilePathToRegistry(string path)
-          {
-               string strKeyMain = "TaskFracker";
-               string strKeySub = "StartFile";
-
-               // Opens or creates a RegistryKey
-               RegistryKey startFileKey = Registry.CurrentUser.CreateSubKey(strKeyMain, true);
-               try
-               {
-                    if (startFileKey != null)
-                    {
-                         Console.WriteLine($"Finding prevously saved key's value...");
-                         object startFilePath = startFileKey.GetValue(strKeySub);
-                         if (startFilePath != null)
-                         {
-                              Console.WriteLine($"Value of key found: [{startFilePath}]");
-
-                              Console.WriteLine($"Changing value to: [{path}]");
-                         }
-                         else
-                         {
-                              Console.WriteLine($"Key's value hasn't been created yet, creating: [{path}]");
-                         }
-
-                         startFileKey.SetValue(strKeySub, path);
-
-                         startFileKey.Close();
-                         startFileKey = null;
-                    }
-                    else
-                    {
-                         Console.WriteLine($"[ERROR] Something went wrong trying to write the registry key: [{strKeyMain}]");
-                    }
-               }
-               catch (Exception)
-               {
-                    Console.WriteLine($"[CATCH] Something went wrong trying to write the registry key: [{strKeyMain}]");
-               }
-               finally
-               {
-                    if (startFileKey != null)
-                    {
-                         startFileKey.Close();
-                         startFileKey = null;
-                    }
-               }
-          }
-
-          private string ReadStartFilePathFromRegistry()
-          {
-               string strKeyMain = "TaskFracker";
-               string strKeySub = "StartFile";
-
-               // Opens or creates a RegistryKey
-               RegistryKey startFileKey = Registry.CurrentUser.CreateSubKey(strKeyMain, true);
-               try
-               {
-                    if (startFileKey != null)
-                    {
-                         Console.WriteLine($"Finding prevously saved key's value...");
-                         object startFilePath = startFileKey.GetValue(strKeySub);
-                         if (startFilePath != null)
-                         {
-                              Console.WriteLine($"Value of key found: [{startFilePath}]");
-
-                              startFileKey.Close();
-                              startFileKey = null;
-
-                              return (string)startFilePath;
-                         }
-                         else
-                         {
-                              Console.WriteLine("Key's value not found");
-
-                              startFileKey.Close();
-                              startFileKey = null;
-                         }
-                    }
-                    else
-                    {
-                         Console.WriteLine($"[ERROR] Something went wrong trying to read the registry key: [{strKeyMain}]");
-                    }
-               }
-               catch (Exception)
-               {
-                    Console.WriteLine($"[CATCH] Something went wrong trying to read the registry key: [{strKeyMain}]");
-               }
-               finally
-               {
-                    if (startFileKey != null)
-                    {
-                         startFileKey.Close();
-                         startFileKey = null;
-                    }
-               }
-
-               return null;
-          }
-
      }
 }
