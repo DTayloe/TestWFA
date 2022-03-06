@@ -20,6 +20,7 @@ namespace TestWFA
      {
           private TaskController _controller = null;
 
+          public const string TIMER_CURRENT_EVENT = "Current Event";
           public const string TIMER_THIS_TASK = "This Task";
           public const string TIMER_TOTAL = "This Task + Subtasks";
 
@@ -66,9 +67,10 @@ namespace TestWFA
                     dgvTaskEventHistory.Columns.Add(dgtc);
                }
 
+               cbTaskTimeMode.Items.Add(TIMER_CURRENT_EVENT);
                cbTaskTimeMode.Items.Add(TIMER_THIS_TASK);
                cbTaskTimeMode.Items.Add(TIMER_TOTAL);
-               cbTaskTimeMode.SelectedIndex = 0;
+               cbTaskTimeMode.SelectedIndex = 1;
                cbTaskTimeMode.SelectedValueChanged += cbTaskTimeMode_SelectedValueChanged;
 
                //treeViewTasks.contex
@@ -179,6 +181,10 @@ namespace TestWFA
                TimeSpan timeToDisplay = TimeSpan.Zero;
                switch (cbTaskTimeMode.SelectedItem)
                {
+                    case TIMER_CURRENT_EVENT:
+                         //Console.WriteLine("TIMER_CURRENT_EVENT");
+                         timeToDisplay = t.TaskSeriesItem.TaskEvents.Last().Elapsed;
+                         break;
                     case TIMER_THIS_TASK:
                          //Console.WriteLine("TIMER_THIS_TASK");
                          timeToDisplay = t.TaskSeriesItem.Elapsed;
@@ -866,11 +872,6 @@ namespace TestWFA
                     ((RichTextBox)sender).Paste(DataFormats.GetFormat("Text"));
                     e.Handled = true;
                }
-          }
-
-          private void btnTaskHistory_Click(object sender, EventArgs e)
-          {
-
           }
      }
 }

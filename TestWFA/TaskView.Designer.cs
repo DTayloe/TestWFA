@@ -920,7 +920,6 @@
                this.btnTaskHistory.TabIndex = 1;
                this.btnTaskHistory.Text = "Task History";
                this.btnTaskHistory.UseVisualStyleBackColor = true;
-               this.btnTaskHistory.Click += new System.EventHandler(this.btnTaskHistory_Click);
                // 
                // timerRefresh
                // 
