@@ -66,6 +66,12 @@ namespace TestWFA
                     dgtc.Name = "State";
                     dgvTaskEventHistory.Columns.Add(dgtc);
                }
+               {
+                    DataGridViewTextBoxColumn dgtc = new DataGridViewTextBoxColumn();
+                    dgtc.DataPropertyName = "EventText";
+                    dgtc.Name = "Text";
+                    dgvTaskEventHistory.Columns.Add(dgtc);
+               }
 
                cbTaskTimeMode.Items.Add(TIMER_CURRENT_EVENT);
                cbTaskTimeMode.Items.Add(TIMER_THIS_TASK);
@@ -183,7 +189,7 @@ namespace TestWFA
                {
                     case TIMER_CURRENT_EVENT:
                          //Console.WriteLine("TIMER_CURRENT_EVENT");
-                         timeToDisplay = t.TaskSeriesItem.TaskEvents.Last().Elapsed;
+                         timeToDisplay = t.TaskSeriesItem.Current.Elapsed;
                          break;
                     case TIMER_THIS_TASK:
                          //Console.WriteLine("TIMER_THIS_TASK");
@@ -239,6 +245,7 @@ namespace TestWFA
                          case TaskEventState.TaskEventRunning:
                               Console.WriteLine("Stopping...");
                               // item is currently running
+                              task.TaskSeriesItem.Current.EventText = txtEventText.Text;
                               UpdateBtnStartStopState(task.TaskSeriesItem.Stop());
                               UpdateTreeNodeRunningState(task, treeViewTasks.SelectedNode);
                               //UpdateViewTaskbarTitle(task);
@@ -494,6 +501,7 @@ namespace TestWFA
                timerRefresh.Start();
                UpdateViewTaskNote();
                UpdateViewTaskHistory();
+               UpdateViewTaskEventText();
                UpdateViewTaskbarTitle();
           }
 
@@ -613,7 +621,33 @@ namespace TestWFA
                }
           }
 
-          public void UpdateViewTaskNote()
+          public void UpdateViewTaskEventText()
+        {
+            TaskItem task = _controller.FindTaskItemByID(GetIDFromSelection());
+            if (task != null)
+            {
+                TaskEvent te = task.TaskSeriesItem.Current;
+                switch (te.State)
+                {
+                    case TaskEventState.TaskEventNew:
+                    case TaskEventState.TaskEventComplete:
+                        {
+                            txtEventText.Text = "";
+                            txtEventText.Enabled = false;
+                        }
+                        break;
+                    case TaskEventState.TaskEventRunning:
+                        {
+                            txtEventText.Enabled = true;
+                            txtEventText.Text = te.EventText;
+                            txtEventText.Focus();
+                        }
+                        break;
+                }
+            }
+        }
+
+        public void UpdateViewTaskNote()
           {
                TaskItem task = _controller.FindTaskItemByID(GetIDFromSelection());
                if (task != null)
@@ -728,6 +762,7 @@ namespace TestWFA
                SetTaskTimer(new TaskItem());
                TextBoxTask = "";
                txtFolderPath.Text = "";
+               txtEventText.Text = "";
                ClearViewTaskHistory();
           }
 
@@ -873,5 +908,26 @@ namespace TestWFA
                     e.Handled = true;
                }
           }
-     }
+
+        private void txtEventText_TextChanged(object sender, EventArgs e)
+        {
+            if (treeViewTasks.SelectedNode != null)
+            {// XXX every single action / keystoke sends the entire contents of tb to the model... this might not be super great
+                TaskItem task = _controller.FindTaskItemByID(GetIDFromSelection());
+                if (task != null)
+                {
+                    TextBox tb = (TextBox)sender;
+
+                    Console.WriteLine("EVENT TEXT CHANGED [" + tb.Text + "]");
+
+                    TaskEvent te = task.TaskSeriesItem.Current;
+                    if (te.State == TaskEventState.TaskEventRunning && te.EventText != tb.Text)
+                    {// there are only changes needing saved if the rtb text does not match the model. Otherwise selecting a different task will trigger the save button
+                        task.TaskSeriesItem.Current.EventText = tb.Text;
+                        _controller.UnsavedChanges = true;
+                    }
+                }
+            }
+        }
+    }
 }

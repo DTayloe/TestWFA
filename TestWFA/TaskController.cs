@@ -46,7 +46,8 @@ namespace TestWFA
                task_series,
                task_event,
                task_event_starting,
-               task_event_ending
+               task_event_ending,
+               task_event_text
           }
 
           public TaskController(TaskView view, TaskModel model)
@@ -200,7 +201,7 @@ namespace TestWFA
                     {
                          emptyFlag = false;
                          switch (xr.NodeType)
-                         {
+                         {// switch over the types of XML nodes that can appear in a file
                               case XmlNodeType.None:
                                    break;
                               case XmlNodeType.Element:
@@ -271,6 +272,11 @@ namespace TestWFA
                                                        currentNodeType = NodeTypes.task_event_ending;
                                                   }
                                                   break;
+                                             case nameof(NodeTypes.task_event_text):
+                                                  {
+                                                       currentNodeType = NodeTypes.task_event_text;
+                                                  }
+                                            break;
                                              case "":
                                                   {
 
@@ -286,11 +292,11 @@ namespace TestWFA
                               case XmlNodeType.Attribute:
                                    break;
                               case XmlNodeType.Text:
-                                   {
+                                   {// this is text found between XML tags
                                         string text = xr.ReadContentAsString(); // MUST STORE THIS IN A VARIABLE... IT IS CONSUMED WHEN READ
                                         Console.Write("Text: " + text + ", ");
                                         switch (currentNodeType)
-                                        {
+                                        {// switch over the node type we know we have
                                              case NodeTypes.tasks:
                                                   {
 
@@ -349,6 +355,12 @@ namespace TestWFA
                                                        {
                                                             Console.WriteLine($"[ERROR] TaskController.LoadXmlFileToModel: taskeventending [{text}] from file could not be parsed");
                                                        }
+                                                  }
+                                                  break;
+                                             case NodeTypes.task_event_text:
+                                                  {
+                                                       currentTask.Peek().TaskSeriesItem.Current.EventText = System.Net.WebUtility.HtmlDecode(text);
+                                                       //Console.WriteLine($"[INFO] TaskController.LoadXmlFileToModel: taskeventtext [{text}]");
                                                   }
                                                   break;
                                              default:

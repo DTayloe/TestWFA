@@ -202,6 +202,10 @@ namespace TestWFA
                     xtw.WriteString("" + item.EndingTime.Ticks);
                     xtw.WriteEndElement();
 
+                    xtw.WriteStartElement("task_event_text");
+                    xtw.WriteString(System.Security.SecurityElement.Escape(item.EventText));
+                    xtw.WriteEndElement();
+
                     xtw.WriteEndElement();
                }
           }
@@ -313,12 +317,14 @@ namespace TestWFA
                               $"{Utility.DisplayDigitWithZero(Elapsed.Seconds)}S";
                }
           }
-          
-          /// <summary>
-          /// True for success, false for failure
-          /// </summary>
-          /// <returns></returns>
-          public bool Start()
+
+        public string EventText { get; set; }
+
+        /// <summary>
+        /// True for success, false for failure
+        /// </summary>
+        /// <returns></returns>
+        public bool Start()
           {
                if (StartingTime != DateTime.MinValue)
                {// we have started
@@ -369,20 +375,22 @@ namespace TestWFA
 
           }
           
-          public TaskEvent(DateTime startingTime)
+          public TaskEvent(DateTime startingTime, string eventText = "")
           {
                StartingTime = startingTime;
+            EventText = eventText;
           }
 
-          public TaskEvent(DateTime startingTime, DateTime endingTime)
+          public TaskEvent(DateTime startingTime, DateTime endingTime, string eventText = "")
           {
                StartingTime = startingTime;
                EndingTime = endingTime;
-          }
+            EventText = eventText;
+        }
 
           public override string ToString()
           {
-               return $"[TaskEvent: Start({StartingTime}), End({EndingTime}), State({State})]";
+               return $"[TaskEvent: Start({StartingTime}), End({EndingTime}), State({State}), EventText({EventText})]";
           }
      }
 }
