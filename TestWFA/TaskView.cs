@@ -13,16 +13,13 @@ using System.Reflection;
 using System.Diagnostics;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Microsoft.Win32;
+using TaskFrackerControlLibrary;
 
 namespace TestWFA
 {
      public partial class TaskView : Form
      {
           private TaskController _controller = null;
-
-          public const string TIMER_CURRENT_EVENT = "Current Event";
-          public const string TIMER_THIS_TASK = "This Task";
-          public const string TIMER_TOTAL = "This Task + Subtasks";
 
           public TaskView()
           {
@@ -72,12 +69,6 @@ namespace TestWFA
                     dgtc.Name = "Text";
                     dgvTaskEventHistory.Columns.Add(dgtc);
                }
-
-               cbTaskTimeMode.Items.Add(TIMER_CURRENT_EVENT);
-               cbTaskTimeMode.Items.Add(TIMER_THIS_TASK);
-               cbTaskTimeMode.Items.Add(TIMER_TOTAL);
-               cbTaskTimeMode.SelectedIndex = 1;
-               cbTaskTimeMode.SelectedValueChanged += cbTaskTimeMode_SelectedValueChanged;
 
                //treeViewTasks.contex
 
@@ -164,11 +155,6 @@ namespace TestWFA
                }
           }
 
-          public void SetLblDigit(LinkLabel label, int digit)
-          {
-               label.Text = Utility.DisplayDigitWithZero(digit);
-          }
-
           public string TextBoxTask
           {
                get
@@ -184,30 +170,7 @@ namespace TestWFA
 
           private void SetTaskTimer(TaskItem t)
           {
-               TimeSpan timeToDisplay = TimeSpan.Zero;
-               switch (cbTaskTimeMode.SelectedItem)
-               {
-                    case TIMER_CURRENT_EVENT:
-                         //Console.WriteLine("TIMER_CURRENT_EVENT");
-                         timeToDisplay = t.TaskSeriesItem.Current.Elapsed;
-                         break;
-                    case TIMER_THIS_TASK:
-                         //Console.WriteLine("TIMER_THIS_TASK");
-                         timeToDisplay = t.TaskSeriesItem.Elapsed;
-                         break;
-                    case TIMER_TOTAL:
-                         //Console.WriteLine("TIMER_TOTAL");
-                         timeToDisplay = t.ElapsedTotal;
-                         break;
-                    default:
-                         Console.WriteLine("[ERROR] SetTaskTimer: DEFAULT");
-                         break;
-               }
-
-               SetLblDigit(lblDigitDays, timeToDisplay.Days);
-               SetLblDigit(lblDigitHours, timeToDisplay.Hours);
-               SetLblDigit(lblDigitMinutes, timeToDisplay.Minutes);
-               SetLblDigit(lblDigitSeconds, timeToDisplay.Seconds);
+               taskTimeControl.SetTime(t);
                UpdateBtnStartStopState(t.TaskSeriesItem.State);
           }
 
@@ -928,6 +891,16 @@ namespace TestWFA
                     }
                 }
             }
+        }
+
+        private void taskTimeControl1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void taskTimeControl_Load(object sender, EventArgs e)
+        {
+            taskTimeControl.
         }
     }
 }

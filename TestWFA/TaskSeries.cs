@@ -347,6 +347,10 @@ namespace TestWFA
                }
           }
 
+        /// <summary>
+        /// Records the ending time to a TaskEvent, if the state is valid
+        /// </summary>
+        /// <returns>Was this a valid Stop action for this TaskEvent</returns>
           public bool Stop()
           {
                if (StartingTime != DateTime.MinValue)

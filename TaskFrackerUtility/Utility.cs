@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestWFA
 {
-     class Utility
+     public class Utility
      {
           public static string DanPropertyList(object obj)
           {

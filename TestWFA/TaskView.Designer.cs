@@ -87,6 +87,7 @@
             this.lblDigitSeconds = new System.Windows.Forms.LinkLabel();
             this.lblDigitMinutes = new System.Windows.Forms.LinkLabel();
             this.btnTaskStartStop = new System.Windows.Forms.Button();
+            this.txtEventText = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
@@ -95,7 +96,8 @@
             this.cmsTreeView = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.resetTaskEventHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetTaskEventHistoryAndChildrenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.txtEventText = new System.Windows.Forms.TextBox();
+            this.taskTimeControl = new TestWFA.TaskTimeControl();
+            this.v05ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -155,7 +157,7 @@
             "Il > Ticket 234249"});
             this.listBox1.Location = new System.Drawing.Point(3, 3);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(263, 542);
+            this.listBox1.Size = new System.Drawing.Size(263, 363);
             this.listBox1.TabIndex = 1;
             // 
             // treeViewTasks
@@ -168,7 +170,7 @@
             this.treeViewTasks.Location = new System.Drawing.Point(3, 57);
             this.treeViewTasks.Name = "treeViewTasks";
             this.treeViewTasks.ShowLines = false;
-            this.treeViewTasks.Size = new System.Drawing.Size(263, 426);
+            this.treeViewTasks.Size = new System.Drawing.Size(263, 247);
             this.treeViewTasks.TabIndex = 2;
             this.treeViewTasks.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewTasks_AfterLabelEdit);
             this.treeViewTasks.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewTasks_AfterSelect);
@@ -245,7 +247,7 @@
             // 
             this.groupBox1.Controls.Add(this.tableLayoutPanel3);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox1.Location = new System.Drawing.Point(3, 483);
+            this.groupBox1.Location = new System.Drawing.Point(3, 304);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(263, 62);
             this.groupBox1.TabIndex = 4;
@@ -469,7 +471,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 93);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(277, 574);
+            this.tabControl1.Size = new System.Drawing.Size(277, 395);
             this.tabControl1.TabIndex = 7;
             // 
             // tabPage1
@@ -480,7 +482,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(269, 548);
+            this.tabPage1.Size = new System.Drawing.Size(269, 369);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Open Tasks";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -491,7 +493,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(269, 548);
+            this.tabPage2.Size = new System.Drawing.Size(269, 369);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Running Tasks";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -501,7 +503,7 @@
             this.tabPage3.Controls.Add(this.propertyGrid1);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(269, 548);
+            this.tabPage3.Size = new System.Drawing.Size(269, 369);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "History";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -517,9 +519,9 @@
             // 
             this.groupBox4.Controls.Add(this.tableLayoutPanel6);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox4.Location = new System.Drawing.Point(3, 569);
+            this.groupBox4.Location = new System.Drawing.Point(3, 390);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(547, 95);
+            this.groupBox4.Size = new System.Drawing.Size(633, 95);
             this.groupBox4.TabIndex = 8;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Task Folder Control";
@@ -538,7 +540,7 @@
             this.tableLayoutPanel6.RowCount = 2;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(541, 76);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(627, 76);
             this.tableLayoutPanel6.TabIndex = 3;
             // 
             // btnOpenFolder
@@ -546,7 +548,7 @@
             this.btnOpenFolder.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnOpenFolder.Location = new System.Drawing.Point(3, 3);
             this.btnOpenFolder.Name = "btnOpenFolder";
-            this.btnOpenFolder.Size = new System.Drawing.Size(264, 44);
+            this.btnOpenFolder.Size = new System.Drawing.Size(307, 44);
             this.btnOpenFolder.TabIndex = 0;
             this.btnOpenFolder.Text = "Open Folder";
             this.btnOpenFolder.UseVisualStyleBackColor = true;
@@ -555,9 +557,9 @@
             // btnChooseFolder
             // 
             this.btnChooseFolder.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnChooseFolder.Location = new System.Drawing.Point(273, 3);
+            this.btnChooseFolder.Location = new System.Drawing.Point(316, 3);
             this.btnChooseFolder.Name = "btnChooseFolder";
-            this.btnChooseFolder.Size = new System.Drawing.Size(265, 44);
+            this.btnChooseFolder.Size = new System.Drawing.Size(308, 44);
             this.btnChooseFolder.TabIndex = 2;
             this.btnChooseFolder.Text = "Choose Folder...";
             this.btnChooseFolder.UseVisualStyleBackColor = true;
@@ -570,7 +572,7 @@
             this.txtFolderPath.Location = new System.Drawing.Point(3, 53);
             this.txtFolderPath.Name = "txtFolderPath";
             this.txtFolderPath.ReadOnly = true;
-            this.txtFolderPath.Size = new System.Drawing.Size(535, 20);
+            this.txtFolderPath.Size = new System.Drawing.Size(621, 20);
             this.txtFolderPath.TabIndex = 3;
             // 
             // menuStrip1
@@ -579,12 +581,13 @@
             this.toolStripMenuItemOpen,
             this.toolStripMenuItemSave,
             this.toolStripMenuItemFilePath,
-            this.toolStripMenuItemSettings});
+            this.toolStripMenuItemSettings,
+            this.v05ToolStripMenuItem});
             this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(834, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1068, 24);
             this.menuStrip1.TabIndex = 10;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -626,7 +629,7 @@
             this.groupBoxSelectedTask.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxSelectedTask.Location = new System.Drawing.Point(0, 0);
             this.groupBoxSelectedTask.Name = "groupBoxSelectedTask";
-            this.groupBoxSelectedTask.Size = new System.Drawing.Size(553, 667);
+            this.groupBoxSelectedTask.Size = new System.Drawing.Size(639, 488);
             this.groupBoxSelectedTask.TabIndex = 12;
             this.groupBoxSelectedTask.TabStop = false;
             this.groupBoxSelectedTask.Text = "SELECTED TASK NAME HERE";
@@ -640,7 +643,7 @@
             this.tabControl2.Location = new System.Drawing.Point(3, 129);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(547, 440);
+            this.tabControl2.Size = new System.Drawing.Size(633, 261);
             this.tabControl2.TabIndex = 11;
             // 
             // tabPage4
@@ -649,7 +652,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(539, 414);
+            this.tabPage4.Size = new System.Drawing.Size(625, 235);
             this.tabPage4.TabIndex = 0;
             this.tabPage4.Text = "Task Notes";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -663,7 +666,7 @@
             this.txtTask.Location = new System.Drawing.Point(3, 3);
             this.txtTask.Name = "txtTask";
             this.txtTask.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.txtTask.Size = new System.Drawing.Size(533, 408);
+            this.txtTask.Size = new System.Drawing.Size(619, 229);
             this.txtTask.TabIndex = 2;
             this.txtTask.TabStop = false;
             this.txtTask.Text = "ksadfkjkasjdfsahfjhaskfj";
@@ -676,7 +679,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(539, 414);
+            this.tabPage5.Size = new System.Drawing.Size(625, 235);
             this.tabPage5.TabIndex = 1;
             this.tabPage5.Text = "Task Event History";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -690,7 +693,7 @@
             this.dgvTaskEventHistory.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvTaskEventHistory.Location = new System.Drawing.Point(3, 3);
             this.dgvTaskEventHistory.Name = "dgvTaskEventHistory";
-            this.dgvTaskEventHistory.Size = new System.Drawing.Size(533, 408);
+            this.dgvTaskEventHistory.Size = new System.Drawing.Size(619, 229);
             this.dgvTaskEventHistory.TabIndex = 0;
             // 
             // groupBox5
@@ -701,7 +704,7 @@
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox5.Location = new System.Drawing.Point(3, 16);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(547, 113);
+            this.groupBox5.Size = new System.Drawing.Size(633, 113);
             this.groupBox5.TabIndex = 9;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Task Time Control";
@@ -722,7 +725,7 @@
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 1;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(541, 94);
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(627, 94);
             this.tableLayoutPanel8.TabIndex = 3;
             // 
             // tableLayoutPanel5
@@ -910,13 +913,22 @@
             this.btnTaskStartStop.UseVisualStyleBackColor = true;
             this.btnTaskStartStop.Click += new System.EventHandler(this.btnTaskStartStop_Click);
             // 
+            // txtEventText
+            // 
+            this.txtEventText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtEventText.Location = new System.Drawing.Point(374, 3);
+            this.txtEventText.Multiline = true;
+            this.txtEventText.Name = "txtEventText";
+            this.txtEventText.Size = new System.Drawing.Size(250, 88);
+            this.txtEventText.TabIndex = 19;
+            this.txtEventText.TextChanged += new System.EventHandler(this.txtEventText_TextChanged);
+            // 
             // timerRefresh
             // 
             this.timerRefresh.Interval = 1000;
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainer1.Location = new System.Drawing.Point(0, 24);
             this.splitContainer1.Name = "splitContainer1";
@@ -929,7 +941,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBoxSelectedTask);
-            this.splitContainer1.Size = new System.Drawing.Size(834, 667);
+            this.splitContainer1.Size = new System.Drawing.Size(920, 488);
             this.splitContainer1.SplitterDistance = 277;
             this.splitContainer1.TabIndex = 12;
             // 
@@ -955,21 +967,31 @@
             this.resetTaskEventHistoryAndChildrenToolStripMenuItem.Text = "Reset Task Event History + Children";
             this.resetTaskEventHistoryAndChildrenToolStripMenuItem.Click += new System.EventHandler(this.resetTaskEventHistoryAndChildrenToolStripMenuItem_Click);
             // 
-            // txtEventText
+            // taskTimeControl
             // 
-            this.txtEventText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtEventText.Location = new System.Drawing.Point(374, 3);
-            this.txtEventText.Multiline = true;
-            this.txtEventText.Name = "txtEventText";
-            this.txtEventText.Size = new System.Drawing.Size(164, 88);
-            this.txtEventText.TabIndex = 19;
-            this.txtEventText.TextChanged += new System.EventHandler(this.txtEventText_TextChanged);
+            this.taskTimeControl.AutoSize = true;
+            this.taskTimeControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.taskTimeControl.Location = new System.Drawing.Point(456, 547);
+            this.taskTimeControl.Name = "taskTimeControl";
+            this.taskTimeControl.Size = new System.Drawing.Size(260, 91);
+            this.taskTimeControl.TabIndex = 13;
+            this.taskTimeControl.Load += new System.EventHandler(this.taskTimeControl_Load);
+            this.taskTimeControl.Click += new System.EventHandler(this.taskTimeControl1_Click);
+            // 
+            // v05ToolStripMenuItem
+            // 
+            this.v05ToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.v05ToolStripMenuItem.Enabled = false;
+            this.v05ToolStripMenuItem.Name = "v05ToolStripMenuItem";
+            this.v05ToolStripMenuItem.Size = new System.Drawing.Size(125, 20);
+            this.v05ToolStripMenuItem.Text = "v0.5 (control library)";
             // 
             // TaskView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(834, 691);
+            this.ClientSize = new System.Drawing.Size(1068, 746);
+            this.Controls.Add(this.taskTimeControl);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.menuStrip1);
@@ -1088,6 +1110,8 @@
           private System.Windows.Forms.ToolStripMenuItem resetTaskEventHistoryToolStripMenuItem;
           private System.Windows.Forms.RichTextBox txtTask;
         private System.Windows.Forms.TextBox txtEventText;
+        private TaskTimeControl taskTimeControl;
+        private System.Windows.Forms.ToolStripMenuItem v05ToolStripMenuItem;
     }
 }
 

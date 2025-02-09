@@ -8,10 +8,11 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>TestWFA</RootNamespace>
     <AssemblyName>TestWFA</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -60,12 +61,6 @@
     <Compile Include="TaskItem.cs" />
     <Compile Include="TaskModel.cs" />
     <Compile Include="TaskSeries.cs" />
-    <Compile Include="TaskTime.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="TaskTime.Designer.cs">
-      <DependentUpon>TaskTime.cs</DependentUpon>
-    </Compile>
     <Compile Include="TaskView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,10 +75,6 @@
     <Compile Include="TaskViewSettingsView.Designer.cs">
       <DependentUpon>TaskViewSettingsView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utility.cs" />
-    <EmbeddedResource Include="TaskTime.resx">
-      <DependentUpon>TaskTime.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="TaskView.resx">
       <DependentUpon>TaskView.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -96,6 +87,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="TaskViewSettingsView.resx">
       <DependentUpon>TaskViewSettingsView.cs</DependentUpon>
@@ -113,6 +105,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TaskFrackerControlLibrary\TaskFrackerControlLibrary.csproj">
+      <Project>{d313a57d-2f60-40cb-8f30-6645cdd0609b}</Project>
+      <Name>TaskFrackerControlLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TaskFrackerUtility\TaskFrackerUtility.csproj">
+      <Project>{5712e7d6-7b10-428c-9f95-ffd3f80d522a}</Project>
+      <Name>TaskFrackerUtility</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
