@@ -274,7 +274,7 @@ namespace TestWFA
                List<TaskItem> running = _controller.GetRunningTasks();
                if (running.Count > 0)
                {
-                    treeViewTasks.CollapseAll();
+                    //treeViewTasks.CollapseAll();
 
                     TreeNode t = FindTreeNodeByTask(running[0]);
                     treeViewTasks.SelectedNode = t;
@@ -337,6 +337,32 @@ namespace TestWFA
                     }
                }
           }
+        
+
+          //private void btnCreateFolder_Click(object sender, EventArgs e)
+          //{
+          //     if (treeViewTasks.SelectedNode != null)
+          //     {
+          //          TaskItem task = _controller.FindTaskItemByID(GetIDFromSelection());
+          //          if (task != null)
+          //          {
+          //               string folder = task.Folder;
+          //               if (Directory.Exists(folder))
+          //               {
+          //                    if (true)
+          //                    {
+          //                         // open a new folder location or existing
+          //                         Process.Start(folder);
+          //                    }
+          //                    else
+          //                    {
+          //                         // open a new folder location
+          //                         Process.Start("explorer.exe", folder);
+          //                    }
+          //               }
+          //          }
+          //     }
+          //}
 
           /* 
           EEE this and next method show 2 different ways for updating the model... 

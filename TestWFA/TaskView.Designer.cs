@@ -87,6 +87,7 @@
             this.lblDigitSeconds = new System.Windows.Forms.LinkLabel();
             this.lblDigitMinutes = new System.Windows.Forms.LinkLabel();
             this.btnTaskStartStop = new System.Windows.Forms.Button();
+            this.txtEventText = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
@@ -95,7 +96,7 @@
             this.cmsTreeView = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.resetTaskEventHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetTaskEventHistoryAndChildrenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.txtEventText = new System.Windows.Forms.TextBox();
+            this.v011ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -579,7 +580,8 @@
             this.toolStripMenuItemOpen,
             this.toolStripMenuItemSave,
             this.toolStripMenuItemFilePath,
-            this.toolStripMenuItemSettings});
+            this.toolStripMenuItemSettings,
+            this.v011ToolStripMenuItem});
             this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -910,6 +912,16 @@
             this.btnTaskStartStop.UseVisualStyleBackColor = true;
             this.btnTaskStartStop.Click += new System.EventHandler(this.btnTaskStartStop_Click);
             // 
+            // txtEventText
+            // 
+            this.txtEventText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtEventText.Location = new System.Drawing.Point(374, 3);
+            this.txtEventText.Multiline = true;
+            this.txtEventText.Name = "txtEventText";
+            this.txtEventText.Size = new System.Drawing.Size(164, 88);
+            this.txtEventText.TabIndex = 19;
+            this.txtEventText.TextChanged += new System.EventHandler(this.txtEventText_TextChanged);
+            // 
             // timerRefresh
             // 
             this.timerRefresh.Interval = 1000;
@@ -955,15 +967,13 @@
             this.resetTaskEventHistoryAndChildrenToolStripMenuItem.Text = "Reset Task Event History + Children";
             this.resetTaskEventHistoryAndChildrenToolStripMenuItem.Click += new System.EventHandler(this.resetTaskEventHistoryAndChildrenToolStripMenuItem_Click);
             // 
-            // txtEventText
+            // v011ToolStripMenuItem
             // 
-            this.txtEventText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtEventText.Location = new System.Drawing.Point(374, 3);
-            this.txtEventText.Multiline = true;
-            this.txtEventText.Name = "txtEventText";
-            this.txtEventText.Size = new System.Drawing.Size(164, 88);
-            this.txtEventText.TabIndex = 19;
-            this.txtEventText.TextChanged += new System.EventHandler(this.txtEventText_TextChanged);
+            this.v011ToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.v011ToolStripMenuItem.Enabled = false;
+            this.v011ToolStripMenuItem.Name = "v011ToolStripMenuItem";
+            this.v011ToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+            this.v011ToolStripMenuItem.Text = "v0.1.1";
             // 
             // TaskView
             // 
@@ -1088,6 +1098,7 @@
           private System.Windows.Forms.ToolStripMenuItem resetTaskEventHistoryToolStripMenuItem;
           private System.Windows.Forms.RichTextBox txtTask;
         private System.Windows.Forms.TextBox txtEventText;
+        private System.Windows.Forms.ToolStripMenuItem v011ToolStripMenuItem;
     }
 }
 
